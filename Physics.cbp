@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Physics" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin\Debug\Physics" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Debug\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin\Release\Verlet" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Release\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Linker>
+			<Add option="-lsfml-graphics" />
+			<Add option="-lsfml-window" />
+			<Add option="-lsfml-system" />
+			<Add option="-lglu32" />
+			<Add library="C:\MinGW\lib\libopengl32.a" />
+		</Linker>
+		<Unit filename="Physics.h" />
+		<Unit filename="PhysicsCollidingObject.cpp" />
+		<Unit filename="PhysicsCollidingObject.h" />
+		<Unit filename="PhysicsConstraint.cpp" />
+		<Unit filename="PhysicsConstraint.h" />
+		<Unit filename="PhysicsElastic.cpp" />
+		<Unit filename="PhysicsElastic.h" />
+		<Unit filename="PhysicsMain.cpp" />
+		<Unit filename="PhysicsPolygon.cpp" />
+		<Unit filename="PhysicsPolygon.h" />
+		<Unit filename="PhysicsRectangle.cpp" />
+		<Unit filename="PhysicsRectangle.h" />
+		<Unit filename="PhysicsRigid.cpp" />
+		<Unit filename="PhysicsRigid.h" />
+		<Unit filename="PhysicsVertex.cpp" />
+		<Unit filename="PhysicsVertex.h" />
+		<Unit filename="Vec2.cpp" />
+		<Unit filename="Vec2.h" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+			<envvars />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
