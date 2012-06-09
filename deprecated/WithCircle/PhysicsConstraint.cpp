@@ -5,24 +5,24 @@ namespace Physics
 
 std::list<Constraint*> Constraint::list;
 
-Constraint::Constraint(Vertex* V1, Vertex* V2, float Length) :
-								myV1(V1), myV2(V2)
+Constraint::Constraint(Vertex* P1, Vertex* P2, float Length) :
+								P1(P1), P2(P2)
 {
 	if(Length > 0)
 		myLength = Length;
 	else
-		myLength = (myV1->getPosition() - myV2->getPosition()).getLength();
+		myLength = (P1->getPosition() - P2->getPosition()).getLength();
 
 	list.push_back(this);
 }
 
-Constraint::Constraint(Vertex &V1, Vertex &V2, float Length) :
-								myV1(&V1), myV2(&V2)
+Constraint::Constraint(Vertex &P1, Vertex &P2, float Length) :
+								P1(&P1), P2(&P2)
 {
 	if(Length > 0)
 		myLength = Length;
 	else
-		myLength = (V1.getPosition() - V2.getPosition()).getLength();
+		myLength = (P1.getPosition() - P2.getPosition()).getLength();
 
 	list.push_back(this);
 }
@@ -30,11 +30,6 @@ Constraint::Constraint(Vertex &V1, Vertex &V2, float Length) :
 Constraint::~Constraint()
 {
 	list.remove(this);
-}
-
-Vertex* Constraint::operator[](const unsigned int i)
-{
-	if(i < 1) return myV1; else return myV2;
 }
 
 void Constraint::DrawAll()

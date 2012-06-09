@@ -47,7 +47,7 @@ void Rigid::Resolve(int iterations)
 	for(int i = 0; i < iterations; i++)
 	{
 		// Vecteur P1P2
-		Vec2 Vect = myV2->getPosition() - myV1->getPosition();
+		Vec2 Vect = P2->getPosition() - P1->getPosition();
 
 		// Précalcul de la distance P1P2 - Peut être optimisée par une approximation
 		float acLength = Vect.getLength();
@@ -57,13 +57,13 @@ void Rigid::Resolve(int iterations)
 		// Normalisation du vecteur (pas besoin de Normalize(), on a déjà acLength)
 		Vect = Vect/acLength;
 
-		if(myV2->isFixed())
-			myV1->correctPosition(Vect*factor);
-		else if(myV1->isFixed())
-			myV2->correctPosition(-Vect*factor);
+		if(P2->isFixe())
+			P1->correctPosition(Vect*factor);
+		else if(P1->isFixe())
+			P2->correctPosition(-Vect*factor);
 		else
-			myV2->correctPosition(-Vect*factor*0.5f),
-			myV1->correctPosition(Vect*factor*0.5f);
+			P2->correctPosition(-Vect*factor*0.5f),
+			P1->correctPosition(Vect*factor*0.5f);
 	}
 }
 
@@ -73,8 +73,8 @@ void Rigid::glDraw()
 	glLoadIdentity();
 	glBegin(GL_LINES);
 	glColor3f(0.f, 0.f, 1.f);
-	glVertex2f(myV1->getPosition().x, myV1->getPosition().y);
-	glVertex2f(myV2->getPosition().x, myV2->getPosition().y);
+	glVertex2f(P1->getPosition().x, P1->getPosition().y);
+	glVertex2f(P2->getPosition().x, P2->getPosition().y);
 	glEnd();
 	glPopMatrix();
 }

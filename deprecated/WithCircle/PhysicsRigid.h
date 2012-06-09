@@ -23,7 +23,7 @@ class Rigid : public Constraint
 		/** @brief Appelle Resolve pour tout les Rigid
 		 *
 		**/
-		static void ResolveAll(int iterations = 1);
+		static void ResolveAll(int iterations = 10);
 
 		/// @brief Détruit tout les VR
 		static void DeleteAll();
@@ -38,7 +38,7 @@ class Rigid : public Constraint
 		 *
 		 * @param iterations Nombre d'itérations, un nombre important génère une simulation plus précise.
 		**/
-		void Resolve(int iterations = 1);
+		void Resolve(int iterations);
 		/// @brief Replace les points pour qu'ils respectent la liaison
 		void Resolve();
 

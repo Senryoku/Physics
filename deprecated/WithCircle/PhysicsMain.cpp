@@ -1,14 +1,11 @@
 #include <cstdlib>
 #include <iostream>
-#include <sstream>
 
 #include "Physics.h"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/OpenGL.hpp>
 #include <SFML/Audio.hpp>
-
-#include "FPSCounter.hpp"
 
 #ifdef SFML_SYSTEM_MACOS
 	#include "ResourcePath.hpp"
@@ -59,7 +56,7 @@ GLuint glTexLoad(const char* Path)
 int main(int argc, char** argv)
 {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
-	window.setVerticalSyncEnabled(0);
+	window.setVerticalSyncEnabled(1);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -75,7 +72,7 @@ int main(int argc, char** argv)
 
 	Vertex* P4 = new Vertex();
 	P4->setPosition(Vec2(100, 25));
-	P4->setFixed();
+	P4->setFixe();
 	Vertex* P5 = new Vertex();
 	P5->setPosition(Vec2(50, 50));
 	Vertex* P6 = new Vertex();
@@ -100,13 +97,13 @@ int main(int argc, char** argv)
 
 	Vertex* P41 = new Vertex();
 	P41->setPosition(Vec2(150, 150));
-	P41->setFixed();
+	P41->setFixe();
 	Vertex* P42 = new Vertex();
 	P42->setPosition(Vec2(250, 150));
-	P42->setFixed();
+	P42->setFixe();
 	Vertex* P43 = new Vertex();
 	P43->setPosition(Vec2(100, 300));
-	P43->setFixed();
+	P43->setFixe();
 
 	new Polygon(3, FLAG_NULL, P41, P42, P43);
 
@@ -144,9 +141,9 @@ int main(int argc, char** argv)
 			pRideau[i+j*colums]->setMass(.5f);
 			//On fixe deux des points
 			if ((i==0 && j==0) || (i==0  && j==rows-1))// || (i==colums-1 && j==0) || (i==colums-1  && j==rows-1))
-				pRideau[i+j*colums]->setFixed();
+				pRideau[i+j*colums]->setFixe();
 			if (j!=0 && i==0)
-				pRideau[i+j*colums]->setFixed();
+				pRideau[i+j*colums]->setFixe();
 
 			//On fait le lien avec celui qui est à gauche est en haut
 			if (i>0) //on peut faire le lien sur la gauche
@@ -194,13 +191,6 @@ int main(int argc, char** argv)
 
 	float polygon = 20.f;
 
-	sf::Font Font;
-	Font.loadFromFile("data/V5PRC___.TTF");
-	sf::Text Numbers("Initializing...", Font);
-	Numbers.setCharacterSize(20);
-	Numbers.setColor(sf::Color(255, 255, 255, 170));
-	Numbers.setPosition(5.f, 30.f);
-	FPSCounter FPS;
 	while(window.isOpen())
 	{
 		// Process events
@@ -274,7 +264,7 @@ int main(int argc, char** argv)
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 				Mouse->setPosition(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
 		//else if(MouseElastic != NULL) delete MouseElastic, MouseElastic = NULL;
-		else Mouse->setFixed();
+		else Mouse->setFixe();
 
 		glClear(GL_COLOR_BUFFER_BIT);
 
@@ -346,16 +336,6 @@ int main(int argc, char** argv)
 
 		Vertex::DrawAll();
 		Constraint::DrawAll();
-
-		FPS.update();
-		window.pushGLStates();
-		window.draw(FPS.getText());
-		std::ostringstream oss;
-		oss << "#V : " << Vertex::List.size() << " #R : " << Rigid::List.size()
-			<< " #E : " << Elastic::List.size() << " #P : " << Polygon::List.size();
-		Numbers.setString(oss.str());
-		window.draw(Numbers);
-		window.popGLStates();
 
 		window.display();
 	}

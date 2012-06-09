@@ -30,6 +30,13 @@ void Elastic::ResolveAll()
 {
 	for(std::list<Elastic*>::iterator ite = Elastic::List.begin();
 		ite != Elastic::List.end(); ite++)
+		/*if ((*ite)->getVector().getLength()>10.f*(*ite)->myLength)
+		{
+			Elastic* E=(*ite);
+			ite--;
+			delete <#expression#>
+		}
+		else*/
 			(*ite)->Resolve();
 }
 
@@ -41,10 +48,10 @@ void Elastic::DeleteAll()
 
 void Elastic::Resolve()
 {
-	// Vecteur V1V2
-	Vec2 Vect = myV2->getPosition() - myV1->getPosition();
+	// Vecteur P1P2
+	Vec2 Vect = P2->getPosition() - P1->getPosition();
 
-	// Précalcul de la distance V1V2 - Peut être optimisée par une approximation
+	// Précalcul de la distance P1P2 - Peut être optimisée par une approximation
 	float acLength = Vect.getLength();
 
 	// Loi de Hooke
@@ -53,8 +60,8 @@ void Elastic::Resolve()
 	// Normalisation du vecteur (pas besoin de getNormalized(), on a déjà acLength)
 	Vect = Vect/acLength;
 
-	myV2->applyForce(-Vect*factor),
-	myV1->applyForce(Vect*factor);
+	P2->applyForce(-Vect*factor),
+	P1->applyForce(Vect*factor);
 }
 
 void Elastic::glDraw()
@@ -64,8 +71,8 @@ void Elastic::glDraw()
 	glBegin(GL_LINES);
 	// Plus la contraite est forte, plus le lien est rouge
 	glColor3f(std::abs(myLength - getVector().getLength())*mySpring*0.5f/myLength, 0.f, 0.f);
-	glVertex2f(myV1->getPosition().x, myV1->getPosition().y);
-	glVertex2f(myV2->getPosition().x, myV2->getPosition().y);
+	glVertex2f(P1->getPosition().x, P1->getPosition().y);
+	glVertex2f(P2->getPosition().x, P2->getPosition().y);
 	glEnd();
 	glPopMatrix();
 }

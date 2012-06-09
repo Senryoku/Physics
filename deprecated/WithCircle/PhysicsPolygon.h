@@ -7,53 +7,26 @@
 
 #include "PhysicsVertex.h"
 #include "PhysicsRigid.h"
+#include "PhysicsShape.h"
 
-#define FLAG_NULL 		0x00
-#define WITH_LENGTH 	0x01
-
-#define PHYSICS_NONE	0x0000
-#define PHYSICS_LAYER1	0x0001
-#define PHYSICS_LAYER2	0x0002
-#define PHYSICS_LAYER3	0x0004
-#define PHYSICS_LAYER4	0x0008
-#define PHYSICS_LAYER5	0x0010
-#define PHYSICS_LAYER6	0x0020
-#define PHYSICS_LAYER7	0x0040
-#define PHYSICS_LAYER8	0x0080
-#define PHYSICS_LAYER9	0x0100
-#define PHYSICS_LAYER10	0x0200
-#define PHYSICS_LAYER11	0x0400
-#define PHYSICS_LAYER12	0x0800
-#define PHYSICS_LAYER13	0x1000
-#define PHYSICS_LAYER14	0x2000
-#define PHYSICS_LAYER15	0x4000
-#define PHYSICS_LAYER16	0x8000
-#define PHYSICS_ALL		0xFFFF
+#define FLAG_NULL 0
+#define WITH_LENGTH 1
 
 namespace Physics
 {
 
-class CollisionInfo;
+class Circle;
 
 /** @brief Décrit un polygone CONVEXE : Ensemble de points (Vertices)
  * reliés par les liaisons rigides (Edges).
  *
  **/
-class Polygon
+class Polygon : public Shape
 {
 	protected:
 		std::vector<Vertex*> Vertices;
 		std::vector<Rigid*> Edges;
 		std::vector<Rigid*> InternContraints;
-
-		std::list<CollisionInfo> myCIs;
-
-		float myFriction;
-		unsigned int myDetectionMask;
-		unsigned int myReactionMask;
-
-		bool myFixed;
-		std::vector<Vec2> Normals;
 
 	public:
 		static std::list<Polygon*> List;
@@ -96,21 +69,6 @@ class Polygon
 		**/
 		virtual ~Polygon();
 
-		// Accesseurs
-		inline bool isFixed() { return myFixed; }
-		inline float getFriction() { return myFriction; }
-		inline unsigned int getDetectionMask() { return myDetectionMask; }
-		inline unsigned int getReactionMask() { return myReactionMask; }
-
-		// Mutateurs
-		inline void addDetectionMask(unsigned int Mask) { myDetectionMask |= Mask; }
-		inline void addReactionMask(unsigned int Mask) { myReactionMask |= Mask; }
-		inline void rmDetectionMask(unsigned int Mask) { if(myDetectionMask & Mask) myDetectionMask -= Mask; }
-		inline void rmReactionMask(unsigned int Mask) { if(myReactionMask & Mask) myReactionMask -= Mask; }
-		inline void setDetectionMask(unsigned int Mask) { myDetectionMask = Mask; }
-		inline void setReactionMask(unsigned int Mask) { myReactionMask = Mask; }
-		void setFixed(bool B = true);
-
 		/// @brief Renvoi le centre du polygone
 		Vec2 getCenter();
 
@@ -118,8 +76,7 @@ class Polygon
 		Vec2 getMassCenter();
 
 		CollisionInfo collide(Polygon *P);
-		void addCI(CollisionInfo CI);
-		void clearCIs() { myCIs.clear(); }
+		CollisionInfo collide(Circle *C);
 
 		void ProjectToAxis(float &Min, float &Max, const Vec2 Axis);
 
@@ -127,18 +84,6 @@ class Polygon
 		void applyForce(Vec2 V);
 
 		Rigid& operator[](const unsigned int);
-};
-
-class CollisionInfo {
-	public:
-		Polygon*	P1;
-		Polygon*	P2;
-		float		Depth;
-		Vec2		Normal;
-		Rigid*		Edge;
-		Vertex*		V;
-
-		CollisionInfo() : P1(0), P2(0), Depth(0.f), Normal(0,0), Edge(0), V(0) { }
 };
 
 }

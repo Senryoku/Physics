@@ -30,7 +30,7 @@ class Vertex
 		float	myRadius; ///< Rayon, utilisé pour les collisions
 		float	myMass; ///< Masse
 		float	myBounce; ///< Coefficient de restitution
-		bool	myFixed; ///< Détermine si le point est fixe ou non (applyForce n'aura alors aucun effet)
+		bool	myFixe; ///< Détermine si le point est fixe ou non (applyForce n'aura alors aucun effet)
 
 	public:
 		/// @brief Constructeur par défaut
@@ -111,7 +111,7 @@ class Vertex
 		Vec2 getSpeed() { return myPosition - myOldPosition; }
 
 		/// @brief Accesseur de myFixe
-		bool isFixed() { return myFixed; }
+		bool isFixe() { return myFixe; }
 
 		/** @brief Mutateur de la position
 		 *
@@ -147,7 +147,7 @@ class Vertex
 		bool setMass(float newMass);
 
 		/// @brief Mutateur de myFixe
-		void setFixed(bool newFixed = true) { myFixed = newFixed; }
+		void setFixe(bool newFixe = true) { myFixe = newFixe; }
 
 		/** @brief Applique une force à la particule
 		 *

@@ -38,9 +38,9 @@
 			<Add option="-lglu32" />
 			<Add library="C:\MinGW\lib\libopengl32.a" />
 		</Linker>
-		<Unit filename="FPSCounter.cpp" />
-		<Unit filename="FPSCounter.hpp" />
 		<Unit filename="Physics.h" />
+		<Unit filename="PhysicsCircle.cpp" />
+		<Unit filename="PhysicsCircle.h" />
 		<Unit filename="PhysicsConstraint.cpp" />
 		<Unit filename="PhysicsConstraint.h" />
 		<Unit filename="PhysicsElastic.cpp" />
@@ -52,6 +52,8 @@
 		<Unit filename="PhysicsRectangle.h" />
 		<Unit filename="PhysicsRigid.cpp" />
 		<Unit filename="PhysicsRigid.h" />
+		<Unit filename="PhysicsShape.cpp" />
+		<Unit filename="PhysicsShape.h" />
 		<Unit filename="PhysicsVertex.cpp" />
 		<Unit filename="PhysicsVertex.h" />
 		<Unit filename="PhysicsWorld.cpp" />

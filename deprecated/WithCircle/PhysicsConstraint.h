@@ -15,28 +15,26 @@ namespace Physics
 class Constraint
 {
 	protected:
-		Vertex*	myV1;
-		Vertex*	myV2;
+		Vertex*	P1;
+		Vertex*	P2;
 		float	myLength; ///< Longueur à l'équilibre
 	static std::list<Constraint*> list;
 
 	public:
-		Constraint(Vertex* V1, Vertex* V2, float Length = -1);
-		Constraint(Vertex &V1, Vertex &V2, float Length = -1);
+		Constraint(Vertex* P1, Vertex* P2, float Length = -1);
+		Constraint(Vertex &P1, Vertex &P2, float Length = -1);
 		virtual ~Constraint();
 
 		/// @brief Applique la contrainte
 		virtual void Resolve() =0;
 
 		/// @brief Accesseur de P1
-		Vertex* getP1() { return myV1; }
+		Vertex* getP1() { return P1; }
 		/// @brief Accesseur de P2
-		Vertex* getP2() { return myV2; }
-
-		Vertex* operator[](const unsigned int);
+		Vertex* getP2() { return P2; }
 
 		/// @brief Retourne le vecteur associé à la contrainte (dans le sens P1 vers P2)
-		Vec2 getVector() { return (myV2->getPosition() - myV1->getPosition()); }
+		Vec2 getVector() { return (P2->getPosition() - P1->getPosition()); }
 
 	virtual void glDraw() =0;
 	static void DrawAll();

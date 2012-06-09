@@ -30,7 +30,7 @@ Vertex& Rectangle::getTopLeft()
 void Rectangle::setFixed()
 {
 	for (std::vector<Vertex*>::iterator it=Vertices.begin(); it!=Vertices.end(); it++)
-		(*it)->setFixed();
+		(*it)->setFixe();
 }
 
 }

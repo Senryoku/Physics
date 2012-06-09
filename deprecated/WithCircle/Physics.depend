@@ -79,13 +79,13 @@
 
 1339141366 f:\github\physics\physicscollidingobject.h
 
-1339236075 source:f:\github\physics\physicsconstraint.cpp
+1339083942 source:f:\github\physics\physicsconstraint.cpp
 	"PhysicsConstraint.h"
 
-1339235912 f:\github\physics\physicsconstraint.h
+1339083942 f:\github\physics\physicsconstraint.h
 	"PhysicsVertex.h"
 
-1339239205 f:\github\physics\physicsvertex.h
+1339153015 f:\github\physics\physicsvertex.h
 	<cmath>
 	<list>
 	<SFML/OpenGL.hpp>
@@ -94,25 +94,23 @@
 1339105436 f:\github\physics\vec2.h
 	<cmath>
 
-1339239409 source:f:\github\physics\physicselastic.cpp
+1339087399 source:f:\github\physics\physicselastic.cpp
 	"PhysicsElastic.h"
 
 1331681185 f:\github\physics\physicselastic.h
 	"PhysicsVertex.h"
 	"PhysicsConstraint.h"
 
-1339239292 source:f:\github\physics\physicsmain.cpp
+1339168999 source:f:\github\physics\physicsmain.cpp
 	<cstdlib>
 	<iostream>
-	<sstream>
 	"Physics.h"
 	<SFML/Graphics.hpp>
 	<SFML/OpenGL.hpp>
 	<SFML/Audio.hpp>
-	"FPSCounter.hpp"
 	"ResourcePath.hpp"
 
-1339237955 f:\github\physics\physics.h
+1339233899 f:\github\physics\physics.h
 	"PhysicsVertex.h"
 	"PhysicsConstraint.h"
 	"PhysicsElastic.h"
@@ -120,36 +118,38 @@
 	"PhysicsPolygon.h"
 	"PhysicsRectangle.h"
 
-1339239542 f:\github\physics\physicsrigid.h
+1331681177 f:\github\physics\physicsrigid.h
 	"PhysicsVertex.h"
 	"PhysicsConstraint.h"
 
-1339239169 f:\github\physics\physicspolygon.h
+1339234480 f:\github\physics\physicspolygon.h
 	<vector>
 	<list>
 	<cstdarg>
 	"PhysicsVertex.h"
 	"PhysicsRigid.h"
+	"PhysicsShape.h"
 
 1339234267 f:\github\physics\physicsrectangle.h
 	"PhysicsPolygon.h"
 
-1339239179 source:f:\github\physics\physicspolygon.cpp
+1339233873 source:f:\github\physics\physicspolygon.cpp
 	"PhysicsPolygon.h"
+	"PhysicsCircle.h"
 
-1339239225 source:f:\github\physics\physicsrectangle.cpp
+1339084049 source:f:\github\physics\physicsrectangle.cpp
 	"PhysicsRectangle.h"
 
-1339239231 source:f:\github\physics\physicsrigid.cpp
+1339153029 source:f:\github\physics\physicsrigid.cpp
 	"PhysicsRigid.h"
 
-1339239256 source:f:\github\physics\physicsvertex.cpp
+1339106417 source:f:\github\physics\physicsvertex.cpp
 	"PhysicsVertex.h"
 
 1339105460 source:f:\github\physics\vec2.cpp
 	"Vec2.h"
 
-1339235248 f:\github\physics\physicsshape.h
+1339234470 f:\github\physics\physicsshape.h
 	<list>
 	"Vec2.h"
 
@@ -168,15 +168,8 @@
 1339170496 source:f:\github\physics\physicsworld.cpp
 	"PhysicsWorld.h"
 
-1339239750 f:\github\physics\physicsworld.h
+1339170558 f:\github\physics\physicsworld.h
 	"PhysicsVertex.h"
 	"PhysicsRigid.h"
 	"PhysicsPolygon.h"
-
-1339239280 source:f:\github\physics\fpscounter.cpp
-	"FPSCounter.hpp"
-
-1339237437 f:\github\physics\fpscounter.hpp
-	<sstream>
-	"SFML/Graphics.hpp"
 

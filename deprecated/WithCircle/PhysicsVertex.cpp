@@ -12,7 +12,7 @@ Vertex::Vertex() :
 	myRadius(0),
 	myMass(1),
 	myBounce(0),
-	myFixed(0)
+	myFixe(0)
 {
 	Vertex::List.push_back(this);
 }
@@ -24,7 +24,7 @@ Vertex::Vertex(float x, float y) :
 	myRadius(0),
 	myMass(1),
 	myBounce(0),
-	myFixed(0)
+	myFixe(0)
 {
 	Vertex::List.push_back(this);
 }
@@ -36,7 +36,7 @@ Vertex::Vertex(float x, float y, float Mass) :
 	myRadius(0),
 	myMass(Mass),
 	myBounce(0),
-	myFixed(0)
+	myFixe(0)
 {
 	Vertex::List.push_back(this);
 }
@@ -48,7 +48,7 @@ Vertex::Vertex(Vec2 Pos) :
 	myRadius(0),
 	myMass(1),
 	myBounce(0),
-	myFixed(0)
+	myFixe(0)
 {
 	Vertex::List.push_back(this);
 }
@@ -113,14 +113,14 @@ bool Vertex::setPosition(Vec2 newPos, bool oldToo)
 
 bool Vertex::correctPosition(Vec2 add)
 {
-	if(myFixed) return false;
+	if(myFixe) return false;
 	myPosition += add;
 	return true;
 }
 
 bool Vertex::setAcceleration(Vec2 newAcc)
 {
-	if(myFixed) return false;
+	if(myFixe) return false;
 	myAcceleration = newAcc;
 	return true;
 }
@@ -142,17 +142,17 @@ bool Vertex::setMass(float newMass)
 
 void Vertex::applyForce(Vec2 Force)
 {
-	if(!myFixed) myAcceleration += Force/myMass;
+	if(!myFixe) myAcceleration += Force/myMass;
 }
 
 void Vertex::addAcceleration(Vec2 Acc)
 {
-	if(!myFixed) myAcceleration += Acc;
+	if(!myFixe) myAcceleration += Acc;
 }
 
 void Vertex::resolve(float prevdt, float dt)
 {
-	if(myFixed) return;
+	if(myFixe) return;
 	Vec2 tmp = myPosition;
 	//            Dissipation d'énergie, dépend du milieu
 	myPosition += 0.99f*((myPosition - myOldPosition)*(dt/prevdt)) // Inertie
@@ -164,33 +164,30 @@ void Vertex::resolve(float prevdt, float dt)
 
 void Vertex::glDraw()
 {
-//	int quality(16);
-//	float radius(1.f);
-//	glPushMatrix();
-//	glLoadIdentity();
-//	glTranslatef(myPosition.x, myPosition.y, 0.f);
-//	glBegin(GL_TRIANGLE_FAN);
-//	//centre du cercle
-//	glVertex2f(0.f, 0.f);
-//	for (int i=0; i<=quality; i++)
-//	{
-//		(myFixe) ? glColor3f(1.f, 0.2f, 0.2f) : glColor3f(1.f, 1.f, 1.f);
-//		glVertex2f(myMass*radius*cos((2.0*M_PI)*(i/static_cast<double>(quality))), myMass*radius*sin((2.0*M_PI)*(i/static_cast<double>(quality))));
-//	}
-//
-//	glEnd();
-//	glPopMatrix();
-	glVertex2f(myPosition.x, myPosition.y);
+	int quality(16);
+	float radius(1.f);
+	glPushMatrix();
+	glLoadIdentity();
+	glTranslatef(myPosition.x, myPosition.y, 0.f);
+	glBegin(GL_TRIANGLE_FAN);
+	//centre du cercle
+	glVertex2f(0.f, 0.f);
+	for (int i=0; i<=quality; i++)
+	{
+		(myFixe) ? glColor3f(1.f, 0.2f, 0.2f) : glColor3f(1.f, 1.f, 1.f);
+		glVertex2f(myMass*radius*cos((2.0*M_PI)*(i/static_cast<double>(quality))), myMass*radius*sin((2.0*M_PI)*(i/static_cast<double>(quality))));
+	}
+
+	glEnd();
+	glPopMatrix();
 }
 
 void Vertex::DrawAll()
 {
-	glPointSize(2);
-	glBegin(GL_POINTS);
-	for (std::list<Vertex*>::iterator it = Vertex::List.begin(); it != Vertex::List.end(); it++)
+	for (std::list<Vertex*>::iterator it=List.begin(); it!=List.end(); it++)
 		(*it)->glDraw();
-	glEnd();
 }
+
 
 
 Vertex* Vertex::getNearest(const Vec2 &v)
