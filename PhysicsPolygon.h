@@ -33,6 +33,8 @@
 namespace Physics
 {
 
+class World;
+
 class CollisionInfo;
 
 /** @brief Décrit un polygone CONVEXE : Ensemble de points (Vertices)
@@ -56,19 +58,6 @@ class Polygon
 		std::vector<Vec2> Normals;
 
 	public:
-		static std::list<Polygon*> List;
-		/** @brief Détruit tout les VP (et les VR qu'ils contiennent)
-		 * Doit être appellé AVANT Constraint ou Rigid ::DeleteAll !
-		**/
-		static void DeleteAll();
-		/** @brief Calcule et gère les collisions de tous les polygones
-		**/
-		static void HandleCollisions();
-
-		/** @brief Vide les informations de collision de tout les Polygons
-		**/
-		static void clearAllCIs();
-
 		/// @brief Constructeur par défaut, pour usage interne.
 		Polygon();
 
@@ -117,6 +106,8 @@ class Polygon
 		/// @brief Renvoi le centre de masse du polygone
 		Vec2 getMassCenter();
 
+		void resolveRigids();
+
 		CollisionInfo collide(Polygon *P);
 		void addCI(CollisionInfo CI);
 		void clearCIs() { myCIs.clear(); }
@@ -126,7 +117,11 @@ class Polygon
 		/// @brief Applique une force à tout les Vertices du polygon
 		void applyForce(Vec2 V);
 
+		void addVerticesToWorld(World* W); // C'est mauvais...........
+
 		Rigid& operator[](const unsigned int);
+
+		void glDraw();
 };
 
 class CollisionInfo {

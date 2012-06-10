@@ -18,15 +18,6 @@ class Elastic : public Constraint
 		float mySpring; ///< Constante de ressort
 
 	public:
-		/// @brief Liste des VerletConstraint créés
-		static std::list<Elastic*> List;
-
-		/// @brief Appelle Resolve pour tout les Elastic
-		static void ResolveAll();
-
-		/// @brief Détruit tout les VC
-		static void DeleteAll();
-
 		Elastic(Vertex* P1, Vertex* P2,
 						float Length = -1.f, float Spring = 1.f);
 		Elastic(Vertex &P1, Vertex &P2,
@@ -36,9 +27,10 @@ class Elastic : public Constraint
 		/** @brief Applique la contrainte
 		*
 		**/
-		void Resolve();
+		void resolve();
 
 		void glDraw();
+		void glDraws();
 };
 
 }

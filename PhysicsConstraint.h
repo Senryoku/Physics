@@ -18,7 +18,6 @@ class Constraint
 		Vertex*	myV1;
 		Vertex*	myV2;
 		float	myLength; ///< Longueur à l'équilibre
-	static std::list<Constraint*> list;
 
 	public:
 		Constraint(Vertex* V1, Vertex* V2, float Length = -1);
@@ -26,7 +25,7 @@ class Constraint
 		virtual ~Constraint();
 
 		/// @brief Applique la contrainte
-		virtual void Resolve() =0;
+		virtual void resolve() =0;
 
 		/// @brief Accesseur de P1
 		Vertex* getP1() { return myV1; }
@@ -38,8 +37,7 @@ class Constraint
 		/// @brief Retourne le vecteur associé à la contrainte (dans le sens P1 vers P2)
 		Vec2 getVector() { return (myV2->getPosition() - myV1->getPosition()); }
 
-	virtual void glDraw() =0;
-	static void DrawAll();
+		virtual void glDraw() =0;
 };
 
 }

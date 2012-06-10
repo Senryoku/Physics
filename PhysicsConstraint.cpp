@@ -3,8 +3,6 @@
 namespace Physics
 {
 
-std::list<Constraint*> Constraint::list;
-
 Constraint::Constraint(Vertex* V1, Vertex* V2, float Length) :
 								myV1(V1), myV2(V2)
 {
@@ -12,8 +10,6 @@ Constraint::Constraint(Vertex* V1, Vertex* V2, float Length) :
 		myLength = Length;
 	else
 		myLength = (myV1->getPosition() - myV2->getPosition()).getLength();
-
-	list.push_back(this);
 }
 
 Constraint::Constraint(Vertex &V1, Vertex &V2, float Length) :
@@ -23,24 +19,15 @@ Constraint::Constraint(Vertex &V1, Vertex &V2, float Length) :
 		myLength = Length;
 	else
 		myLength = (V1.getPosition() - V2.getPosition()).getLength();
-
-	list.push_back(this);
 }
 
 Constraint::~Constraint()
 {
-	list.remove(this);
 }
 
 Vertex* Constraint::operator[](const unsigned int i)
 {
 	if(i < 1) return myV1; else return myV2;
-}
-
-void Constraint::DrawAll()
-{
-	for (std::list<Constraint*>::iterator it=list.begin(); it!=list.end(); it++)
-		(*it)->glDraw();
 }
 
 }

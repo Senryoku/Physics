@@ -3,14 +3,11 @@
 namespace Physics
 {
 
-std::list<Elastic*> Elastic::List;
-
 Elastic::Elastic(Vertex* P1, Vertex* P2,
 								float Length, float Spring) :
 								Constraint(P1, P2, Length),
 								mySpring(Spring)
 {
-	Elastic::List.push_back(this);
 }
 
 Elastic::Elastic(Vertex &P1, Vertex &P2,
@@ -18,28 +15,13 @@ Elastic::Elastic(Vertex &P1, Vertex &P2,
 								Constraint(P1, P2, Length),
 								mySpring(Spring)
 {
-	Elastic::List.push_back(this);
 }
 
 Elastic::~Elastic()
 {
-	Elastic::List.remove(this);
 }
 
-void Elastic::ResolveAll()
-{
-	for(std::list<Elastic*>::iterator ite = Elastic::List.begin();
-		ite != Elastic::List.end(); ite++)
-			(*ite)->Resolve();
-}
-
-void Elastic::DeleteAll()
-{
-    while (Elastic::List.size()>0)
-        delete (Elastic::List.front());
-}
-
-void Elastic::Resolve()
+void Elastic::resolve()
 {
 	// Vecteur V1V2
 	Vec2 Vect = myV2->getPosition() - myV1->getPosition();
@@ -59,15 +41,20 @@ void Elastic::Resolve()
 
 void Elastic::glDraw()
 {
-	glPushMatrix();
-	glLoadIdentity();
 	glBegin(GL_LINES);
 	// Plus la contraite est forte, plus le lien est rouge
 	glColor3f(std::abs(myLength - getVector().getLength())*mySpring*0.5f/myLength, 0.f, 0.f);
 	glVertex2f(myV1->getPosition().x, myV1->getPosition().y);
 	glVertex2f(myV2->getPosition().x, myV2->getPosition().y);
 	glEnd();
-	glPopMatrix();
+}
+
+void Elastic::glDraws()
+{
+	// Plus la contraite est forte, plus le lien est rouge
+	glColor3f(std::abs(myLength - getVector().getLength())*mySpring*0.5f/myLength, 0.f, 0.f);
+	glVertex2f(myV1->getPosition().x, myV1->getPosition().y);
+	glVertex2f(myV2->getPosition().x, myV2->getPosition().y);
 }
 
 }

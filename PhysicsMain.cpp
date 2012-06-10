@@ -70,45 +70,48 @@ int main(int argc, char** argv)
 	sf::Clock vent;
 	float forceVent(1.f);
 
+	World W;
+
 	//Une texture OpenGL
 	GLuint texture = glTexLoad("data/cute.png");
 
-	Vertex* P4 = new Vertex();
+	Vertex* P4 = W.newVertex();
 	P4->setPosition(Vec2(100, 25));
 	P4->setFixed();
-	Vertex* P5 = new Vertex();
+	Vertex* P5 = W.newVertex();
 	P5->setPosition(Vec2(50, 50));
-	Vertex* P6 = new Vertex();
+	Vertex* P6 = W.newVertex();
 	P6->setPosition(Vec2(100, 150));
-	Vertex* P7 = new Vertex();
+	Vertex* P7 = W.newVertex();
 	P7->setPosition(Vec2(150, 50));
 	Polygon* VP1 = new Polygon(4, WITH_LENGTH, P4, 100.f, P5, 100.f, P6, 100.f, P7, 100.f);
-	new Rigid(P4, P6, sqrt(20000.f));
-	new Rigid(P5, P7, sqrt(20000.f));
+	W.add(VP1);
+	W.newRigid(P4, P6, sqrt(20000.f));
+	W.newRigid(P5, P7, sqrt(20000.f));
 
-	Vertex* pLeftTop = new Vertex(), *pRightTop = new Vertex(), *pRightBottom = new Vertex(), *pLeftBottom = new Vertex();
+	Vertex* pLeftTop = W.newVertex(), *pRightTop = W.newVertex(), *pRightBottom = W.newVertex(), *pLeftBottom = W.newVertex();
 	pLeftTop->setPosition(Vec2(300.f, 10.f));
 	pRightTop->setPosition(Vec2(400.f, 10.f));
 	pLeftBottom->setPosition(Vec2(300.f, 110.f));
 	pRightBottom->setPosition(Vec2(400.f, 110.f));
 
-	new Polygon(4, FLAG_NULL, pLeftTop, pRightTop, pRightBottom, pLeftBottom);
-	new Rigid(pLeftTop, pRightBottom);// sqrt(20000.f));
-	new Rigid(pLeftBottom, pRightTop);// sqrt(20000.f));
+	W.add(new Polygon(4, FLAG_NULL, pLeftTop, pRightTop, pRightBottom, pLeftBottom));
+	W.newRigid(pLeftTop, pRightBottom);// sqrt(20000.f));
+	W.newRigid(pLeftBottom, pRightTop);// sqrt(20000.f));
 
 	float taille_cubes = 50.f;
 
-	Vertex* P41 = new Vertex();
+	Vertex* P41 = W.newVertex();
 	P41->setPosition(Vec2(150, 150));
 	P41->setFixed();
-	Vertex* P42 = new Vertex();
+	Vertex* P42 = W.newVertex();
 	P42->setPosition(Vec2(250, 150));
 	P42->setFixed();
-	Vertex* P43 = new Vertex();
+	Vertex* P43 = W.newVertex();
 	P43->setPosition(Vec2(100, 300));
 	P43->setFixed();
 
-	new Polygon(3, FLAG_NULL, P41, P42, P43);
+	W.add(new Polygon(3, FLAG_NULL, P41, P42, P43));
 
 	//Vertex* P8 = new Vertex();
 
@@ -139,7 +142,7 @@ int main(int argc, char** argv)
 	for (int i=0; i<colums; i++)
 		for (int j=0; j<rows; j++)
 		{
-			pRideau[i+j*colums]=new Vertex();
+			pRideau[i+j*colums]=W.newVertex();
 			pRideau[i+j*colums]->setPosition(Vec2(300.f+i*tailleCarre, 30.f+j*tailleCarre));
 			pRideau[i+j*colums]->setMass(.5f);
 			//On fixe deux des points
@@ -153,13 +156,13 @@ int main(int argc, char** argv)
 				for (int a=0; a<cTimes; a++)
 				{
 					if (cType) {
-						new Elastic(pRideau[i+j*colums-1], pRideau[i+j*colums], -1.f, 10.f);
-						// if(j > 0) new Elastic(pRideau[i+(j - 1)*colums-1], pRideau[i+j*colums], -1.f, 10.f);
+						W.newElastic(pRideau[i+j*colums-1], pRideau[i+j*colums], -1.f, 10.f);
+						// if(j > 0) W.newElastic(pRideau[i+(j - 1)*colums-1], pRideau[i+j*colums], -1.f, 10.f);
 					} else {
-						new Rigid(pRideau[i+j*colums-1], pRideau[i+j*colums]);
-						// if(j > 0) new Rigid(pRideau[i+(j - 1)*colums-1], pRideau[i+j*colums]);
-						if(j > 0) new Elastic(pRideau[i+(j - 1)*colums-1], pRideau[i+j*colums], -1.f, 0.1f);
-						if(j < rows-1) new Elastic(pRideau[i+(j + 1)*colums-1], pRideau[i+j*colums], -1.f, 0.1f);
+						W.newRigid(pRideau[i+j*colums-1], pRideau[i+j*colums]);
+						// if(j > 0) W.newRigid(pRideau[i+(j - 1)*colums-1], pRideau[i+j*colums]);
+						if(j > 0) W.newElastic(pRideau[i+(j - 1)*colums-1], pRideau[i+j*colums], -1.f, 0.1f);
+						if(j < rows-1) W.newElastic(pRideau[i+(j + 1)*colums-1], pRideau[i+j*colums], -1.f, 0.1f);
 					}
 				}
 
@@ -167,15 +170,15 @@ int main(int argc, char** argv)
 				for (int a=0; a<cTimes; a++)
 				{
 					if (cType)
-						new Elastic(pRideau[i+(j-1)*colums], pRideau[i+j*colums], -1.f, 5.f);
+						W.newElastic(pRideau[i+(j-1)*colums], pRideau[i+j*colums], -1.f, 5.f);
 					else
-						new Rigid(pRideau[i+(j-1)*colums], pRideau[i+j*colums]);
+						W.newRigid(pRideau[i+(j-1)*colums], pRideau[i+j*colums]);
 				}
 
 			if (i==1 && j==0)
-				new Elastic(pRideau[i+j*colums-1], pRideau[i+j*colums], -1.f, 2.f);
+				W.newElastic(pRideau[i+j*colums-1], pRideau[i+j*colums], -1.f, 2.f);
 			if (i==0 && j==1)
-				new Elastic(pRideau[i+(j-1)*colums], pRideau[i+j*colums], -1.f, 2.f);
+				W.newElastic(pRideau[i+(j-1)*colums], pRideau[i+j*colums], -1.f, 2.f);
 
 		}
 
@@ -185,10 +188,11 @@ int main(int argc, char** argv)
 
 	Vertex *grab = NULL;
 	Elastic* MouseElastic = NULL;
-	Vertex* Mouse = new Vertex();
+	Vertex* Mouse = W.newVertex();
 
 	Rectangle* rP;
 	rP=new Rectangle(40.f, 60.f);
+	W.add(rP);
 	rP->getTopLeft().setPosition(Vec2(10.f,400.f));
 	//rP->setFixed();
 
@@ -219,15 +223,20 @@ int main(int argc, char** argv)
                         window.close();
                         break;
                     case sf::Keyboard::R:
-                        (new Rectangle(50.f, 50.f))->getTopLeft().setPosition(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
+					{
+                        Rectangle* RE = new Rectangle(50.f, 50.f);
+                        RE->getTopLeft().setPosition(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
+                        W.add(RE);
                         break;
+					}
                     case sf::Keyboard::P:
                          //new Polygon(8, FLAG_NULL, new Vertex(0.f, 1.f*polygon), new Vertex(1.f*polygon, 0.f), new Vertex(2.f*polygon, 0.f),
                                     // new Vertex(3.f*polygon, 1.f*polygon), new Vertex(3.f*polygon, 2.f*polygon), new Vertex(2.f*polygon, 3.f*polygon),
                                     // new Vertex(1.f*polygon, 3.f*polygon), new Vertex(0.f, 2.f*polygon));
-                         new Polygon(6, FLAG_NULL, new Vertex(0.f, 1.f*polygon), new Vertex(1.f*polygon, 0.f),
-                                     new Vertex(2.f*polygon, 1.f*polygon), new Vertex(2.f*polygon, 2.f*polygon),
-                                     new Vertex(1.f*polygon, 3.f*polygon), new Vertex(0.f, 2.f*polygon));
+                         W.add(new Polygon(6, FLAG_NULL, W.newVertex(0.f, 1.f*polygon), W.newVertex(1.f*polygon, 0.f),
+                                     W.newVertex(2.f*polygon, 1.f*polygon), W.newVertex(2.f*polygon, 2.f*polygon),
+                                     W.newVertex(1.f*polygon, 3.f*polygon), W.newVertex(0.f, 2.f*polygon)));
+						break;
                     default:
                         break;
                 }
@@ -240,12 +249,16 @@ int main(int argc, char** argv)
 			if (event.type == sf::Event::MouseButtonPressed)
 			{
 
-				grab=Vertex::getNearest(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
+				grab = W.getNearestVertex(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
 				if(event.mouseButton.button == sf::Mouse::Left)
 					delete MouseElastic,
-					MouseElastic = new Physics::Elastic(grab, Mouse, 1.f, 5.f);
+					MouseElastic = W.newElastic(grab, Mouse, 1.f, 5.f);
 				if(event.mouseButton.button == sf::Mouse::Middle || event.mouseButton.button == sf::Mouse::XButton1)
-					(new Rectangle(25.f, 25.f))->getTopLeft().setPosition(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
+				{
+					Rectangle* R = new Rectangle(25.f, 25.f);
+					R->getTopLeft().setPosition(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
+					W.add(R);
+				}
 			}
 
 
@@ -286,13 +299,10 @@ int main(int argc, char** argv)
 		if (vent.getElapsedTime().asSeconds()>=4.f)
 			forceVent=(forceVent>0 ? -1 : 1)*((rand()%400)/100.f+3.f), vent.restart();
 
-		for(int i = 0; i < 1; i++)
-        {
-            //Physics::ForceAll(Vec2(forceVent, 0.f)); // Vent
-            Physics::addAccelerationAll(Vec2(0.f, 12.f)); // Gravité
-			Physics::Update(prevdt, dt);
-			prevdt = dt; // Permet de gérer des framerate inconstants
-        }
+		// W.addGlobalAcceleration(Vec2(forceVent, 0.f)); // Vent
+		W.addGlobalAcceleration(Vec2(0.f, 12.f)); // Gravité
+		W.update(prevdt, dt);
+		prevdt = dt; // Permet de gérer des framerate inconstants
 
 		//On affiche le rideau
 		glColor4f(1.f, 1.f, 1.f, 1.f);
@@ -340,19 +350,14 @@ int main(int argc, char** argv)
 		glEnd();
 		*/
 
-
-		for (int i=0; i<10; i++)
-		glDrawCube(sf::Vector2f(i*20.f, 400.f), 20.f);
-
-		Vertex::DrawAll();
-		Constraint::DrawAll();
+		W.draw();
 
 		FPS.update();
 		window.pushGLStates();
 		window.draw(FPS.getText());
 		std::ostringstream oss;
-		oss << "#V : " << Vertex::List.size() << " #R : " << Rigid::List.size()
-			<< " #E : " << Elastic::List.size() << " #P : " << Polygon::List.size();
+		oss << "#V : " << W.getVertexCount() << " #R : " << W.getRigidCount()
+			<< " #E : " << W.getElasticCount() << " #P : " << W.getPolygonCount();
 		Numbers.setString(oss.str());
 		window.draw(Numbers);
 		window.popGLStates();
@@ -360,59 +365,7 @@ int main(int argc, char** argv)
 		window.display();
 	}
 
-	Physics::DeleteAll();
+	W.deleteAll();
 	//On libere la texture
 	glDeleteTextures(1, &texture);
-}
-
-
-void glDrawCube(const sf::Vector2f &Position, float size)
-{
-	glPushMatrix();
-	glLoadIdentity();
-	glTranslatef(Position.x, Position.y, 0.f);
-
-	glBegin(GL_QUADS);
-
-	//glColor3f(1.f, 0.f, 0.f);
-	//front
-	/*
-	glTexCoord2f(0, 0); glVertex3f(0.f, 0.f, 0.f);
-	glTexCoord2f(0, 1); glVertex3f(0.f,  size, 0.f);
-	glTexCoord2f(1, 1); glVertex3f( size,  size, 0.f);
-	glTexCoord2f(1, 0); glVertex3f( size, 0.f, 0.f);
-	*/
-	//back
-	glTexCoord2f(0, 0); glVertex3f(0.f, 0.f, size);
-	glTexCoord2f(0, 1); glVertex3f(0.f,  size, size);
-	glTexCoord2f(1, 1); glVertex3f( size,  size, size);
-	glTexCoord2f(1, 0); glVertex3f( size, 0.f, size);
-
-	//left side
-	glTexCoord2f(0, 0); glVertex3f(0.f, 0.f, 0.f);
-	glTexCoord2f(0, 1); glVertex3f(0.f,  size, 0.f);
-	glTexCoord2f(1, 1); glVertex3f(0.f,  size,  size);
-	glTexCoord2f(1, 0); glVertex3f(0.f, 0.f,  size);
-
-	//right side
-	glTexCoord2f(0, 0); glVertex3f(size, 0.f, 0.f);
-	glTexCoord2f(0, 1); glVertex3f(size,  size, 0.f);
-	glTexCoord2f(1, 1); glVertex3f(size,  size,  size);
-	glTexCoord2f(1, 0); glVertex3f(size, 0.f,  size);
-
-	//Top
-	glTexCoord2f(0, 1); glVertex3f(0.f, 0.f,  size);
-	glTexCoord2f(0, 0); glVertex3f(0.f, 0.f, 0.f);
-	glTexCoord2f(1, 0); glVertex3f( size, 0.f, 0.f);
-	glTexCoord2f(1, 1); glVertex3f( size, 0.f,  size);
-
-	//bottom
-	glTexCoord2f(0, 1); glVertex3f(0.f, size,  size);
-	glTexCoord2f(0, 0); glVertex3f(0.f, size, 0.f);
-	glTexCoord2f(1, 0); glVertex3f( size, size, 0.f);
-	glTexCoord2f(1, 1); glVertex3f( size, size,  size);
-
-	glEnd();
-
-	glPopMatrix();
 }

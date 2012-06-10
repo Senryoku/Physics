@@ -1,14 +1,13 @@
 #include "PhysicsPolygon.h"
 
+#include "PhysicsWorld.h"
+
 namespace Physics
 {
-
-std::list<Polygon*> Polygon::List;
 
 Polygon::Polygon() :
 	myFriction(1.f), myDetectionMask(PHYSICS_ALL), myReactionMask(PHYSICS_ALL)
 {
-	Polygon::List.push_back(this);
 }
 
 Polygon::Polygon(int nb, unsigned int FLAGS, ...) :
@@ -47,96 +46,18 @@ Polygon::Polygon(int nb, unsigned int FLAGS, ...) :
 	}
 
 	va_end(ap);
-	Polygon::List.push_back(this);
 }
 
 Polygon::~Polygon()
 {
-	while(Edges.size() > 0)
-		Edges.pop_back(); // Appelle automatiquement le destructeur de l'élément.
-	Polygon::List.remove(this);
-}
-
-void Polygon::DeleteAll()
-{
-    while (Polygon::List.size()>0)
-        delete (Polygon::List.front());
-}
-
-void Polygon::HandleCollisions()
-{
-	CollisionInfo Info;
-	for(std::list<Polygon*>::iterator ite = Polygon::List.begin();
-		ite != Polygon::List.end(); ite++)
-	{
-		for(std::list<Polygon*>::iterator ite2 = Polygon::List.begin(); ite2 != Polygon::List.end(); ite2++)
-		{
-			if( ite != ite2 ) {
-				Info = (*ite)->collide((*ite2));
-				// Il y a collision
-				if(Info.P1 != NULL)
-				{
-					Info.P1->addCI(Info);
-					Info.P2->addCI(Info);
-					// Ils ont un masque de réaction en commun
-					if (Info.P1->getReactionMask() & Info.P2->getReactionMask())
-					{
-						Vec2 P1Center = Info.P1->getCenter();
-						// On s'assure que la normal est dans le bon sens (pointe vers P2)
-						if(Info.Normal*(Info.P2->getCenter() - P1Center) < 0)
-							Info.Normal *= -1;
-
-						// Recherche du point de collision (= le plus proche de P1)
-						float distP1Vertex = INFINITY; // On recherche un minimum
-						float tmpDist;
-						for(unsigned int i = 0; i < Info.P2->Vertices.size(); i++)
-						{
-							tmpDist = Info.Normal*(Info.P2->Vertices[i]->getPosition()-P1Center);
-							if(tmpDist < distP1Vertex)
-								distP1Vertex = tmpDist,
-								Info.V = Info.P2->Vertices[i];
-						}
-
-						// Réponse
-						Vec2 CollisionVector = Info.Normal*Info.Depth;
-
-						Vec2 PosE1 = Info.Edge->getP1()->getPosition();
-						Vec2 PosE2 = Info.Edge->getP2()->getPosition();
-
-						float PositionOnEdge; // Position du point sur la face
-						// On évite les divisions par 0 !
-						if(std::abs(PosE1.x - PosE2.x) > std::abs(PosE1.y - PosE2.y))
-							PositionOnEdge = (Info.V->getPosition().x - CollisionVector.x
-							- PosE1.x)/(PosE2.x - PosE1.x);
-						else
-							PositionOnEdge = (Info.V->getPosition().y - CollisionVector.y
-							- PosE1.y)/(PosE2.y - PosE1.y);
-
-						// Moins cher que de normaliser le vecteur de Edge
-						Vec2 Tangent = Vec2(Info.Normal.y, -Info.Normal.x);
-						Info.V->applyForce(Info.P1->getFriction()*Info.P2->getFriction()*Info.Depth*((Tangent*Info.V->getSpeed() < 0) ? 1 : -1)*Tangent);
-
-						float CorrectionFactor = -1.0f/(PositionOnEdge*PositionOnEdge + (1 - PositionOnEdge)*(1 - PositionOnEdge));
-
-						// Correction des positions
-						Info.V->correctPosition(CollisionVector*0.5f); // Du point
-						// De  la face
-						Info.Edge->getP1()->correctPosition(CollisionVector*
-							CorrectionFactor*(1-PositionOnEdge)*0.5f);
-						Info.Edge->getP2()->correctPosition(CollisionVector*
-							CorrectionFactor*(PositionOnEdge)*0.5f);
-					}
-				}
-			}
-		}
-    }
-}
-
-void Polygon::clearAllCIs()
-{
-	for(std::list<Polygon*>::iterator ite = Polygon::List.begin();
-		ite != Polygon::List.end(); ite++)
-		(*ite)->clearCIs();
+	for(std::vector<Rigid*>::iterator ite = Edges.begin();
+		ite != Edges.end(); ite++)
+		delete *ite;
+	Edges.clear();
+	for(std::vector<Rigid*>::iterator ite = InternContraints.begin();
+		ite != InternContraints.end(); ite++)
+		delete *ite;
+	InternContraints.clear();
 }
 
 void Polygon::addCI(CollisionInfo CI)
@@ -172,6 +93,16 @@ Vec2 Polygon::getMassCenter()
 		Mass += Vertices[i]->getMass();
 	}
 	return Center;
+}
+
+void Polygon::resolveRigids()
+{
+	for(std::vector<Rigid*>::iterator ite = Edges.begin();
+		ite != Edges.end(); ite++)
+		(*ite)->resolve();
+	for(std::vector<Rigid*>::iterator ite = InternContraints.begin();
+		ite != InternContraints.end(); ite++)
+		(*ite)->resolve();
 }
 
 CollisionInfo Polygon::collide(Polygon *P)
@@ -213,6 +144,22 @@ CollisionInfo Polygon::collide(Polygon *P)
 			Info.Edge = Edge;
 	}
 
+	Vec2 P1Center = Info.P1->getCenter();
+	// On s'assure que la normal est dans le bon sens (pointe vers P2)
+	if(Info.Normal*(Info.P2->getCenter() - P1Center) < 0)
+		Info.Normal *= -1;
+
+	// Recherche du point de collision (= le plus proche de P1)
+	float distP1Vertex = INFINITY; // On recherche un minimum
+	float tmpDist;
+	for(unsigned int i = 0; i < Info.P2->Vertices.size(); i++)
+	{
+		tmpDist = Info.Normal*(Info.P2->Vertices[i]->getPosition()-P1Center);
+		if(tmpDist < distP1Vertex)
+			distP1Vertex = tmpDist,
+			Info.V = Info.P2->Vertices[i];
+	}
+
 	// Gère le cas où le polygone se résume à un point (Tout ses points ont les mêmes coordonnées
 	if(Info.Edge == NULL)
 		return CollisionInfo();
@@ -232,6 +179,13 @@ void Polygon::ProjectToAxis(float &Min, float &Max, const Vec2 Axis)
 	}
 }
 
+void Polygon::addVerticesToWorld(World* W)
+{
+	for(std::vector<Vertex*>::iterator ite = Vertices.begin();
+		ite != Vertices.end(); ite++)
+		W->add(*ite);
+}
+
 Rigid& Polygon::operator[](const unsigned int i)
 {
 	return *Edges[i];
@@ -243,6 +197,26 @@ void Polygon::applyForce(Vec2 V)
 	{
 		Vertices[i]->applyForce(V);
 	}
+}
+
+void Polygon::glDraw()
+{
+	glBegin(GL_LINES);
+	glColor3f(0.f, 0.f, 1.f);
+	for(std::vector<Rigid*>::iterator ite = Edges.begin();
+		ite != Edges.end(); ite++)
+		(*ite)->glDraws();
+	for(std::vector<Rigid*>::iterator ite = InternContraints.begin();
+		ite != InternContraints.end(); ite++)
+		(*ite)->glDraws();
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	for(std::vector<Vertex*>::iterator ite = Vertices.begin();
+		ite != Vertices.end(); ite++)
+		Vec2 Pos = (*ite)->getPosition(),
+		glVertex2f(Pos.x, Pos.y);
+	glEnd();
 }
 
 }

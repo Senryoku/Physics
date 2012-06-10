@@ -3,80 +3,51 @@
 namespace Physics
 {
 
-std::list<Rigid*> Rigid::List;
-
 Rigid::Rigid(Vertex* P1, Vertex* P2,
 								float Length) :
 								Constraint(P1, P2, Length)
 {
-	Rigid::List.push_back(this);
-}
-
-Rigid::Rigid(Vertex &P1, Vertex &P2,
-								float Length) :
-								Constraint(P1, P2, Length)
-{
-	Rigid::List.push_back(this);
 }
 
 Rigid::~Rigid()
 {
-	Rigid::List.remove(this);
 }
 
-void Rigid::ResolveAll(int iterations)
+void Rigid::resolve()
 {
-	for(std::list<Rigid*>::iterator ite = Rigid::List.begin();
-		ite != Rigid::List.end(); ite++)
-		(*ite)->Resolve(iterations);
-}
+	// Vecteur P1P2
+	Vec2 Vect = myV2->getPosition() - myV1->getPosition();
 
-void Rigid::DeleteAll()
-{
-    while (Rigid::List.size()>0)
-        delete (Rigid::List.front());
-}
+	// Précalcul de la distance P1P2 - Peut être optimisée par une approximation
+	float acLength = Vect.getLength();
 
-void Rigid::Resolve()
-{
-	Resolve(1);
-}
+	float factor = (acLength - myLength);
 
-void Rigid::Resolve(int iterations)
-{
-	for(int i = 0; i < iterations; i++)
-	{
-		// Vecteur P1P2
-		Vec2 Vect = myV2->getPosition() - myV1->getPosition();
+	// Normalisation du vecteur (pas besoin de Normalize(), on a déjà acLength)
+	Vect = Vect/acLength;
 
-		// Précalcul de la distance P1P2 - Peut être optimisée par une approximation
-		float acLength = Vect.getLength();
-
-		float factor = (acLength - myLength);
-
-		// Normalisation du vecteur (pas besoin de Normalize(), on a déjà acLength)
-		Vect = Vect/acLength;
-
-		if(myV2->isFixed())
-			myV1->correctPosition(Vect*factor);
-		else if(myV1->isFixed())
-			myV2->correctPosition(-Vect*factor);
-		else
-			myV2->correctPosition(-Vect*factor*0.5f),
-			myV1->correctPosition(Vect*factor*0.5f);
-	}
+	if(myV2->isFixed())
+		myV1->correctPosition(Vect*factor);
+	else if(myV1->isFixed())
+		myV2->correctPosition(-Vect*factor);
+	else
+		myV2->correctPosition(-Vect*factor*0.5f),
+		myV1->correctPosition(Vect*factor*0.5f);
 }
 
 void Rigid::glDraw()
 {
-	glPushMatrix();
-	glLoadIdentity();
 	glBegin(GL_LINES);
 	glColor3f(0.f, 0.f, 1.f);
 	glVertex2f(myV1->getPosition().x, myV1->getPosition().y);
 	glVertex2f(myV2->getPosition().x, myV2->getPosition().y);
 	glEnd();
-	glPopMatrix();
+}
+
+void Rigid::glDraws()
+{
+	glVertex2f(myV1->getPosition().x, myV1->getPosition().y);
+	glVertex2f(myV2->getPosition().x, myV2->getPosition().y);
 }
 
 }

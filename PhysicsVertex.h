@@ -34,45 +34,13 @@ class Vertex
 
 	public:
 		/// @brief Constructeur par défaut
-		Vertex();
-
-		/// @brief Constructeur par coordonnées
-		Vertex(float x, float y);
-
-		/// @brief Constructeur par coordonnées et masse
-		Vertex(float x, float y, float Mass);
+		Vertex(float x = 0.f, float y = 0.f, float Mass = 1.f);
 
 		/// @brief Constructeur par Vec2
-		Vertex(Vec2 Pos);
+		Vertex(Vec2 Pos, float Mass = 1.f);
 
 		/// @brief Destructeur par défaut
 		~Vertex();
-
-		/// @brief Liste des Vertex créés
-		static std::list<Vertex*> List;
-
-		/** @brief Appelle resolve pour tout les Vertexs
-		 *
-		 * @param prevdt Intervalle de temps lors de la frame précédente
-		 * @param dt Intervalle de temps
-		**/
-		static void UpdateAll(float prevdt, float dt);
-
-		/** @brief Applique une force à tout les VP
-		 *
-		 * Usage typique : Gravité
-		 * @param Force Force à appliquer
-		**/
-		static void applyForceAll(Vec2 Force);
-
-		/** @brief Ajoute une accélération à tout les VP
-		 *
-		 * @param Acc Accélération à appliquer
-		**/
-		static void addAccelerationAll(Vec2 Acc);
-
-		/// @brief Détruit tout les VP
-		static void DeleteAll();
 
 		/** @brief Accesseur de la position
 		 *
@@ -168,11 +136,8 @@ class Vertex
 		**/
 		void resolve(float prevdt, float dt);
 
-
-	void glDraw();
-	static void DrawAll();
-
-	static Vertex* getNearest(const Vec2 &v);
+		void glDraw();
+		void glDraws();
 };
 
 } // Namespace Physics
