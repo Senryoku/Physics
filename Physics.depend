@@ -101,7 +101,7 @@
 	"PhysicsVertex.h"
 	"PhysicsConstraint.h"
 
-1339358852 source:f:\github\physics\physicsmain.cpp
+1339366741 source:f:\github\physics\physicsmain.cpp
 	<cstdlib>
 	<iostream>
 	<sstream>
@@ -112,20 +112,19 @@
 	"FPSCounter.hpp"
 	"ResourcePath.hpp"
 
-1339353262 f:\github\physics\physics.h
+1339366745 f:\github\physics\physics.h
 	"PhysicsVertex.h"
 	"PhysicsConstraint.h"
 	"PhysicsElastic.h"
 	"PhysicsRigid.h"
 	"PhysicsPolygon.h"
-	"PhysicsRectangle.h"
 	"PhysicsWorld.h"
 
 1339353182 f:\github\physics\physicsrigid.h
 	"PhysicsVertex.h"
 	"PhysicsConstraint.h"
 
-1339359037 f:\github\physics\physicspolygon.h
+1339365933 f:\github\physics\physicspolygon.h
 	<vector>
 	<list>
 	<cstdarg>
@@ -135,9 +134,8 @@
 1339234267 f:\github\physics\physicsrectangle.h
 	"PhysicsPolygon.h"
 
-1339359020 source:f:\github\physics\physicspolygon.cpp
+1339365240 source:f:\github\physics\physicspolygon.cpp
 	"PhysicsPolygon.h"
-	"PhysicsWorld.h"
 
 1339239225 source:f:\github\physics\physicsrectangle.cpp
 	"PhysicsRectangle.h"
@@ -167,16 +165,15 @@
 	"PhysicsVertex.h"
 	"PhysicsShape.h"
 
-1339359067 source:f:\github\physics\physicsworld.cpp
+1339366707 source:f:\github\physics\physicsworld.cpp
 	"PhysicsWorld.h"
 
-1339359048 f:\github\physics\physicsworld.h
+1339366627 f:\github\physics\physicsworld.h
 	"PhysicsVertex.h"
 	"PhysicsConstraint.h"
 	"PhysicsRigid.h"
 	"PhysicsElastic.h"
 	"PhysicsPolygon.h"
-	"PhysicsRectangle.h"
 
 1339239280 source:f:\github\physics\fpscounter.cpp
 	"FPSCounter.hpp"

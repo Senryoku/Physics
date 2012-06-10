@@ -48,8 +48,6 @@
 		<Unit filename="PhysicsMain.cpp" />
 		<Unit filename="PhysicsPolygon.cpp" />
 		<Unit filename="PhysicsPolygon.h" />
-		<Unit filename="PhysicsRectangle.cpp" />
-		<Unit filename="PhysicsRectangle.h" />
 		<Unit filename="PhysicsRigid.cpp" />
 		<Unit filename="PhysicsRigid.h" />
 		<Unit filename="PhysicsVertex.cpp" />

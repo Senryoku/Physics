@@ -6,7 +6,6 @@
 #include "PhysicsRigid.h"
 #include "PhysicsElastic.h"
 #include "PhysicsPolygon.h"
-#include "PhysicsRectangle.h"
 
 namespace Physics
 {
@@ -46,13 +45,12 @@ class World
 		void add(Elastic* E);
 		void add(Rigid* R);
 		void add(Polygon* P);
-		void add(Rectangle* R);
 
 		Vertex* newVertex(float x = 0.f, float y = 0.f, float Mass = 1.f);
 		Vertex* newVertex(Vec2 Vec, float Mass = 1.f);
 		Elastic* newElastic(Vertex* P1, Vertex* P2, float Length = -1.f, float Spring = 1.f);
 		Rigid* newRigid(Vertex* P1, Vertex* P2, float Length = -1);
-		void newPolygon();
+		Polygon* newRectangle(float Width = 100.f, float Height = -1.f);
 
 		void draw();
 		void drawVertices();
@@ -71,9 +69,13 @@ class World
 
 		void deleteAll();
 		void deleteVertices();
+		void deleteVertex(Vertex* V);
 		void deleteRigids();
+		void deleteRigid(Rigid* R);
 		void deleteElastics();
+		void deleteElastic(Elastic* E);
 		void deletePolygons();
+		void deletePolygon(Polygon* P);
 
 	protected:
 		float myWidth;

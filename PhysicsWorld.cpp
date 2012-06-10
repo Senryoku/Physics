@@ -17,7 +17,7 @@ Grid::~Grid()
 }
 
 World::World(float Width, float Height) :
-	myWidth(Width), myHeight(Height), myOverallIterations(4), myRigidIterations(1)
+	myWidth(Width), myHeight(Height), myRigidIterations(1), myOverallIterations(4)
 {
 }
 
@@ -81,12 +81,6 @@ void World::add(Polygon* P)
 	myPolygons.push_back(P);
 }
 
-void World::add(Rectangle* R)
-{
-	myPolygons.push_back(R);
-	R->addVerticesToWorld(this);
-}
-
 Vertex* World::newVertex(float x, float y, float Mass)
 {
 	Vertex* V = new Vertex(x, y, Mass);
@@ -115,8 +109,12 @@ Rigid* World::newRigid(Vertex* P1, Vertex* P2, float Length)
 	return R;
 }
 
-void World::newPolygon()
+Polygon* World::newRectangle(float Width, float Height)
 {
+	if(Height < 0.f) Height = Width;
+	Polygon* P = new Polygon(4, FLAG_NULL, newVertex(0.f, 0.f), newVertex(Width, 0.f), newVertex(Width, Height), newVertex(0.f, Height));
+	add(P);
+	return P;
 }
 
 void World::draw()
@@ -185,7 +183,7 @@ void World::resolveVertices(float prevdt, float dt)
         if((*ite)->getPosition().x != (*ite)->getPosition().x ||
 			(*ite)->getPosition().y != (*ite)->getPosition().y)
         {
-            (*ite)->setPosition(Vec2(0, 0), 1);
+            (*ite)->setPosition(Vec2(0, 0), true);
         }
 	}
 }
@@ -297,12 +295,24 @@ void World::deleteVertices()
 	myVertices.clear();
 }
 
+void World::deleteVertex(Vertex* V)
+{
+	myVertices.remove(V);
+	delete V;
+}
+
 void World::deleteRigids()
 {
 	for(std::list<Rigid*>::iterator ite = myRigids.begin();
 		ite != myRigids.end(); ite++)
         delete *ite;
 	myRigids.clear();
+}
+
+void World::deleteRigid(Rigid* R)
+{
+	myRigids.remove(R);
+	delete R;
 }
 
 void World::deleteElastics()
@@ -313,12 +323,24 @@ void World::deleteElastics()
 	myElastics.clear();
 }
 
+void World::deleteElastic(Elastic* E)
+{
+	myElastics.remove(E);
+	delete E;
+}
+
 void World::deletePolygons()
 {
 	for(std::list<Polygon*>::iterator ite = myPolygons.begin();
 		ite != myPolygons.end(); ite++)
         delete *ite;
 	myPolygons.clear();
+}
+
+void World::deletePolygon(Polygon* P)
+{
+	myPolygons.remove(P);
+	delete P;
 }
 
 }

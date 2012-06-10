@@ -1,7 +1,5 @@
 #include "PhysicsPolygon.h"
 
-#include "PhysicsWorld.h"
-
 namespace Physics
 {
 
@@ -177,13 +175,6 @@ void Polygon::ProjectToAxis(float &Min, float &Max, const Vec2 Axis)
 		Min = std::min(Tmp, Min);
 		Max = std::max(Tmp, Max);
 	}
-}
-
-void Polygon::addVerticesToWorld(World* W)
-{
-	for(std::vector<Vertex*>::iterator ite = Vertices.begin();
-		ite != Vertices.end(); ite++)
-		W->add(*ite);
 }
 
 Rigid& Polygon::operator[](const unsigned int i)

@@ -11,7 +11,6 @@
 #include "PhysicsElastic.h"
 #include "PhysicsRigid.h"
 #include "PhysicsPolygon.h"
-#include "PhysicsRectangle.h"
 #include "PhysicsWorld.h"
 
 /// @}

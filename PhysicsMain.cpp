@@ -190,10 +190,9 @@ int main(int argc, char** argv)
 	Elastic* MouseElastic = NULL;
 	Vertex* Mouse = W.newVertex();
 
-	Rectangle* rP;
-	rP=new Rectangle(40.f, 60.f);
-	W.add(rP);
-	rP->getTopLeft().setPosition(Vec2(10.f,400.f));
+	Polygon* rP;
+	rP = W.newRectangle(40.f, 60.f);
+	rP->getVertex(0)->setPosition(Vec2(10.f,400.f));
 	//rP->setFixed();
 
 	float polygon = 20.f;
@@ -224,9 +223,8 @@ int main(int argc, char** argv)
                         break;
                     case sf::Keyboard::R:
 					{
-                        Rectangle* RE = new Rectangle(50.f, 50.f);
-                        RE->getTopLeft().setPosition(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
-                        W.add(RE);
+                        Polygon* RE = W.newRectangle(50.f, 50.f);
+                        RE->getVertex(0)->setPosition(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
                         break;
 					}
                     case sf::Keyboard::P:
@@ -251,13 +249,12 @@ int main(int argc, char** argv)
 
 				grab = W.getNearestVertex(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
 				if(event.mouseButton.button == sf::Mouse::Left)
-					delete MouseElastic,
+					W.deleteElastic(MouseElastic),
 					MouseElastic = W.newElastic(grab, Mouse, 1.f, 5.f);
 				if(event.mouseButton.button == sf::Mouse::Middle || event.mouseButton.button == sf::Mouse::XButton1)
 				{
-					Rectangle* R = new Rectangle(25.f, 25.f);
-					R->getTopLeft().setPosition(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
-					W.add(R);
+					Polygon* R = W.newRectangle(25.f, 25.f);
+					R->getVertex(0)->setPosition(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
 				}
 			}
 

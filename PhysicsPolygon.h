@@ -33,8 +33,6 @@
 namespace Physics
 {
 
-class World;
-
 class CollisionInfo;
 
 /** @brief Décrit un polygone CONVEXE : Ensemble de points (Vertices)
@@ -88,6 +86,8 @@ class Polygon
 		// Accesseurs
 		inline bool isFixed() { return myFixed; }
 		inline float getFriction() { return myFriction; }
+		inline Vertex* getVertex(unsigned int i) {return Vertices[i]; }
+		Rigid& operator[](const unsigned int);
 		inline unsigned int getDetectionMask() { return myDetectionMask; }
 		inline unsigned int getReactionMask() { return myReactionMask; }
 
@@ -116,10 +116,6 @@ class Polygon
 
 		/// @brief Applique une force à tout les Vertices du polygon
 		void applyForce(Vec2 V);
-
-		void addVerticesToWorld(World* W); // C'est mauvais...........
-
-		Rigid& operator[](const unsigned int);
 
 		void glDraw();
 };
