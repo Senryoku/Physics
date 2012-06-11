@@ -6,12 +6,12 @@
  * @{
 **/
 
-#include "PhysicsVertex.hpp"
-#include "PhysicsConstraint.hpp"
-#include "PhysicsElastic.hpp"
-#include "PhysicsRigid.hpp"
-#include "PhysicsPolygon.hpp"
-#include "PhysicsWorld.hpp"
+#include "Vertex.hpp"
+#include "Constraint.hpp"
+#include "Elastic.hpp"
+#include "Rigid.hpp"
+#include "Polygon.hpp"
+#include "World.hpp"
 
 /// @}
 

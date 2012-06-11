@@ -60,7 +60,7 @@ else
 endif
 .PHONY : run
 
-test : $(POINTO) $(OBJ)PhysicsMain.o
+test : $(POINTO)
 	@echo "Linking $@"
 	@$(CXX) $(OPT) $^ -o $(BIN)$@ $(LIBS)
 

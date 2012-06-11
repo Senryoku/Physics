@@ -3,6 +3,9 @@
 
 #include <cmath>
 
+#define MIN( X, Y ) ( (X) < (Y) ? (X) : (Y) ) /* Deux macros qui déterminent le min et le max */
+#define MAX( X, Y ) ( (X) > (Y) ? (X) : (Y) )
+
 /// @brief Classe simple décrivant un vecteur de R²
 class Vec2
 {
