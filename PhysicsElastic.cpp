@@ -33,7 +33,8 @@ void Elastic::resolve()
 	float factor = mySpring*(acLength - myLength);
 
 	// Normalisation du vecteur (pas besoin de getNormalized(), on a déjà acLength)
-	Vect = Vect/acLength;
+	if(acLength == 0.f) Vect = Vec2(1.f, 0.f);
+	else Vect = Vect/acLength;
 
 	myV2->applyForce(-Vect*factor),
 	myV1->applyForce(Vect*factor);

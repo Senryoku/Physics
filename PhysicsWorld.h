@@ -1,6 +1,8 @@
 #ifndef _PHYSICSWORLD_H_
 #define _PHYSICSWORLD_H_
 
+#include <iostream> // DEBUG
+
 #include "PhysicsVertex.h"
 #include "PhysicsConstraint.h"
 #include "PhysicsRigid.h"
@@ -12,11 +14,38 @@ namespace Physics
 
 typedef std::list<Polygon*> Cell;
 
+class Coord {
+	public:
+		unsigned int X;
+		unsigned int Y;
+
+		bool operator!=(Coord C) { return X != C.X || Y != C.Y; }
+};
+
 class Grid
 {
 	public:
 		Grid(unsigned int Width, unsigned int Height, float CellWidth = 192.f, float CellHeight = 192.f);
 		~Grid();
+
+		Coord getCellCoord(Vec2 Pos);
+
+		std::vector<Cell>& operator[](unsigned int X) { return myGrid[X]; }
+		std::vector<Cell>& getLine(unsigned int X) { return myGrid[X]; }
+		Cell& operator[](Coord C) { return myGrid[C.X][C.Y]; }
+		Cell& getCell(unsigned int X, unsigned int Y) { return myGrid[X][Y]; }
+		Cell& getCell(Coord C) { return myGrid[C.X][C.Y]; }
+
+		inline std::list<Polygon*> getList(BBox BB);
+		std::list<Polygon*> getList(Coord C1, Coord C2);
+
+		inline void add(Polygon* P);
+		inline void add(Polygon* P, BBox BB);
+		void add(Polygon* P, Coord C1, Coord C2);
+
+		void rm(Polygon* P);
+		inline void rm(Polygon* P, BBox BB);
+		void rm(Polygon* P, Coord C1, Coord C2);
 
 	private:
 		std::vector<std::vector<Cell> > myGrid;
@@ -32,6 +61,7 @@ class World
 		World(float Width = 800.f, float Height = 600.f);
 		~World();
 
+		void updateGrid();
 		void update(float prevdt, float dt);
 
 		unsigned int getVertexCount() { return myVertices.size(); }
@@ -40,6 +70,8 @@ class World
 		unsigned int getPolygonCount() { return myPolygons.size(); }
 
 		Vertex* getNearestVertex(Vec2 Pos);
+
+		void correctBBox(BBox& BB);
 
 		void add(Vertex* V);
 		void add(Elastic* E);
@@ -90,6 +122,8 @@ class World
 		std::list<Elastic*> myElastics;
 		std::list<Rigid*> myRigids;
 		std::list<Polygon*> myPolygons;
+
+		Grid myGrid;
 
 	private:
 };

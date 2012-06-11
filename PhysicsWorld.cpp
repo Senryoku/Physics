@@ -16,8 +16,85 @@ Grid::~Grid()
 {
 }
 
+Coord Grid::getCellCoord(Vec2 Pos)
+{
+	Coord C;
+	C.X = (unsigned int) Pos.x/myCellWidth;
+	C.Y = (unsigned int) Pos.y/myCellHeight;
+	return C;
+}
+
+std::list<Polygon*> Grid::getList(BBox BB)
+{
+	return getList(getCellCoord(BB.TopLeft), getCellCoord(BB.BottomRight));
+}
+
+std::list<Polygon*> Grid::getList(Coord C1, Coord C2)
+{
+	std::list<Polygon*> Accumulator;
+	std::list<Polygon*> Tmp;
+	for(unsigned int j = C1.Y; j <= C2.Y; j++)
+	{
+		for(unsigned int i = C1.X; i <= C2.X; i++)
+		{
+			Tmp = myGrid[j][i]; // Copie
+			Accumulator.splice(Accumulator.begin(), Tmp); // Transfert dans Accumulator
+		}
+	}
+	return Accumulator;
+}
+
+void Grid::add(Polygon* P)
+{
+	add(P, P->getBBox());
+}
+
+void Grid::add(Polygon* P, BBox BB)
+{
+	add(P, getCellCoord(BB.TopLeft), getCellCoord(BB.BottomRight));
+}
+
+void Grid::add(Polygon* P, Coord C1, Coord C2)
+{
+	for(unsigned int j = C1.Y; j <= C2.Y; j++)
+	{
+		for(unsigned int i = C1.X; i <= C2.X; i++)
+		{
+			myGrid[j][i].push_back(P);
+		}
+	}
+}
+
+void Grid::rm(Polygon* P)
+{
+	for(unsigned int j = 0; j <= myHeight; j++)
+	{
+		for(unsigned int i = 0; i <= myWidth; i++)
+		{
+			myGrid[j][i].remove(P);
+		}
+	}
+}
+
+void Grid::rm(Polygon* P, BBox BB)
+{
+	rm(P, getCellCoord(BB.TopLeft), getCellCoord(BB.BottomRight));
+}
+
+void Grid::rm(Polygon* P, Coord C1, Coord C2)
+{
+	for(unsigned int j = C1.Y; j <= C2.Y; j++)
+	{
+		for(unsigned int i = C1.X; i <= C2.X; i++)
+		{
+			myGrid[j][i].remove(P);
+		}
+	}
+}
+
 World::World(float Width, float Height) :
-	myWidth(Width), myHeight(Height), myRigidIterations(1), myOverallIterations(4)
+	myWidth(Width), myHeight(Height), myRigidIterations(1), myOverallIterations(4),
+	myGrid(Width/192.f + 1, Height/192.f + 1)
 {
 }
 
@@ -26,11 +103,33 @@ World::~World()
 	deleteAll();
 }
 
+void World::updateGrid()
+{
+	BBox Old, Actual;
+	Coord Old_Top, Old_Bottom, Actual_Top, Actual_Bottom;
+	for(std::list<Polygon*>::iterator ite = myPolygons.begin();
+		ite != myPolygons.end(); ite++)
+	{
+		Old = (*ite)->getOldBBox();
+		Old_Top = myGrid.getCellCoord(Old.TopLeft);
+		Old_Bottom = myGrid.getCellCoord(Old.BottomRight);
+		Actual = (*ite)->getBBox();
+		Actual_Top = myGrid.getCellCoord(Actual.TopLeft);
+		Actual_Bottom = myGrid.getCellCoord(Actual.BottomRight);
+
+		if(Old_Top != Actual_Top || Old_Bottom != Actual_Bottom)
+		{
+			myGrid.rm(*ite, Old);
+			myGrid.add(*ite, Actual);
+		}
+	}
+}
+
 void World::update(float prevdt, float dt)
 {
 	applyGlobalAcceleration();
-	resolveVertices(prevdt, dt);
 	resolveElastics();
+	resolveVertices(prevdt, dt);
 	for(unsigned int i = 0; i < myOverallIterations; i++)
 	{
 		for(unsigned int j = 0; j < myRigidIterations; j++) resolveRigids();
@@ -61,6 +160,14 @@ Vertex* World::getNearestVertex(Vec2 Pos)
 	return P;
 }
 
+void World::correctBBox(BBox& BB)
+{
+	BB.BottomRight.x = std::max(0.f, std::min(BB.BottomRight.x, myWidth));
+	BB.BottomRight.y = std::max(0.f, std::min(BB.BottomRight.x, myHeight));
+	BB.TopLeft.x = std::max(0.f, std::min(BB.BottomRight.x, myWidth));
+	BB.TopLeft.y = std::max(0.f, std::min(BB.BottomRight.x, myHeight));
+}
+
 void World::add(Vertex* V)
 {
 	myVertices.push_back(V);
@@ -79,6 +186,7 @@ void World::add(Rigid* R)
 void World::add(Polygon* P)
 {
 	myPolygons.push_back(P);
+	myGrid.add(P);
 }
 
 Vertex* World::newVertex(float x, float y, float Mass)
@@ -183,6 +291,7 @@ void World::resolveVertices(float prevdt, float dt)
         if((*ite)->getPosition().x != (*ite)->getPosition().x ||
 			(*ite)->getPosition().y != (*ite)->getPosition().y)
         {
+        	std::cout << "Nan Error !" << std::endl; // DEBUG
             (*ite)->setPosition(Vec2(0, 0), true);
         }
 	}
@@ -225,10 +334,14 @@ void World::resolveRigids()
 void World::resolvePolygons(bool saveCI)
 {
 	CollisionInfo Info;
+	updateGrid();
 	for(std::list<Polygon*>::iterator ite = myPolygons.begin();
 		ite != myPolygons.end(); ite++)
 	{
 		(*ite)->resolveRigids();
+		BBox BB = (*ite)->getBBox();
+		correctBBox(BB);
+		//std::list<Polygon*> List = myGrid.getList(BB);
 		for(std::list<Polygon*>::iterator ite2 = myPolygons.begin(); ite2 != myPolygons.end(); ite2++)
 		{
 			if( ite != ite2) {
