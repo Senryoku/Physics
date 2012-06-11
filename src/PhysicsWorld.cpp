@@ -1,5 +1,7 @@
 #include "PhysicsWorld.hpp"
 
+#include <iostream> // DEBUG
+
 namespace Physics
 {
 
@@ -19,8 +21,9 @@ Grid::~Grid()
 Coord Grid::getCellCoord(Vec2 Pos)
 {
 	Coord C;
-	C.X = (unsigned int) Pos.x/myCellWidth;
-	C.Y = (unsigned int) Pos.y/myCellHeight;
+	C.X = std::max(0u, std::min(myWidth - 1, static_cast<unsigned int>(Pos.x/myCellWidth)));
+	C.Y = std::max(0u, std::min(myHeight - 1, static_cast<unsigned int>(Pos.y/myCellHeight)));
+	std::cout << C.X << " " << C.Y << std::endl;
 	return C;
 }
 
@@ -164,9 +167,9 @@ Vertex* World::getNearestVertex(Vec2 Pos)
 void World::correctBBox(BBox& BB)
 {
 	BB.BottomRight.x = std::max(0.f, std::min(BB.BottomRight.x, myWidth));
-	BB.BottomRight.y = std::max(0.f, std::min(BB.BottomRight.x, myHeight));
-	BB.TopLeft.x = std::max(0.f, std::min(BB.BottomRight.x, myWidth));
-	BB.TopLeft.y = std::max(0.f, std::min(BB.BottomRight.x, myHeight));
+	BB.BottomRight.y = std::max(0.f, std::min(BB.BottomRight.y, myHeight));
+	BB.TopLeft.x = std::max(0.f, std::min(BB.TopLeft.x, myWidth));
+	BB.TopLeft.y = std::max(0.f, std::min(BB.TopLeft.y, myHeight));
 }
 
 void World::add(Vertex* V)
@@ -341,9 +344,8 @@ void World::resolvePolygons(bool saveCI)
 	{
 		(*ite)->resolveRigids();
 		BBox BB = (*ite)->getBBox();
-		correctBBox(BB);
-		//std::list<Polygon*> List = myGrid.getList(BB);
-		for(std::list<Polygon*>::iterator ite2 = myPolygons.begin(); ite2 != myPolygons.end(); ite2++)
+		std::list<Polygon*> List = myGrid.getList(BB);
+		for(std::list<Polygon*>::iterator ite2 = List.begin(); ite2 != List.end(); ite2++)
 		{
 			if( ite != ite2) {
 				Info = (*ite)->collide((*ite2));

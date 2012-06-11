@@ -38,25 +38,24 @@
 			<Add option="-lglu32" />
 			<Add library="C:\MinGW\lib\libopengl32.a" />
 		</Linker>
-		<Unit filename="src\FPSCounter.cpp" />
-		<Unit filename="src\FPSCounter.hpp" />
-		<Unit filename="src\Physics.hpp" />
-		<Unit filename="src\PhysicsConstant.hpp" />
-		<Unit filename="src\PhysicsConstraint.cpp" />
-		<Unit filename="src\PhysicsConstraint.hpp" />
-		<Unit filename="src\PhysicsElastic.cpp" />
-		<Unit filename="src\PhysicsElastic.hpp" />
-		<Unit filename="src\PhysicsMain.cpp" />
-		<Unit filename="src\PhysicsPolygon.cpp" />
-		<Unit filename="src\PhysicsPolygon.hpp" />
-		<Unit filename="src\PhysicsRigid.cpp" />
-		<Unit filename="src\PhysicsRigid.hpp" />
-		<Unit filename="src\PhysicsVertex.cpp" />
-		<Unit filename="src\PhysicsVertex.hpp" />
-		<Unit filename="src\PhysicsWorld.cpp" />
-		<Unit filename="src\PhysicsWorld.hpp" />
-		<Unit filename="src\Vec2.cpp" />
-		<Unit filename="src\Vec2.hpp" />
+		<Unit filename="FPSCounter.cpp" />
+		<Unit filename="FPSCounter.hpp" />
+		<Unit filename="Physics.h" />
+		<Unit filename="PhysicsConstraint.cpp" />
+		<Unit filename="PhysicsConstraint.h" />
+		<Unit filename="PhysicsElastic.cpp" />
+		<Unit filename="PhysicsElastic.h" />
+		<Unit filename="PhysicsMain.cpp" />
+		<Unit filename="PhysicsPolygon.cpp" />
+		<Unit filename="PhysicsPolygon.h" />
+		<Unit filename="PhysicsRigid.cpp" />
+		<Unit filename="PhysicsRigid.h" />
+		<Unit filename="PhysicsVertex.cpp" />
+		<Unit filename="PhysicsVertex.h" />
+		<Unit filename="PhysicsWorld.cpp" />
+		<Unit filename="PhysicsWorld.h" />
+		<Unit filename="Vec2.cpp" />
+		<Unit filename="Vec2.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
