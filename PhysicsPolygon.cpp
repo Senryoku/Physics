@@ -19,7 +19,7 @@ Polygon::Polygon(int nb, unsigned int FLAGS, ...) :
 
 	if(FLAGS==FLAG_NULL)
 	{
-		InternContraints.reserve((nb-2)*(nb-3)/2 + 1);
+		InternalContraints.reserve((nb-2)*(nb-3)/2 + 1);
 
 		for(int i = 0; i < nb; i++)
 			Vertices.push_back(va_arg(ap, Vertex*));
@@ -27,7 +27,7 @@ Polygon::Polygon(int nb, unsigned int FLAGS, ...) :
 		{
 			Edges.push_back(new Rigid(Vertices[i], Vertices[(i+1)%nb]));
             for(int j = i + 2; j < nb - (i==0?1:0); j++)
-                InternContraints.push_back(new Rigid(Vertices[i], Vertices[j]));
+                InternalContraints.push_back(new Rigid(Vertices[i], Vertices[j]));
 		}
 
 	} else if(FLAGS & WITH_LENGTH) {
@@ -52,10 +52,10 @@ Polygon::~Polygon()
 		ite != Edges.end(); ite++)
 		delete *ite;
 	Edges.clear();
-	for(std::vector<Rigid*>::iterator ite = InternContraints.begin();
-		ite != InternContraints.end(); ite++)
+	for(std::vector<Rigid*>::iterator ite = InternalContraints.begin();
+		ite != InternalContraints.end(); ite++)
 		delete *ite;
-	InternContraints.clear();
+	InternalContraints.clear();
 }
 
 void Polygon::addCI(CollisionInfo CI)
@@ -93,13 +93,47 @@ Vec2 Polygon::getMassCenter()
 	return Center;
 }
 
+BBox Polygon::getBBox()
+{
+	BBox BB;
+	Vec2 Pos = Vertices[0]->getPosition();
+	BB.TopLeft = Pos;
+	BB.BottomRight = Pos;
+	for(unsigned int i = 1; i < Vertices.size(); i++)
+	{
+		Pos = Vertices[i]->getPosition();
+		BB.TopLeft.x = std::min(BB.TopLeft.x, Pos.x);
+		BB.TopLeft.y = std::min(BB.TopLeft.y, Pos.y);
+		BB.BottomRight.x = std::max(BB.BottomRight.x, Pos.x);
+		BB.BottomRight.y = std::max(BB.BottomRight.y, Pos.y);
+	}
+	return BB;
+}
+
+BBox Polygon::getOldBBox()
+{
+	BBox BB;
+	Vec2 Pos = Vertices[0]->getOldPosition();
+	BB.TopLeft = Pos;
+	BB.BottomRight = Pos;
+	for(unsigned int i = 1; i < Vertices.size(); i++)
+	{
+		Pos = Vertices[i]->getOldPosition();
+		BB.TopLeft.x = std::min(BB.TopLeft.x, Pos.x);
+		BB.TopLeft.y = std::min(BB.TopLeft.y, Pos.y);
+		BB.BottomRight.x = std::max(BB.TopLeft.x, Pos.x);
+		BB.BottomRight.y = std::max(BB.BottomRight.y, Pos.y);
+	}
+	return BB;
+}
+
 void Polygon::resolveRigids()
 {
 	for(std::vector<Rigid*>::iterator ite = Edges.begin();
 		ite != Edges.end(); ite++)
 		(*ite)->resolve();
-	for(std::vector<Rigid*>::iterator ite = InternContraints.begin();
-		ite != InternContraints.end(); ite++)
+	for(std::vector<Rigid*>::iterator ite = InternalContraints.begin();
+		ite != InternalContraints.end(); ite++)
 		(*ite)->resolve();
 }
 
@@ -197,8 +231,8 @@ void Polygon::glDraw()
 	for(std::vector<Rigid*>::iterator ite = Edges.begin();
 		ite != Edges.end(); ite++)
 		(*ite)->glDraws();
-	for(std::vector<Rigid*>::iterator ite = InternContraints.begin();
-		ite != InternContraints.end(); ite++)
+	for(std::vector<Rigid*>::iterator ite = InternalContraints.begin();
+		ite != InternalContraints.end(); ite++)
 		(*ite)->glDraws();
 	glEnd();
 

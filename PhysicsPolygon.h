@@ -35,6 +35,13 @@ namespace Physics
 
 class CollisionInfo;
 
+class BBox
+{
+	public :
+		Vec2 TopLeft;
+		Vec2 BottomRight;
+};
+
 /** @brief Décrit un polygone CONVEXE : Ensemble de points (Vertices)
  * reliés par les liaisons rigides (Edges).
  *
@@ -44,7 +51,7 @@ class Polygon
 	protected:
 		std::vector<Vertex*> Vertices;
 		std::vector<Rigid*> Edges;
-		std::vector<Rigid*> InternContraints;
+		std::vector<Rigid*> InternalContraints;
 
 		std::list<CollisionInfo> myCIs;
 
@@ -105,6 +112,9 @@ class Polygon
 
 		/// @brief Renvoi le centre de masse du polygone
 		Vec2 getMassCenter();
+
+		BBox getBBox();
+		BBox getOldBBox();
 
 		void resolveRigids();
 

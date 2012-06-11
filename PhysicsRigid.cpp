@@ -24,7 +24,8 @@ void Rigid::resolve()
 	float factor = (acLength - myLength);
 
 	// Normalisation du vecteur (pas besoin de Normalize(), on a déjà acLength)
-	Vect = Vect/acLength;
+	if(acLength == 0.f) Vect = Vec2(1.f, 0.f);
+	else Vect = Vect/acLength;
 
 	if(myV2->isFixed())
 		myV1->correctPosition(Vect*factor);
