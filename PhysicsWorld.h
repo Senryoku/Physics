@@ -99,6 +99,8 @@ class World
 		void resolveRigids();
 		void resolvePolygons(bool saveCI = false);
 
+		void clearCIs();
+
 		void deleteAll();
 		void deleteVertices();
 		void deleteVertex(Vertex* V);
