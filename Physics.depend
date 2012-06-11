@@ -183,3 +183,85 @@
 	<sstream>
 	"SFML/Graphics.hpp"
 
+1339422890 source:f:\github\physics\src\vec2.cpp
+	"Vec2.hpp"
+
+1339422890 f:\github\physics\src\vec2.hpp
+	<cmath>
+
+1339422890 source:f:\github\physics\src\physicselastic.cpp
+	"PhysicsElastic.hpp"
+
+1339422890 f:\github\physics\src\physicselastic.hpp
+	"PhysicsVertex.hpp"
+	"PhysicsConstraint.hpp"
+
+1339422890 f:\github\physics\src\physicsvertex.hpp
+	<cmath>
+	<list>
+	<SFML/OpenGL.hpp>
+	"Vec2.hpp"
+
+1339422890 f:\github\physics\src\physicsconstraint.hpp
+	"PhysicsVertex.hpp"
+
+1339422890 source:f:\github\physics\src\physicsvertex.cpp
+	"PhysicsVertex.hpp"
+
+1339422890 source:f:\github\physics\src\physicsmain.cpp
+	<cstdlib>
+	<iostream>
+	<sstream>
+	"Physics.hpp"
+	<SFML/Graphics.hpp>
+	<SFML/OpenGL.hpp>
+	<SFML/Audio.hpp>
+	"FPSCounter.hpp"
+
+1339422890 f:\github\physics\src\physics.hpp
+	"PhysicsVertex.hpp"
+	"PhysicsConstraint.hpp"
+	"PhysicsElastic.hpp"
+	"PhysicsRigid.hpp"
+	"PhysicsPolygon.hpp"
+	"PhysicsWorld.hpp"
+
+1339422890 f:\github\physics\src\physicsrigid.hpp
+	"PhysicsVertex.hpp"
+	"PhysicsConstraint.hpp"
+
+1339422890 f:\github\physics\src\physicspolygon.hpp
+	<vector>
+	<list>
+	<cstdarg>
+	"PhysicsVertex.hpp"
+	"PhysicsRigid.hpp"
+
+1339422890 f:\github\physics\src\physicsworld.hpp
+	<iostream>
+	"PhysicsVertex.hpp"
+	"PhysicsConstraint.hpp"
+	"PhysicsRigid.hpp"
+	"PhysicsElastic.hpp"
+	"PhysicsPolygon.hpp"
+
+1339422890 f:\github\physics\src\fpscounter.hpp
+	<sstream>
+	"SFML/Graphics.hpp"
+
+1339422890 source:f:\github\physics\src\physicsconstraint.cpp
+	"PhysicsConstraint.hpp"
+
+1339422890 source:f:\github\physics\src\physicsrigid.cpp
+	"PhysicsRigid.hpp"
+
+1339422890 source:f:\github\physics\src\physicspolygon.cpp
+	"PhysicsPolygon.hpp"
+
+1339422890 source:f:\github\physics\src\fpscounter.cpp
+	"FPSCounter.hpp"
+
+1339423454 source:f:\github\physics\src\physicsworld.cpp
+	"PhysicsWorld.hpp"
+	<iostream>
+
