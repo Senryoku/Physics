@@ -16,6 +16,7 @@ using namespace Physics;
 
 void glDrawCube(const sf::Vector2f &Position, float size);
 
+GLuint glTexLoad(const char* Path);
 GLuint glTexLoad(const char* Path)
 {
 	sf::Image image;

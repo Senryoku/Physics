@@ -19,8 +19,8 @@ Grid::~Grid()
 Coord Grid::getCellCoord(Vec2 Pos)
 {
 	Coord C;
-	C.X = (unsigned int) Pos.x/myCellWidth;
-	C.Y = (unsigned int) Pos.y/myCellHeight;
+	C.X = static_cast<unsigned int>(Pos.x/myCellWidth);
+	C.Y = static_cast<unsigned int>(Pos.y/myCellHeight);
 	return C;
 }
 
