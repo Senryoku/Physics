@@ -64,7 +64,7 @@ test : $(POINTO) $(OBJ)PhysicsMain.o
 	@echo "Linking $@"
 	@$(CXX) $(OPT) $^ -o $(BIN)$@ $(LIBS)
 
-valgrind : all
+valgrind : dirs test
 	valgrind --leak-check=full --tool=memcheck ./$(BIN)test
 .PHONY : valgrind
 
