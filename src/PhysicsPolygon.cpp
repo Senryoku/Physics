@@ -1,4 +1,4 @@
-#include "PhysicsPolygon.h"
+#include "PhysicsPolygon.hpp"
 
 namespace Physics
 {

@@ -5,8 +5,8 @@
 #include <list>
 #include <cstdarg>
 
-#include "PhysicsVertex.h"
-#include "PhysicsRigid.h"
+#include "PhysicsVertex.hpp"
+#include "PhysicsRigid.hpp"
 
 #define FLAG_NULL 		0x00
 #define WITH_LENGTH 	0x01

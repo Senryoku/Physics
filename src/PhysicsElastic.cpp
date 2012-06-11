@@ -1,4 +1,4 @@
-#include "PhysicsElastic.h"
+#include "PhysicsElastic.hpp"
 
 namespace Physics
 {

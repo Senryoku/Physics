@@ -1,7 +1,7 @@
 #ifndef _PHYSICSCONSTRAINT_H_
 #define _PHYSICSCONSTRAINT_H_
 
-#include "PhysicsVertex.h"
+#include "PhysicsVertex.hpp"
 
 
 namespace Physics

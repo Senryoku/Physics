@@ -1,4 +1,4 @@
-#include "PhysicsConstraint.h"
+#include "PhysicsConstraint.hpp"
 
 namespace Physics
 {

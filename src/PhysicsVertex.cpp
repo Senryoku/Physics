@@ -1,4 +1,4 @@
-#include "PhysicsVertex.h"
+#include "PhysicsVertex.hpp"
 
 namespace Physics
 {

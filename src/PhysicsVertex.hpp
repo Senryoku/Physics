@@ -5,7 +5,7 @@
 #include <list>
 #include <SFML/OpenGL.hpp>
 
-#include "Vec2.h"
+#include "Vec2.hpp"
 
 namespace Physics
 {

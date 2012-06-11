@@ -3,11 +3,11 @@
 
 #include <iostream> // DEBUG
 
-#include "PhysicsVertex.h"
-#include "PhysicsConstraint.h"
-#include "PhysicsRigid.h"
-#include "PhysicsElastic.h"
-#include "PhysicsPolygon.h"
+#include "PhysicsVertex.hpp"
+#include "PhysicsConstraint.hpp"
+#include "PhysicsRigid.hpp"
+#include "PhysicsElastic.hpp"
+#include "PhysicsPolygon.hpp"
 
 namespace Physics
 {

@@ -2,7 +2,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "Physics.h"
+#include "Physics.hpp"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/OpenGL.hpp>
@@ -10,9 +10,6 @@
 
 #include "FPSCounter.hpp"
 
-#ifdef SFML_SYSTEM_MACOS
-	#include "ResourcePath.hpp"
-#endif
 /* Simple test de Physics.h */
 
 using namespace Physics;

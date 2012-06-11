@@ -1,4 +1,4 @@
-#include "PhysicsRigid.h"
+#include "PhysicsRigid.hpp"
 
 namespace Physics
 {

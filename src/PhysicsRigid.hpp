@@ -1,8 +1,8 @@
 #ifndef _PHYSICSRIGID_H_
 #define _PHYSICSRIGID_H_
 
-#include "PhysicsVertex.h"
-#include "PhysicsConstraint.h"
+#include "PhysicsVertex.hpp"
+#include "PhysicsConstraint.hpp"
 
 namespace Physics
 {

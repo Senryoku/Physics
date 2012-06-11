@@ -1,4 +1,4 @@
-#include "PhysicsWorld.h"
+#include "PhysicsWorld.hpp"
 
 namespace Physics
 {
