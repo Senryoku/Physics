@@ -130,6 +130,7 @@ void World::update(float prevdt, float dt)
 	applyGlobalAcceleration();
 	resolveElastics();
 	resolveVertices(prevdt, dt);
+	clearCIs();
 	for(unsigned int i = 0; i < myOverallIterations; i++)
 	{
 		for(unsigned int j = 0; j < myRigidIterations; j++) resolveRigids();
@@ -349,7 +350,7 @@ void World::resolvePolygons(bool saveCI)
 				// Il y a collision
 				if(Info.P1 != NULL)
 				{
-					if(saveCI) // Sauvegarde des informations de collision
+					if(!saveCI) // Sauvegarde des informations de collision
 					{
 						Info.P1->addCI(Info);
 						Info.P2->addCI(Info);
@@ -390,6 +391,13 @@ void World::resolvePolygons(bool saveCI)
 			}
 		}
     }
+}
+
+void World::clearCIs()
+{
+	for(std::list<Polygon*>::iterator ite = myPolygons.begin();
+		ite != myPolygons.end(); ite++)
+		(*ite)->clearCIs();
 }
 
 void World::deleteAll()
