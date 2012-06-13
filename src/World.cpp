@@ -357,7 +357,7 @@ void World::resolvePolygons(bool saveCI)
 				// Il y a collision
 				if(Info.P1 != NULL)
 				{
-					if(!saveCI) // Sauvegarde des informations de collision
+					if(saveCI) // Sauvegarde des informations de collision
 					{
 						Info.P1->addCI(Info);
 						Info.P2->addCI(Info);

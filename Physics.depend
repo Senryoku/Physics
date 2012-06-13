@@ -186,7 +186,7 @@
 1339422890 source:f:\github\physics\src\vec2.cpp
 	"Vec2.hpp"
 
-1339422890 f:\github\physics\src\vec2.hpp
+1339582608 f:\github\physics\src\vec2.hpp
 	<cmath>
 
 1339422890 source:f:\github\physics\src\physicselastic.cpp
@@ -218,13 +218,13 @@
 	<SFML/Audio.hpp>
 	"FPSCounter.hpp"
 
-1339422890 f:\github\physics\src\physics.hpp
-	"PhysicsVertex.hpp"
-	"PhysicsConstraint.hpp"
-	"PhysicsElastic.hpp"
-	"PhysicsRigid.hpp"
-	"PhysicsPolygon.hpp"
-	"PhysicsWorld.hpp"
+1339582608 f:\github\physics\src\physics.hpp
+	"Vertex.hpp"
+	"Constraint.hpp"
+	"Elastic.hpp"
+	"Rigid.hpp"
+	"Polygon.hpp"
+	"World.hpp"
 
 1339422890 f:\github\physics\src\physicsrigid.hpp
 	"PhysicsVertex.hpp"
@@ -263,5 +263,66 @@
 
 1339423454 source:f:\github\physics\src\physicsworld.cpp
 	"PhysicsWorld.hpp"
+	<iostream>
+
+1339582608 source:f:\github\physics\src\constraint.cpp
+	"Constraint.hpp"
+
+1339582608 f:\github\physics\src\constraint.hpp
+	"Vertex.hpp"
+
+1339582608 f:\github\physics\src\vertex.hpp
+	<cmath>
+	<list>
+	<SFML/OpenGL.hpp>
+	"Vec2.hpp"
+
+1339582608 source:f:\github\physics\src\elastic.cpp
+	"Elastic.hpp"
+
+1339582608 f:\github\physics\src\elastic.hpp
+	"Vertex.hpp"
+	"Constraint.hpp"
+
+1339582610 source:f:\github\physics\src\main.cpp
+	<cstdlib>
+	<iostream>
+	<sstream>
+	"Physics.hpp"
+	<SFML/Graphics.hpp>
+	<SFML/OpenGL.hpp>
+	<SFML/Audio.hpp>
+	"FPSCounter.hpp"
+
+1339582608 f:\github\physics\src\rigid.hpp
+	"Vertex.hpp"
+	"Constraint.hpp"
+
+1339582610 f:\github\physics\src\polygon.hpp
+	<vector>
+	<list>
+	<cstdarg>
+	"Vertex.hpp"
+	"Rigid.hpp"
+
+1339582608 f:\github\physics\src\world.hpp
+	<iostream>
+	"Vertex.hpp"
+	"Constraint.hpp"
+	"Rigid.hpp"
+	"Elastic.hpp"
+	"Polygon.hpp"
+
+1339582610 source:f:\github\physics\src\polygon.cpp
+	"Polygon.hpp"
+
+1339582608 source:f:\github\physics\src\rigid.cpp
+	"Rigid.hpp"
+
+1339582608 source:f:\github\physics\src\vertex.cpp
+	"Vertex.hpp"
+
+1339583052 source:f:\github\physics\src\world.cpp
+	"World.hpp"
 	<iostream>
 

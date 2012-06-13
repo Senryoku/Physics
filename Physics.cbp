@@ -21,6 +21,8 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-fexpensive-optimizations" />
+					<Add option="-O3" />
 					<Add option="-O2" />
 				</Compiler>
 				<Linker>
@@ -38,25 +40,25 @@
 			<Add option="-lglu32" />
 			<Add library="C:\MinGW\lib\libopengl32.a" />
 		</Linker>
+		<Unit filename="src\Constant.hpp" />
+		<Unit filename="src\Constraint.cpp" />
+		<Unit filename="src\Constraint.hpp" />
+		<Unit filename="src\Elastic.cpp" />
+		<Unit filename="src\Elastic.hpp" />
 		<Unit filename="src\FPSCounter.cpp" />
 		<Unit filename="src\FPSCounter.hpp" />
+		<Unit filename="src\Main.cpp" />
 		<Unit filename="src\Physics.hpp" />
-		<Unit filename="src\PhysicsConstant.hpp" />
-		<Unit filename="src\PhysicsConstraint.cpp" />
-		<Unit filename="src\PhysicsConstraint.hpp" />
-		<Unit filename="src\PhysicsElastic.cpp" />
-		<Unit filename="src\PhysicsElastic.hpp" />
-		<Unit filename="src\PhysicsMain.cpp" />
-		<Unit filename="src\PhysicsPolygon.cpp" />
-		<Unit filename="src\PhysicsPolygon.hpp" />
-		<Unit filename="src\PhysicsRigid.cpp" />
-		<Unit filename="src\PhysicsRigid.hpp" />
-		<Unit filename="src\PhysicsVertex.cpp" />
-		<Unit filename="src\PhysicsVertex.hpp" />
-		<Unit filename="src\PhysicsWorld.cpp" />
-		<Unit filename="src\PhysicsWorld.hpp" />
+		<Unit filename="src\Polygon.cpp" />
+		<Unit filename="src\Polygon.hpp" />
+		<Unit filename="src\Rigid.cpp" />
+		<Unit filename="src\Rigid.hpp" />
 		<Unit filename="src\Vec2.cpp" />
 		<Unit filename="src\Vec2.hpp" />
+		<Unit filename="src\Vertex.cpp" />
+		<Unit filename="src\Vertex.hpp" />
+		<Unit filename="src\World.cpp" />
+		<Unit filename="src\World.hpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
