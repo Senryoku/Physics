@@ -40,6 +40,8 @@ class BBox
 	public :
 		Vec2 TopLeft;
 		Vec2 BottomRight;
+
+		void glDraw();
 };
 
 /** @brief Décrit un polygone CONVEXE : Ensemble de points (Vertices)

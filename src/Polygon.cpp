@@ -3,6 +3,17 @@
 namespace Physics
 {
 
+void BBox::glDraw()
+{
+	glBegin(GL_LINE_LOOP);
+	glColor4f(1.f, 1.f, 0.f, 0.5f);
+	glVertex2f(TopLeft.x, TopLeft.y);
+	glVertex2f(BottomRight.x, TopLeft.y);
+	glVertex2f(BottomRight.x, BottomRight.y);
+	glVertex2f(TopLeft.x, BottomRight.y);
+	glEnd();
+}
+
 Polygon::Polygon() :
 	myFriction(1.f), myDetectionMask(PHYSICS_ALL), myReactionMask(PHYSICS_ALL)
 {
@@ -121,7 +132,7 @@ BBox Polygon::getOldBBox()
 		Pos = Vertices[i]->getOldPosition();
 		BB.TopLeft.x = std::min(BB.TopLeft.x, Pos.x);
 		BB.TopLeft.y = std::min(BB.TopLeft.y, Pos.y);
-		BB.BottomRight.x = std::max(BB.TopLeft.x, Pos.x);
+		BB.BottomRight.x = std::max(BB.BottomRight.x, Pos.x);
 		BB.BottomRight.y = std::max(BB.BottomRight.y, Pos.y);
 	}
 	return BB;
@@ -226,8 +237,8 @@ void Polygon::applyForce(Vec2 V)
 
 void Polygon::glDraw()
 {
+	glColor4f(0.f, 0.f, 1.f, 0.8f);
 	glBegin(GL_LINES);
-	glColor3f(0.f, 0.f, 1.f);
 	for(std::vector<Rigid*>::iterator ite = Edges.begin();
 		ite != Edges.end(); ite++)
 		(*ite)->glDraws();
@@ -236,6 +247,7 @@ void Polygon::glDraw()
 		(*ite)->glDraws();
 	glEnd();
 
+	glColor4f(1.f, 1.f, 1.f, 0.2f);
 	glBegin(GL_POLYGON);
 	for(std::vector<Vertex*>::iterator ite = Vertices.begin();
 		ite != Vertices.end(); ite++)

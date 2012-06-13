@@ -24,7 +24,7 @@ Coord Grid::getCellCoord(Vec2 Pos)
 
 	C.X = std::max(0u, std::min(myWidth - 1, static_cast<unsigned int>(Pos.x/myCellWidth)));
 	C.Y = std::max(0u, std::min(myHeight - 1, static_cast<unsigned int>(Pos.y/myCellHeight)));
-	//std::cout << C.X << " " << C.Y << std::endl;
+	// std::cout << C.X << " " << C.Y << std::endl; // DEBUG
 	return C;
 }
 
@@ -71,9 +71,9 @@ void Grid::add(Polygon* P, Coord C1, Coord C2)
 
 void Grid::rm(Polygon* P)
 {
-	for(unsigned int j = 0; j <= myHeight; j++)
+	for(unsigned int j = 0; j < myHeight; j++)
 	{
-		for(unsigned int i = 0; i <= myWidth; i++)
+		for(unsigned int i = 0; i < myWidth; i++)
 		{
 			myGrid[j][i].remove(P);
 		}
@@ -115,9 +115,11 @@ void World::updateGrid()
 		ite != myPolygons.end(); ite++)
 	{
 		Old = (*ite)->getOldBBox();
+		//Old.glDraw(); // DEBUG
 		Old_Top = myGrid.getCellCoord(Old.TopLeft);
 		Old_Bottom = myGrid.getCellCoord(Old.BottomRight);
 		Actual = (*ite)->getBBox();
+		//Actual.glDraw(); // DEBUG
 		Actual_Top = myGrid.getCellCoord(Actual.TopLeft);
 		Actual_Bottom = myGrid.getCellCoord(Actual.BottomRight);
 

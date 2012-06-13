@@ -64,6 +64,10 @@ int main(int argc, char** argv)
 	glOrtho(0.0, 800.0, 600.0, 0.0, 0.0, 100.0);
 	glDisable(GL_DEPTH_TEST);
 	glClearColor(0.0f, 0.f, 0.f, 1.f);
+	glEnable(GL_BLEND);
+	//glEnable(GL_ALPHA_TEST);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glAlphaFunc(GL_GREATER, 0.01f);
 
 	sf::Clock vent;
 	float forceVent(1.f);
