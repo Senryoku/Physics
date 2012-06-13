@@ -44,7 +44,7 @@ void Elastic::glDraw()
 {
 	glBegin(GL_LINES);
 	// Plus la contraite est forte, plus le lien est rouge
-	glColor3f(std::abs(myLength - getVector().getLength())*mySpring*0.5f/myLength, 0.f, 0.f);
+	glColor4f(std::abs(myLength - getVector().getLength())*mySpring*0.5f/myLength, 0.f, 0.f, 1.f);
 	glVertex2f(myV1->getPosition().x, myV1->getPosition().y);
 	glVertex2f(myV2->getPosition().x, myV2->getPosition().y);
 	glEnd();

@@ -250,9 +250,11 @@ void Polygon::glDraw()
 	glColor4f(1.f, 1.f, 1.f, 0.2f);
 	glBegin(GL_POLYGON);
 	for(std::vector<Vertex*>::iterator ite = Vertices.begin();
-		ite != Vertices.end(); ite++)
-		Vec2 Pos = (*ite)->getPosition(),
+		ite != Vertices.end(); ++ite)
+	{
+		Vec2 Pos = (*ite)->getPosition();
 		glVertex2f(Pos.x, Pos.y);
+	}
 	glEnd();
 }
 
