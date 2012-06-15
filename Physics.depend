@@ -277,7 +277,7 @@
 	<SFML/OpenGL.hpp>
 	"Vec2.hpp"
 
-1339582608 source:f:\github\physics\src\elastic.cpp
+1339606830 source:f:\github\physics\src\elastic.cpp
 	"Elastic.hpp"
 
 1339582608 f:\github\physics\src\elastic.hpp
@@ -298,7 +298,7 @@
 	"Vertex.hpp"
 	"Constraint.hpp"
 
-1339582610 f:\github\physics\src\polygon.hpp
+1339751071 f:\github\physics\src\polygon.hpp
 	<vector>
 	<list>
 	<cstdarg>
@@ -322,7 +322,7 @@
 1339582608 source:f:\github\physics\src\vertex.cpp
 	"Vertex.hpp"
 
-1339583052 source:f:\github\physics\src\world.cpp
+1339583289 source:f:\github\physics\src\world.cpp
 	"World.hpp"
 	<iostream>
 

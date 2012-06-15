@@ -86,6 +86,14 @@ class Polygon
 		 * @param ... Liste de Vertex* [, float]
 		**/
 		Polygon(int nb, unsigned int FLAGS, ...);
+
+		/** @brief Constructeur par une liste de Vertex
+		 *
+		 * Longueurs automatiques. Contraintes internes automatiques.
+		 * @param VecVertec std::vector de Vertex*
+		**/
+		Polygon(std::vector<Vertex*> VecVertex);
+
 		/** @brief Destructeur
 		 *
 		 * Détruit également les Rigid crées lors de la construction !

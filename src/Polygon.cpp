@@ -57,6 +57,23 @@ Polygon::Polygon(int nb, unsigned int FLAGS, ...) :
 	va_end(ap);
 }
 
+Polygon::Polygon(std::vector<Vertex*> VecVertex) :
+	myFriction(1.f), myDetectionMask(PHYSICS_ALL), myReactionMask(PHYSICS_ALL)
+{
+	unsigned int nb = VecVertex.size();
+	Edges.reserve(nb);
+	InternalContraints.reserve((nb-2)*(nb-3)/2 + 1);
+
+	Vertices = VecVertex;
+
+	for(int i = 0; i < nb; i++)
+	{
+		Edges.push_back(new Rigid(Vertices[i], Vertices[(i+1)%nb]));
+		for(int j = i + 2; j < nb - (i==0?1:0); j++)
+			InternalContraints.push_back(new Rigid(Vertices[i], Vertices[j]));
+	}
+}
+
 Polygon::~Polygon()
 {
 	for(std::vector<Rigid*>::iterator ite = Edges.begin();
