@@ -34,10 +34,10 @@ void Elastic::resolve()
 
 	// Normalisation du vecteur (pas besoin de getNormalized(), on a déjà acLength)
 	if(acLength == 0.f) Vect = Vec2(1.f, 0.f);
-	else Vect = Vect/acLength;
+	else Vect = Vect*(factor/acLength);
 
-	myV2->applyForce(-Vect*factor),
-	myV1->applyForce(Vect*factor);
+	myV2->applyForce(-Vect),
+	myV1->applyForce(Vect);
 }
 
 void Elastic::glDraw()

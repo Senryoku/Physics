@@ -132,7 +132,7 @@ class Polygon
 		void addCI(CollisionInfo CI);
 		void clearCIs() { myCIs.clear(); }
 
-		void ProjectToAxis(float &Min, float &Max, const Vec2 Axis);
+		void ProjectToAxis(float &Min, float &Max, const Vec2& Axis);
 
 		/// @brief Applique une force à tout les Vertices du polygon
 		void applyForce(Vec2 V);

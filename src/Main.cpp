@@ -101,8 +101,6 @@ int main(int argc, char** argv)
 	W.newRigid(pLeftTop, pRightBottom);// sqrt(20000.f));
 	W.newRigid(pLeftBottom, pRightTop);// sqrt(20000.f));
 
-	float taille_cubes = 50.f;
-
 	Vertex* P41 = W.newVertex();
 	P41->setPosition(Vec2(150, 150));
 	P41->setFixed();
@@ -184,8 +182,6 @@ int main(int argc, char** argv)
 
 		}
 
-
-	int i = 0;
 	float prevdt = 0.1f, dt = 0.1f;
 
 	Vertex *grab = NULL;

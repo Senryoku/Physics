@@ -25,7 +25,7 @@ class Coord {
 class Grid
 {
 	public:
-		Grid(unsigned int Width, unsigned int Height, float CellWidth = 192.f, float CellHeight = 192.f);
+		Grid(unsigned int Width, unsigned int Height, float CellWidth = 128.f, float CellHeight = 128.f);
 		~Grid();
 
 		Coord getCellCoord(Vec2 Pos);

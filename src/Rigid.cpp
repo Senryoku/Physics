@@ -25,15 +25,17 @@ void Rigid::resolve()
 
 	// Normalisation du vecteur (pas besoin de Normalize(), on a déjà acLength)
 	if(acLength == 0.f) Vect = Vec2(1.f, 0.f);
-	else Vect = Vect/acLength;
+	else Vect = Vect*(factor/acLength);
 
 	if(myV2->isFixed())
-		myV1->correctPosition(Vect*factor);
+		myV1->correctPosition(Vect);
 	else if(myV1->isFixed())
-		myV2->correctPosition(-Vect*factor);
-	else
-		myV2->correctPosition(-Vect*factor*0.5f),
-		myV1->correctPosition(Vect*factor*0.5f);
+		myV2->correctPosition(-Vect);
+	else {
+		Vect *= 0.5f;
+		myV2->correctPosition(-Vect);
+		myV1->correctPosition(Vect);
+	}
 }
 
 void Rigid::glDraw()

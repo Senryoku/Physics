@@ -66,10 +66,10 @@ Polygon::Polygon(std::vector<Vertex*> VecVertex) :
 
 	Vertices = VecVertex;
 
-	for(int i = 0; i < nb; i++)
+	for(unsigned int i = 0; i < nb; i++)
 	{
 		Edges.push_back(new Rigid(Vertices[i], Vertices[(i+1)%nb]));
-		for(int j = i + 2; j < nb - (i==0?1:0); j++)
+		for(unsigned int j = i + 2; j < nb - (i==0?1:0); j++)
 			InternalContraints.push_back(new Rigid(Vertices[i], Vertices[j]));
 	}
 }
@@ -187,7 +187,8 @@ CollisionInfo Polygon::collide(Polygon *P)
 		// Si la face est "nulle", on n'essaye pas de la tester !
 		if(Edge->getVector() == Vec2(0.f, 0.f)) continue;
 
-		Axis = Edge->getVector().getOrthogonal().getNormalized();
+		Axis = Edge->getVector().getOrthogonal();
+		Axis.normalize();
 
 		ProjectToAxis(Min, Max, Axis);
 		P->ProjectToAxis(MinP, MaxP, Axis);
@@ -227,15 +228,15 @@ CollisionInfo Polygon::collide(Polygon *P)
 		return Info;
 }
 
-void Polygon::ProjectToAxis(float &Min, float &Max, const Vec2 Axis)
+void Polygon::ProjectToAxis(float &Min, float &Max, const Vec2& Axis)
 {
 	Min = Max = Vertices[0]->getPosition()*Axis;
 
 	for(unsigned int i = 1; i < Vertices.size(); i++)
 	{
 		float Tmp = Vertices[i]->getPosition()*Axis;
-		Min = std::min(Tmp, Min);
-		Max = std::max(Tmp, Max);
+		if(Tmp < Min) Min = Tmp;
+		else if(Tmp > Max) Max = Tmp;
 	}
 }
 

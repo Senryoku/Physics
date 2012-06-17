@@ -98,7 +98,7 @@ void Grid::rm(Polygon* P, Coord C1, Coord C2)
 
 World::World(float Width, float Height) :
 	myWidth(Width), myHeight(Height), myRigidIterations(1), myOverallIterations(4),
-	myGrid(Width/192.f + 1, Height/192.f + 1)
+	myGrid(Width/128.f + 1, Height/128.f + 1)
 {
 }
 
@@ -366,7 +366,7 @@ void World::resolvePolygons(bool saveCI)
 					if (Info.P1->getReactionMask() & Info.P2->getReactionMask())
 					{
 						// Réponse
-						Vec2 CollisionVector = Info.Normal*Info.Depth;
+						Vec2 CollisionVector = Info.Normal*(Info.Depth*0.5f);
 
 						Vec2 PosE1 = Info.Edge->getP1()->getPosition();
 						Vec2 PosE2 = Info.Edge->getP2()->getPosition();
@@ -387,12 +387,11 @@ void World::resolvePolygons(bool saveCI)
 						float CorrectionFactor = -1.0f/(PositionOnEdge*PositionOnEdge + (1 - PositionOnEdge)*(1 - PositionOnEdge));
 
 						// Correction des positions
-						Info.V->correctPosition(CollisionVector*0.5f); // Du point
+						Info.V->correctPosition(CollisionVector); // Du point
 						// De  la face
-						Info.Edge->getP1()->correctPosition(CollisionVector*
-							CorrectionFactor*(1-PositionOnEdge)*0.5f);
-						Info.Edge->getP2()->correctPosition(CollisionVector*
-							CorrectionFactor*(PositionOnEdge)*0.5f);
+						CollisionVector *= CorrectionFactor;
+						Info.Edge->getP1()->correctPosition(CollisionVector*(1-PositionOnEdge));
+						Info.Edge->getP2()->correctPosition(CollisionVector*PositionOnEdge);
 					}
 				}
 			}

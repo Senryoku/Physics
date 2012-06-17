@@ -46,40 +46,40 @@ class Vertex
 		 *
 		 * @return Vec2
 		**/
-		Vec2 getPosition() { return myPosition; }
+		inline const Vec2& getPosition() { return myPosition; }
 
 		/** @brief Accesseur de l'ancienne position
 		 *
 		 * @return Vec2
 		**/
-		Vec2 getOldPosition() { return myOldPosition; }
+		inline const Vec2& getOldPosition() { return myOldPosition; }
 
 		/** @brief Accesseur de l'accélération
 		 *
 		 * @return Vec2
 		**/
-		Vec2 getAcceleration() { return myAcceleration; }
+		inline const Vec2& getAcceleration() { return myAcceleration; }
 
 		/** @brief Accesseur de la Masse
 		 *
 		 * @return float Masse
 		**/
-		float getRadius() { return myRadius; }
+		inline float getRadius() { return myRadius; }
 
 		/** @brief Accesseur de la Masse
 		 *
 		 * @return float Masse
 		**/
-		float getMass() { return myMass; }
+		inline float getMass() { return myMass; }
 
 		/** @brief Accesseur de la vitesse
 		 *
 		 * @return Vec2
 		**/
-		Vec2 getSpeed() { return myPosition - myOldPosition; }
+		inline Vec2 getSpeed() { return myPosition - myOldPosition; }
 
 		/// @brief Accesseur de myFixe
-		bool isFixed() { return myFixed; }
+		inline bool isFixed() { return myFixed; }
 
 		/** @brief Mutateur de la position
 		 *
