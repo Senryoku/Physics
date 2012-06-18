@@ -22,9 +22,8 @@ Coord Grid::getCellCoord(Vec2 Pos)
 {
 	Coord C;
 
-	C.X = std::max(0u, std::min(myWidth - 1, static_cast<unsigned int>(Pos.x/myCellWidth) + 1));
-	C.Y = std::max(0u, std::min(myHeight - 1, static_cast<unsigned int>(Pos.y/myCellHeight) + 1));
-	// Le +1 va la plupart des fois ajouter une case où le polygone se trouve est dans le cas où E(Pos.y/myCellHeight) == Pos.y/myCellHeight il y a une case de plus. Mais ça vaut le coup!
+	C.X = std::max(0u, std::min(myWidth - 1, static_cast<unsigned int>(Pos.x/myCellWidth)));
+	C.Y = std::max(0u, std::min(myHeight - 1, static_cast<unsigned int>(Pos.y/myCellHeight)));
 	// std::cout << C.X << " " << C.Y << std::endl; // DEBUG
 	return C;
 }
