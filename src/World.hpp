@@ -47,6 +47,8 @@ class Grid
 		inline void rm(Polygon* P, BBox BB);
 		void rm(Polygon* P, Coord C1, Coord C2);
 
+		void glDraw();
+
 	private:
 		std::vector<std::vector<Cell> > myGrid;
 		unsigned int myWidth;

@@ -96,6 +96,23 @@ void Grid::rm(Polygon* P, Coord C1, Coord C2)
 	}
 }
 
+void Grid::glDraw()
+{
+	glColor4f(1.f, 1.f, 1.f, 0.2f);
+	glBegin(GL_LINES);
+	for(unsigned int i = 0; i < myWidth; i++)
+	{
+		glVertex2f((float) i*myCellWidth, 0.f);
+		glVertex2f((float) i*myCellWidth, myHeight*myCellHeight);
+	}
+	for(unsigned int i = 0; i < myHeight; i++)
+	{
+		glVertex2f(0.f, (float) i*myCellHeight);
+		glVertex2f(myWidth*myCellWidth, (float) i*myCellHeight);
+	}
+	glEnd();
+}
+
 World::World(float Width, float Height) :
 	myWidth(Width), myHeight(Height), myRigidIterations(1), myOverallIterations(4),
 	myGrid(Width/128.f + 1, Height/128.f + 1)
@@ -119,7 +136,7 @@ void World::updateGrid()
 		Old_Top = myGrid.getCellCoord(Old.TopLeft);
 		Old_Bottom = myGrid.getCellCoord(Old.BottomRight);
 		Actual = (*ite)->getBBox();
-		//Actual.glDraw(); // DEBUG
+		Actual.glDraw(); // DEBUG
 		Actual_Top = myGrid.getCellCoord(Actual.TopLeft);
 		Actual_Bottom = myGrid.getCellCoord(Actual.BottomRight);
 
@@ -236,6 +253,7 @@ Polygon* World::newRectangle(float Width, float Height)
 
 void World::draw()
 {
+	myGrid.glDraw();
 	drawVertices();
 	drawRigids();
 	drawElastics();

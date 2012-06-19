@@ -51,9 +51,9 @@ class BBox
 class Polygon
 {
 	protected:
-		std::vector<Vertex*> Vertices;
-		std::vector<Rigid*> Edges;
-		std::vector<Rigid*> InternalContraints;
+		std::vector<Vertex*> myVertices;
+		std::vector<Rigid*> myEdges;
+		std::vector<Rigid*> myInternalContraints;
 
 		std::list<CollisionInfo> myCIs;
 
@@ -103,7 +103,7 @@ class Polygon
 		// Accesseurs
 		inline bool isFixed() { return myFixed; }
 		inline float getFriction() { return myFriction; }
-		inline Vertex* getVertex(unsigned int i) {return Vertices[i]; }
+		inline Vertex* getVertex(unsigned int i) {return myVertices[i]; }
 		Rigid& operator[](const unsigned int);
 		inline unsigned int getDetectionMask() { return myDetectionMask; }
 		inline unsigned int getReactionMask() { return myReactionMask; }

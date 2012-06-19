@@ -25,32 +25,32 @@ Polygon::Polygon(int nb, unsigned int FLAGS, ...) :
 	va_list ap;
 	va_start(ap, FLAGS);
 
-	Vertices.reserve(nb);
-	Edges.reserve(nb);
+	myVertices.reserve(nb);
+	myEdges.reserve(nb);
 
 	if(FLAGS==FLAG_NULL)
 	{
-		InternalContraints.reserve((nb-2)*(nb-3)/2 + 1);
+		myInternalContraints.reserve((nb-2)*(nb-3)/2 + 1);
 
 		for(int i = 0; i < nb; i++)
-			Vertices.push_back(va_arg(ap, Vertex*));
+			myVertices.push_back(va_arg(ap, Vertex*));
 		for(int i = 0; i < nb; i++)
 		{
-			Edges.push_back(new Rigid(Vertices[i], Vertices[(i+1)%nb]));
+			myEdges.push_back(new Rigid(myVertices[i], myVertices[(i+1)%nb]));
             for(int j = i + 2; j < nb - (i==0?1:0); j++)
-                InternalContraints.push_back(new Rigid(Vertices[i], Vertices[j]));
+                myInternalContraints.push_back(new Rigid(myVertices[i], myVertices[j]));
 		}
 
 	} else if(FLAGS & WITH_LENGTH) {
 		std::vector<float> Lengths;
 		Lengths.reserve(nb);
-		Edges.reserve(nb);
+		myEdges.reserve(nb);
 		for(int i = 0; i < nb; i++)
-			Vertices.push_back(va_arg(ap, Vertex*)),
+			myVertices.push_back(va_arg(ap, Vertex*)),
 			Lengths.push_back(static_cast<float>(va_arg(ap, double)));
 		for(int i = 0; i < nb; i++)
-			Edges.push_back(new Rigid(Vertices[i],
-											Vertices[(i+1)%nb],
+			myEdges.push_back(new Rigid(myVertices[i],
+											myVertices[(i+1)%nb],
 											Lengths[i]));
 	}
 
@@ -61,29 +61,29 @@ Polygon::Polygon(std::vector<Vertex*> VecVertex) :
 	myFriction(1.f), myDetectionMask(PHYSICS_ALL), myReactionMask(PHYSICS_ALL)
 {
 	unsigned int nb = VecVertex.size();
-	Edges.reserve(nb);
-	InternalContraints.reserve((nb-2)*(nb-3)/2 + 1);
+	myEdges.reserve(nb);
+	myInternalContraints.reserve((nb-2)*(nb-3)/2 + 1);
 
-	Vertices = VecVertex;
+	myVertices = VecVertex;
 
 	for(unsigned int i = 0; i < nb; i++)
 	{
-		Edges.push_back(new Rigid(Vertices[i], Vertices[(i+1)%nb]));
+		myEdges.push_back(new Rigid(myVertices[i], myVertices[(i+1)%nb]));
 		for(unsigned int j = i + 2; j < nb - (i==0?1:0); j++)
-			InternalContraints.push_back(new Rigid(Vertices[i], Vertices[j]));
+			myInternalContraints.push_back(new Rigid(myVertices[i], myVertices[j]));
 	}
 }
 
 Polygon::~Polygon()
 {
-	for(std::vector<Rigid*>::iterator ite = Edges.begin();
-		ite != Edges.end(); ite++)
+	for(std::vector<Rigid*>::iterator ite = myEdges.begin();
+		ite != myEdges.end(); ite++)
 		delete *ite;
-	Edges.clear();
-	for(std::vector<Rigid*>::iterator ite = InternalContraints.begin();
-		ite != InternalContraints.end(); ite++)
+	myEdges.clear();
+	for(std::vector<Rigid*>::iterator ite = myInternalContraints.begin();
+		ite != myInternalContraints.end(); ite++)
 		delete *ite;
-	InternalContraints.clear();
+	myInternalContraints.clear();
 }
 
 void Polygon::addCI(CollisionInfo CI)
@@ -93,30 +93,30 @@ void Polygon::addCI(CollisionInfo CI)
 
 void Polygon::setFixed(bool B)
 {
-	for(unsigned int i = 1; i < Vertices.size(); i++)
-		Vertices[i]->setFixed(B);
+	for(unsigned int i = 1; i < myVertices.size(); i++)
+		myVertices[i]->setFixed(B);
 	myFixed = B;
 }
 
 Vec2 Polygon::getCenter()
 {
-	Vec2 Center(Vertices[0]->getPosition());
-	for(unsigned int i = 1; i < Vertices.size(); i++)
+	Vec2 Center(myVertices[0]->getPosition());
+	for(unsigned int i = 1; i < myVertices.size(); i++)
 	{
-		Center += Vertices[i]->getPosition();
+		Center += myVertices[i]->getPosition();
 	}
-	return Center/Vertices.size();
+	return Center/myVertices.size();
 }
 
 Vec2 Polygon::getMassCenter()
 {
-	float Mass = Vertices[0]->getMass();
-	Vec2 Center(Vertices[0]->getPosition());
-	for(unsigned int i = 1; i < Vertices.size(); i++)
+	float Mass = myVertices[0]->getMass();
+	Vec2 Center(myVertices[0]->getPosition());
+	for(unsigned int i = 1; i < myVertices.size(); i++)
 	{
-		Center = (Vertices[i]->getPosition()*Vertices[i]->getMass()
-					+ Center*Mass)/(Mass + Vertices[i]->getMass());
-		Mass += Vertices[i]->getMass();
+		Center = (myVertices[i]->getPosition()*myVertices[i]->getMass()
+					+ Center*Mass)/(Mass + myVertices[i]->getMass());
+		Mass += myVertices[i]->getMass();
 	}
 	return Center;
 }
@@ -124,12 +124,12 @@ Vec2 Polygon::getMassCenter()
 BBox Polygon::getBBox()
 {
 	BBox BB;
-	Vec2 Pos = Vertices[0]->getPosition();
+	Vec2 Pos = myVertices[0]->getPosition();
 	BB.TopLeft = Pos;
 	BB.BottomRight = Pos;
-	for(unsigned int i = 1; i < Vertices.size(); i++)
+	for(unsigned int i = 1; i < myVertices.size(); i++)
 	{
-		Pos = Vertices[i]->getPosition();
+		Pos = myVertices[i]->getPosition();
 		BB.TopLeft.x = std::min(BB.TopLeft.x, Pos.x);
 		BB.TopLeft.y = std::min(BB.TopLeft.y, Pos.y);
 		BB.BottomRight.x = std::max(BB.BottomRight.x, Pos.x);
@@ -141,12 +141,12 @@ BBox Polygon::getBBox()
 BBox Polygon::getOldBBox()
 {
 	BBox BB;
-	Vec2 Pos = Vertices[0]->getOldPosition();
+	Vec2 Pos = myVertices[0]->getOldPosition();
 	BB.TopLeft = Pos;
 	BB.BottomRight = Pos;
-	for(unsigned int i = 1; i < Vertices.size(); i++)
+	for(unsigned int i = 1; i < myVertices.size(); i++)
 	{
-		Pos = Vertices[i]->getOldPosition();
+		Pos = myVertices[i]->getOldPosition();
 		BB.TopLeft.x = std::min(BB.TopLeft.x, Pos.x);
 		BB.TopLeft.y = std::min(BB.TopLeft.y, Pos.y);
 		BB.BottomRight.x = std::max(BB.BottomRight.x, Pos.x);
@@ -157,11 +157,11 @@ BBox Polygon::getOldBBox()
 
 void Polygon::resolveRigids()
 {
-	for(std::vector<Rigid*>::iterator ite = Edges.begin();
-		ite != Edges.end(); ite++)
+	for(std::vector<Rigid*>::iterator ite = myEdges.begin();
+		ite != myEdges.end(); ite++)
 		(*ite)->resolve();
-	for(std::vector<Rigid*>::iterator ite = InternalContraints.begin();
-		ite != InternalContraints.end(); ite++)
+	for(std::vector<Rigid*>::iterator ite = myInternalContraints.begin();
+		ite != myInternalContraints.end(); ite++)
 		(*ite)->resolve();
 }
 
@@ -177,11 +177,11 @@ CollisionInfo Polygon::collide(Polygon *P)
 	Info.Depth = INFINITY; // Pour le minimum
 	float Min, Max, MinP, MaxP, Gap; // Valeur des projections, distance
 
-	for(unsigned int i = 0; i < Edges.size() + P->Edges.size(); i++)
+	for(unsigned int i = 0; i < myEdges.size() + P->myEdges.size(); i++)
 	{
-		if(i < Edges.size())
-			Edge = Edges[i];
-		else Edge = P->Edges[i - Edges.size()], Info.P1 = P, Info.P2 = this;
+		if(i < myEdges.size())
+			Edge = myEdges[i];
+		else Edge = P->myEdges[i - myEdges.size()], Info.P1 = P, Info.P2 = this;
 		// P1 est toujours le polygone dont on teste la face
 
 		// Si la face est "nulle", on n'essaye pas de la tester !
@@ -213,12 +213,12 @@ CollisionInfo Polygon::collide(Polygon *P)
 	// Recherche du point de collision (= le plus proche de P1)
 	float distP1Vertex = INFINITY; // On recherche un minimum
 	float tmpDist;
-	for(unsigned int i = 0; i < Info.P2->Vertices.size(); i++)
+	for(unsigned int i = 0; i < Info.P2->myVertices.size(); i++)
 	{
-		tmpDist = Info.Normal*(Info.P2->Vertices[i]->getPosition()-P1Center);
+		tmpDist = Info.Normal*(Info.P2->myVertices[i]->getPosition()-P1Center);
 		if(tmpDist < distP1Vertex)
 			distP1Vertex = tmpDist,
-			Info.V = Info.P2->Vertices[i];
+			Info.V = Info.P2->myVertices[i];
 	}
 
 	// Gère le cas où le polygone se résume à un point (Tout ses points ont les mêmes coordonnées
@@ -230,11 +230,11 @@ CollisionInfo Polygon::collide(Polygon *P)
 
 void Polygon::ProjectToAxis(float &Min, float &Max, const Vec2& Axis)
 {
-	Min = Max = Vertices[0]->getPosition()*Axis;
+	Min = Max = myVertices[0]->getPosition()*Axis;
 
-	for(unsigned int i = 1; i < Vertices.size(); i++)
+	for(unsigned int i = 1; i < myVertices.size(); i++)
 	{
-		float Tmp = Vertices[i]->getPosition()*Axis;
+		float Tmp = myVertices[i]->getPosition()*Axis;
 		if(Tmp < Min) Min = Tmp;
 		else if(Tmp > Max) Max = Tmp;
 	}
@@ -242,14 +242,14 @@ void Polygon::ProjectToAxis(float &Min, float &Max, const Vec2& Axis)
 
 Rigid& Polygon::operator[](const unsigned int i)
 {
-	return *Edges[i];
+	return *myEdges[i];
 }
 
 void Polygon::applyForce(Vec2 V)
 {
-	for(unsigned int i = 0; i < Vertices.size(); i++)
+	for(unsigned int i = 0; i < myVertices.size(); i++)
 	{
-		Vertices[i]->applyForce(V);
+		myVertices[i]->applyForce(V);
 	}
 }
 
@@ -257,18 +257,18 @@ void Polygon::glDraw()
 {
 	glColor4f(0.f, 0.f, 1.f, 0.8f);
 	glBegin(GL_LINES);
-	for(std::vector<Rigid*>::iterator ite = Edges.begin();
-		ite != Edges.end(); ite++)
+	for(std::vector<Rigid*>::iterator ite = myEdges.begin();
+		ite != myEdges.end(); ite++)
 		(*ite)->glDraws();
-	for(std::vector<Rigid*>::iterator ite = InternalContraints.begin();
-		ite != InternalContraints.end(); ite++)
+	for(std::vector<Rigid*>::iterator ite = myInternalContraints.begin();
+		ite != myInternalContraints.end(); ite++)
 		(*ite)->glDraws();
 	glEnd();
 
 	glColor4f(1.f, 1.f, 1.f, 0.2f);
 	glBegin(GL_POLYGON);
-	for(std::vector<Vertex*>::iterator ite = Vertices.begin();
-		ite != Vertices.end(); ++ite)
+	for(std::vector<Vertex*>::iterator ite = myVertices.begin();
+		ite != myVertices.end(); ++ite)
 	{
 		Vec2 Pos = (*ite)->getPosition();
 		glVertex2f(Pos.x, Pos.y);
