@@ -15,12 +15,12 @@ void BBox::glDraw()
 }
 
 Polygon::Polygon() :
-	myFriction(1.f), myDetectionMask(PHYSICS_ALL), myReactionMask(PHYSICS_ALL)
+	myFriction(1.f), myDetectionMask(PHYSICS_ALL), myReactionMask(PHYSICS_ALL), mySaveCIs(0)
 {
 }
 
 Polygon::Polygon(int nb, unsigned int FLAGS, ...) :
-	myFriction(1.f), myDetectionMask(PHYSICS_ALL), myReactionMask(PHYSICS_ALL)
+	myFriction(1.f), myDetectionMask(PHYSICS_ALL), myReactionMask(PHYSICS_ALL), mySaveCIs(0)
 {
 	va_list ap;
 	va_start(ap, FLAGS);
@@ -58,7 +58,7 @@ Polygon::Polygon(int nb, unsigned int FLAGS, ...) :
 }
 
 Polygon::Polygon(std::vector<Vertex*> VecVertex) :
-	myFriction(1.f), myDetectionMask(PHYSICS_ALL), myReactionMask(PHYSICS_ALL)
+	myFriction(1.f), myDetectionMask(PHYSICS_ALL), myReactionMask(PHYSICS_ALL), mySaveCIs(0)
 {
 	unsigned int nb = VecVertex.size();
 	myEdges.reserve(nb);

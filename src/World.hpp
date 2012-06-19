@@ -8,7 +8,6 @@
 #include "Rigid.hpp"
 #include "Elastic.hpp"
 #include "Polygon.hpp"
-
 namespace Physics
 {
 
@@ -99,7 +98,7 @@ class World
 		void resolveVertices(float prevdt = 0.1f, float dt = 0.1f);
 		void resolveElastics();
 		void resolveRigids();
-		void resolvePolygons(bool saveCI = false);
+		void resolvePolygons();
 
 		void clearCIs();
 

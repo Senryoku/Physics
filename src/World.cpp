@@ -358,7 +358,7 @@ void World::resolveRigids()
 		(*ite)->resolve();
 }
 
-void World::resolvePolygons(bool saveCI)
+void World::resolvePolygons()
 {
 	CollisionInfo Info;
 	updateGrid();
@@ -375,11 +375,10 @@ void World::resolvePolygons(bool saveCI)
 				// Il y a collision
 				if(Info.P1 != NULL)
 				{
-					if(saveCI) // Sauvegarde des informations de collision
-					{
-						Info.P1->addCI(Info);
-						Info.P2->addCI(Info);
-					}
+					// Sauvegarde des informations de collision
+					if(Info.P1->getSaveCIs()) Info.P1->addCI(Info);
+					if(Info.P2->getSaveCIs()) Info.P2->addCI(Info);
+
 					// Ils ont un masque de réaction en commun
 					if (Info.P1->getReactionMask() & Info.P2->getReactionMask())
 					{

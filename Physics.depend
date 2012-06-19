@@ -298,14 +298,14 @@
 	"Vertex.hpp"
 	"Constraint.hpp"
 
-1340124662 f:\github\physics\src\polygon.hpp
+1340139208 f:\github\physics\src\polygon.hpp
 	<vector>
 	<list>
 	<cstdarg>
 	"Vertex.hpp"
 	"Rigid.hpp"
 
-1340124662 f:\github\physics\src\world.hpp
+1340139231 f:\github\physics\src\world.hpp
 	<iostream>
 	"Vertex.hpp"
 	"Constraint.hpp"
@@ -313,7 +313,7 @@
 	"Elastic.hpp"
 	"Polygon.hpp"
 
-1340124662 source:f:\github\physics\src\polygon.cpp
+1340139065 source:f:\github\physics\src\polygon.cpp
 	"Polygon.hpp"
 
 1339964154 source:f:\github\physics\src\rigid.cpp

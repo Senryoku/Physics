@@ -62,6 +62,7 @@ class Polygon
 		unsigned int myReactionMask;
 
 		bool myFixed;
+		bool mySaveCIs;
 		std::vector<Vec2> Normals;
 
 	public:
@@ -128,6 +129,8 @@ class Polygon
 
 		void resolveRigids();
 
+		inline bool getSaveCIs() { return mySaveCIs; }
+		void setSaveCIs(bool B = true) { mySaveCIs = B; }
 		CollisionInfo collide(Polygon *P);
 		void addCI(CollisionInfo CI);
 		void clearCIs() { myCIs.clear(); }
