@@ -55,12 +55,14 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add directory="F:\GitHub\Physics\src" />
 		</Compiler>
 		<Linker>
 			<Add option="-lsfml-graphics" />
 			<Add option="-lsfml-window" />
 			<Add option="-lsfml-system" />
 			<Add option="-lglu32" />
+			<Add option="-llua51" />
 			<Add library="C:\MinGW\lib\libopengl32.a" />
 		</Linker>
 		<Unit filename="src\Constant.hpp" />

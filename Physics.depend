@@ -284,7 +284,7 @@
 	"Vertex.hpp"
 	"Constraint.hpp"
 
-1340012388 source:f:\github\physics\src\main.cpp
+1340222396 source:f:\github\physics\src\main.cpp
 	<cstdlib>
 	<iostream>
 	<sstream>
@@ -298,22 +298,23 @@
 	"Vertex.hpp"
 	"Constraint.hpp"
 
-1340139208 f:\github\physics\src\polygon.hpp
+1340221026 f:\github\physics\src\polygon.hpp
 	<vector>
 	<list>
 	<cstdarg>
 	"Vertex.hpp"
 	"Rigid.hpp"
 
-1340139231 f:\github\physics\src\world.hpp
+1340226032 f:\github\physics\src\world.hpp
 	<iostream>
 	"Vertex.hpp"
 	"Constraint.hpp"
 	"Rigid.hpp"
 	"Elastic.hpp"
 	"Polygon.hpp"
+	<Lua/lunar.hpp>
 
-1340139065 source:f:\github\physics\src\polygon.cpp
+1340225251 source:f:\github\physics\src\polygon.cpp
 	"Polygon.hpp"
 
 1339964154 source:f:\github\physics\src\rigid.cpp
@@ -322,7 +323,9 @@
 1339582608 source:f:\github\physics\src\vertex.cpp
 	"Vertex.hpp"
 
-1340012231 source:f:\github\physics\src\world.cpp
+1340224627 source:f:\github\physics\src\world.cpp
 	"World.hpp"
-	<iostream>
+
+1340220274 f:\github\physics\src\lua\lunar.hpp
+	<lua.hpp>
 

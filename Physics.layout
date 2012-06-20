@@ -1,49 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="Release" />
-	<File name="src\Constant.hpp" open="1" top="0" tabpos="11">
-		<Cursor position="0" topLine="0" />
+	<ActiveTarget name="Debug" />
+	<File name="src\Elastic.hpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor1 position="0" topLine="0" />
 	</File>
-	<File name="src\Constraint.hpp" open="1" top="0" tabpos="10">
-		<Cursor position="0" topLine="0" />
+	<File name="src\Elastic.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor1 position="676" topLine="21" />
 	</File>
-	<File name="src\Elastic.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="676" topLine="21" />
+	<File name="src\Constraint.hpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor1 position="0" topLine="0" />
 	</File>
-	<File name="src\Elastic.hpp" open="1" top="0" tabpos="9">
-		<Cursor position="0" topLine="0" />
+	<File name="src\Constraint.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor1 position="479" topLine="0" />
 	</File>
-	<File name="src\Main.cpp" open="1" top="0" tabpos="8">
-		<Cursor position="707" topLine="218" />
+	<File name="src\Constant.hpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor1 position="0" topLine="0" />
 	</File>
-	<File name="src\Polygon.cpp" open="1" top="0" tabpos="5">
-		<Cursor position="1649" topLine="212" />
+	<File name="src\World.hpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor1 position="2438" topLine="0" />
 	</File>
-	<File name="src\Polygon.hpp" open="1" top="0" tabpos="1">
-		<Cursor position="4180" topLine="97" />
+	<File name="src\World.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor1 position="5624" topLine="235" />
 	</File>
-	<File name="src\Rigid.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="606" topLine="0" />
+	<File name="src\Vertex.hpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor1 position="1619" topLine="0" />
 	</File>
-	<File name="src\Rigid.hpp" open="1" top="0" tabpos="12">
-		<Cursor position="0" topLine="0" />
+	<File name="src\Vertex.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor1 position="508" topLine="30" />
 	</File>
-	<File name="src\Vec2.cpp" open="1" top="0" tabpos="4">
-		<Cursor position="140" topLine="0" />
+	<File name="src\Vec2.hpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor1 position="1011" topLine="6" />
 	</File>
-	<File name="src\Vec2.hpp" open="1" top="0" tabpos="3">
-		<Cursor position="536" topLine="6" />
+	<File name="src\Vec2.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor1 position="140" topLine="0" />
 	</File>
-	<File name="src\Vertex.cpp" open="1" top="0" tabpos="6">
-		<Cursor position="508" topLine="30" />
+	<File name="src\Rigid.hpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor1 position="0" topLine="0" />
 	</File>
-	<File name="src\Vertex.hpp" open="1" top="0" tabpos="2">
-		<Cursor position="1619" topLine="0" />
+	<File name="src\Rigid.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor1 position="111" topLine="0" />
 	</File>
-	<File name="src\World.cpp" open="1" top="1" tabpos="13">
-		<Cursor position="9004" topLine="357" />
+	<File name="src\Polygon.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor1 position="599" topLine="12" />
 	</File>
-	<File name="src\World.hpp" open="1" top="0" tabpos="7">
-		<Cursor position="2704" topLine="72" />
+	<File name="src\Main.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor1 position="5700" topLine="185" />
+	</File>
+	<File name="src\Polygon.hpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor1 position="1869" topLine="37" />
 	</File>
 </CodeBlocks_layout_file>

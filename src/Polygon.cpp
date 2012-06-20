@@ -19,52 +19,19 @@ Polygon::Polygon() :
 {
 }
 
-Polygon::Polygon(int nb, unsigned int FLAGS, ...) :
-	myFriction(1.f), myDetectionMask(PHYSICS_ALL), myReactionMask(PHYSICS_ALL), mySaveCIs(0)
+Polygon::Polygon(std::vector<Vertex*> VecVertex) :
+	myVertices(VecVertex), myFriction(1.f), myDetectionMask(PHYSICS_ALL), myReactionMask(PHYSICS_ALL), mySaveCIs(0)
 {
-	va_list ap;
-	va_start(ap, FLAGS);
-
-	myVertices.reserve(nb);
-	myEdges.reserve(nb);
-
-	if(FLAGS==FLAG_NULL)
-	{
-		myInternalContraints.reserve((nb-2)*(nb-3)/2 + 1);
-
-		for(int i = 0; i < nb; i++)
-			myVertices.push_back(va_arg(ap, Vertex*));
-		for(int i = 0; i < nb; i++)
-		{
-			myEdges.push_back(new Rigid(myVertices[i], myVertices[(i+1)%nb]));
-            for(int j = i + 2; j < nb - (i==0?1:0); j++)
-                myInternalContraints.push_back(new Rigid(myVertices[i], myVertices[j]));
-		}
-
-	} else if(FLAGS & WITH_LENGTH) {
-		std::vector<float> Lengths;
-		Lengths.reserve(nb);
-		myEdges.reserve(nb);
-		for(int i = 0; i < nb; i++)
-			myVertices.push_back(va_arg(ap, Vertex*)),
-			Lengths.push_back(static_cast<float>(va_arg(ap, double)));
-		for(int i = 0; i < nb; i++)
-			myEdges.push_back(new Rigid(myVertices[i],
-											myVertices[(i+1)%nb],
-											Lengths[i]));
-	}
-
-	va_end(ap);
+	createConstraints();
 }
 
-Polygon::Polygon(std::vector<Vertex*> VecVertex) :
-	myFriction(1.f), myDetectionMask(PHYSICS_ALL), myReactionMask(PHYSICS_ALL), mySaveCIs(0)
+void Polygon::createConstraints()
 {
-	unsigned int nb = VecVertex.size();
+	destroyConstraints();
+
+	unsigned int nb = myVertices.size();
 	myEdges.reserve(nb);
 	myInternalContraints.reserve((nb-2)*(nb-3)/2 + 1);
-
-	myVertices = VecVertex;
 
 	for(unsigned int i = 0; i < nb; i++)
 	{
@@ -74,7 +41,7 @@ Polygon::Polygon(std::vector<Vertex*> VecVertex) :
 	}
 }
 
-Polygon::~Polygon()
+void Polygon::destroyConstraints()
 {
 	for(std::vector<Rigid*>::iterator ite = myEdges.begin();
 		ite != myEdges.end(); ite++)
@@ -84,6 +51,11 @@ Polygon::~Polygon()
 		ite != myInternalContraints.end(); ite++)
 		delete *ite;
 	myInternalContraints.clear();
+}
+
+Polygon::~Polygon()
+{
+	destroyConstraints();
 }
 
 void Polygon::addCI(CollisionInfo CI)

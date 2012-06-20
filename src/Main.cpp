@@ -86,8 +86,8 @@ int main(int argc, char** argv)
 	P6->setPosition(Vec2(100, 150));
 	Vertex* P7 = W.newVertex();
 	P7->setPosition(Vec2(150, 50));
-	Polygon* VP1 = new Polygon(4, WITH_LENGTH, P4, 100.f, P5, 100.f, P6, 100.f, P7, 100.f);
-	W.add(VP1);
+	// Polygon* VP1 = new Polygon(4, WITH_LENGTH, P4, 100.f, P5, 100.f, P6, 100.f, P7, 100.f);
+	// W.add(VP1);
 	W.newRigid(P4, P6, sqrt(20000.f));
 	W.newRigid(P5, P7, sqrt(20000.f));
 
@@ -97,7 +97,7 @@ int main(int argc, char** argv)
 	pLeftBottom->setPosition(Vec2(300.f, 110.f));
 	pRightBottom->setPosition(Vec2(400.f, 110.f));
 
-	W.add(new Polygon(4, FLAG_NULL, pLeftTop, pRightTop, pRightBottom, pLeftBottom));
+	// W.add(new Polygon(4, FLAG_NULL, pLeftTop, pRightTop, pRightBottom, pLeftBottom));
 	W.newRigid(pLeftTop, pRightBottom);// sqrt(20000.f));
 	W.newRigid(pLeftBottom, pRightTop);// sqrt(20000.f));
 
@@ -111,7 +111,7 @@ int main(int argc, char** argv)
 	P43->setPosition(Vec2(100, 300));
 	P43->setFixed();
 
-	W.add(new Polygon(3, FLAG_NULL, P41, P42, P43));
+	// W.add(new Polygon(3, FLAG_NULL, P41, P42, P43));
 
 	//Vertex* P8 = new Vertex();
 
@@ -193,8 +193,6 @@ int main(int argc, char** argv)
 	rP->getVertex(0)->setPosition(Vec2(10.f,400.f));
 	//rP->setFixed();
 
-	float polygon = 20.f;
-
 	sf::Font Font;
 	Font.loadFromFile("data/V5PRC___.TTF");
 	sf::Text Numbers("Initializing...", Font);
@@ -225,14 +223,6 @@ int main(int argc, char** argv)
                         RE->getVertex(0)->setPosition(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
                         break;
 					}
-                    case sf::Keyboard::P:
-                         //new Polygon(8, FLAG_NULL, new Vertex(0.f, 1.f*polygon), new Vertex(1.f*polygon, 0.f), new Vertex(2.f*polygon, 0.f),
-                                    // new Vertex(3.f*polygon, 1.f*polygon), new Vertex(3.f*polygon, 2.f*polygon), new Vertex(2.f*polygon, 3.f*polygon),
-                                    // new Vertex(1.f*polygon, 3.f*polygon), new Vertex(0.f, 2.f*polygon));
-                         W.add(new Polygon(6, FLAG_NULL, W.newVertex(0.f, 1.f*polygon), W.newVertex(1.f*polygon, 0.f),
-                                     W.newVertex(2.f*polygon, 1.f*polygon), W.newVertex(2.f*polygon, 2.f*polygon),
-                                     W.newVertex(1.f*polygon, 3.f*polygon), W.newVertex(0.f, 2.f*polygon)));
-						break;
                     default:
                         break;
                 }
@@ -255,8 +245,6 @@ int main(int argc, char** argv)
 					R->getVertex(0)->setPosition(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
 				}
 			}
-
-
 		}
 
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && grab!=NULL)
