@@ -115,7 +115,7 @@ void Grid::glDraw()
 
 World::World(float Width, float Height) :
 	myWidth(Width), myHeight(Height), myRigidIterations(1), myOverallIterations(4),
-	myGrid(Width/128.f + 1, Height/128.f + 1)
+	myGrid(Width/WORLD_BASE_GRID_WIDTH + 1, Height/WORLD_BASE_GRID_WIDTH + 1)
 {
 }
 
@@ -246,7 +246,13 @@ Rigid* World::newRigid(Vertex* P1, Vertex* P2, float Length)
 Polygon* World::newRectangle(float Width, float Height)
 {
 	if(Height < 0.f) Height = Width;
-	Polygon* P = new Polygon(4, FLAG_NULL, newVertex(0.f, 0.f), newVertex(Width, 0.f), newVertex(Width, Height), newVertex(0.f, Height));
+	std::vector<Vertex*> V;
+	V.reserve(4);
+	V.push_back(newVertex(0.f, 0.f));
+	V.push_back(newVertex(Width, 0.f));
+	V.push_back(newVertex(Width, Height));
+	V.push_back(newVertex(0.f, Height));
+	Polygon* P = new Polygon(V);
 	add(P);
 	return P;
 }

@@ -78,7 +78,6 @@
 		<Unit filename="src\Polygon.hpp" />
 		<Unit filename="src\Rigid.cpp" />
 		<Unit filename="src\Rigid.hpp" />
-		<Unit filename="src\Vec2.cpp" />
 		<Unit filename="src\Vec2.hpp" />
 		<Unit filename="src\Vertex.cpp" />
 		<Unit filename="src\Vertex.hpp" />

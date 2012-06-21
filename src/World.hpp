@@ -8,6 +8,9 @@
 #include "Rigid.hpp"
 #include "Elastic.hpp"
 #include "Polygon.hpp"
+
+#define WORLD_BASE_GRID_WIDTH 192.f
+
 namespace Physics
 {
 
@@ -18,13 +21,13 @@ class Coord {
 		unsigned int X;
 		unsigned int Y;
 
-		bool operator!=(Coord C) { return X != C.X || Y != C.Y; }
+		inline bool operator!=(Coord C) { return X != C.X || Y != C.Y; }
 };
 
 class Grid
 {
 	public:
-		Grid(unsigned int Width, unsigned int Height, float CellWidth = 128.f, float CellHeight = 128.f);
+		Grid(unsigned int Width, unsigned int Height, float CellWidth = WORLD_BASE_GRID_WIDTH, float CellHeight = WORLD_BASE_GRID_WIDTH);
 		~Grid();
 
 		Coord getCellCoord(Vec2 Pos);

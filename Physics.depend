@@ -186,7 +186,7 @@
 1339964464 source:f:\github\physics\src\vec2.cpp
 	"Vec2.hpp"
 
-1339964543 f:\github\physics\src\vec2.hpp
+1340236979 f:\github\physics\src\vec2.hpp
 	<cmath>
 
 1339422890 source:f:\github\physics\src\physicselastic.cpp
@@ -277,7 +277,7 @@
 	<SFML/OpenGL.hpp>
 	"Vec2.hpp"
 
-1339964611 source:f:\github\physics\src\elastic.cpp
+1340272691 source:f:\github\physics\src\elastic.cpp
 	"Elastic.hpp"
 
 1339582608 f:\github\physics\src\elastic.hpp
@@ -298,23 +298,22 @@
 	"Vertex.hpp"
 	"Constraint.hpp"
 
-1340221026 f:\github\physics\src\polygon.hpp
+1340272568 f:\github\physics\src\polygon.hpp
 	<vector>
 	<list>
 	<cstdarg>
 	"Vertex.hpp"
 	"Rigid.hpp"
 
-1340226032 f:\github\physics\src\world.hpp
+1340273111 f:\github\physics\src\world.hpp
 	<iostream>
 	"Vertex.hpp"
 	"Constraint.hpp"
 	"Rigid.hpp"
 	"Elastic.hpp"
 	"Polygon.hpp"
-	<Lua/lunar.hpp>
 
-1340225251 source:f:\github\physics\src\polygon.cpp
+1340272616 source:f:\github\physics\src\polygon.cpp
 	"Polygon.hpp"
 
 1339964154 source:f:\github\physics\src\rigid.cpp
@@ -323,8 +322,9 @@
 1339582608 source:f:\github\physics\src\vertex.cpp
 	"Vertex.hpp"
 
-1340224627 source:f:\github\physics\src\world.cpp
+1340272992 source:f:\github\physics\src\world.cpp
 	"World.hpp"
+	<iostream>
 
 1340220274 f:\github\physics\src\lua\lunar.hpp
 	<lua.hpp>

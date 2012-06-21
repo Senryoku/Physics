@@ -3,9 +3,6 @@
 
 #include <cmath>
 
-#define MIN( X, Y ) ( (X) < (Y) ? (X) : (Y) ) /* Deux macros qui déterminent le min et le max */
-#define MAX( X, Y ) ( (X) > (Y) ? (X) : (Y) )
-
 /// @brief Classe simple décrivant un vecteur de R²
 class Vec2
 {
@@ -13,9 +10,9 @@ class Vec2
 		float x; ///< Composante x
 		float y; ///< Composante y
 
-		Vec2();
-		Vec2(float, float);
-		~Vec2();
+		inline Vec2() : x(0), y(0) {}
+		inline Vec2(float newX, float newY) : x(newX), y(newY) {}
+		inline ~Vec2() {}
 
 		inline float getLength() { return sqrt(x*x + y*y); }
 		inline float getSquaredLength() { return x*x + y*y; }
@@ -23,10 +20,33 @@ class Vec2
 		inline void normalize() { *this /= getLength(); }
 		inline Vec2 getOrthogonal() { return Vec2(-y, x); }
 
-		Vec2& operator+=(const Vec2& V);
-		Vec2& operator-=(const Vec2& V);
-		Vec2& operator*=(const float& f);
-		Vec2& operator/=(const float& f);
+		inline Vec2& operator+=(const Vec2& V)
+		{
+			x += V.x;
+			y += V.y;
+			return *this;
+		}
+
+		inline Vec2& operator-=(const Vec2& V)
+		{
+			x -= V.x;
+			y -= V.y;
+			return *this;
+		}
+
+		inline Vec2& operator*=(const float& f)
+		{
+			x *= f;
+			y *= f;
+			return *this;
+		}
+
+		inline Vec2& operator/=(const float& f)
+		{
+			x /= f;
+			y /= f;
+			return *this;
+		}
 
 		inline friend Vec2 operator-(const Vec2& V) { return Vec2(-V.x, -V.y); }
 		inline friend Vec2 operator+(const Vec2& V1, const Vec2& V2) { return Vec2(V1.x + V2.x, V1.y + V2.y); }
