@@ -29,7 +29,7 @@ void Polygon::createConstraints()
 {
 	destroyConstraints();
 
-	unsigned int nb = myVertices.size();
+	unsigned int nb = static_cast<unsigned int>(myVertices.size());
 	myEdges.reserve(nb);
 	myInternalContraints.reserve((nb-2)*(nb-3)/2 + 1);
 

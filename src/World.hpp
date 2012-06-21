@@ -68,10 +68,10 @@ class World
 		void updateGrid();
 		void update(float prevdt, float dt);
 
-		unsigned int getVertexCount() { return myVertices.size(); }
-		unsigned int getElasticCount() { return myElastics.size(); }
-		unsigned int getRigidCount() { return myRigids.size(); }
-		unsigned int getPolygonCount() { return myPolygons.size(); }
+		unsigned int getVertexCount() { return static_cast<unsigned int>(myVertices.size()); }
+		unsigned int getElasticCount() { return static_cast<unsigned int>(myElastics.size()); }
+		unsigned int getRigidCount() { return static_cast<unsigned int>(myRigids.size()); }
+		unsigned int getPolygonCount() { return static_cast<unsigned int>(myPolygons.size()); }
 
 		Vertex* getNearestVertex(Vec2 Pos);
 
