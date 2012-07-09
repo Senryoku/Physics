@@ -99,6 +99,8 @@ class Polygon
 		// Accesseurs
 		inline bool isFixed() { return myFixed; }
 		inline float getFriction() { return myFriction; }
+		inline unsigned int getVertexCount() { return myVertices.size(); }
+		inline unsigned int getEdgeCount() { return myEdges.size(); }
 		inline Vertex* getVertex(unsigned int i) {return myVertices[i]; }
 		Rigid& operator[](const unsigned int);
 		inline unsigned int getDetectionMask() { return myDetectionMask; }
