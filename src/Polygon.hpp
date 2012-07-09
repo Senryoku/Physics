@@ -56,7 +56,6 @@ class Polygon
 		std::vector<Rigid*> myInternalContraints;
 
 		std::list<CollisionInfo> myCIs;
-
 		float myFriction;
 		unsigned int myDetectionMask;
 		unsigned int myReactionMask;
@@ -64,6 +63,10 @@ class Polygon
 		bool myFixed;
 		bool mySaveCIs;
 		std::vector<Vec2> Normals;
+
+		BBox myBoundingBox;
+		bool myBBValid;
+		BBox myOldBoundingBox;
 
 	public:
 		/// @brief Constructeur par défaut, pour usage interne.
@@ -118,6 +121,8 @@ class Polygon
 
 		BBox getBBox();
 		BBox getOldBBox();
+		void setOldBBox();
+		void setOldBBox(BBox OBB);
 
 		void resolveRigids();
 

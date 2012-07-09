@@ -32,6 +32,12 @@ class Grid
 
 		Coord getCellCoord(Vec2 Pos);
 
+		inline unsigned int getWidth() { return myWidth; }
+		inline unsigned int getHeight() { return myHeight; }
+		inline unsigned int getCellWidth() { return myCellWidth; }
+		inline unsigned int getCellHeight() { return myCellHeight; }
+		inline unsigned int getCellSize(unsigned int i, unsigned int j) { return myGrid[i][j].size(); }
+
 		std::vector<Cell>& operator[](unsigned int X) { return myGrid[X]; }
 		std::vector<Cell>& getLine(unsigned int X) { return myGrid[X]; }
 		Cell& operator[](Coord C) { return myGrid[C.X][C.Y]; }
@@ -65,6 +71,7 @@ class World
 		World(float Width = 800.f, float Height = 600.f);
 		~World();
 
+		inline Grid& getGrid() { return myGrid; }
 		void updateGrid();
 		void update(float prevdt, float dt);
 

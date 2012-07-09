@@ -15,14 +15,16 @@ void BBox::glDraw()
 }
 
 Polygon::Polygon() :
-	myFriction(1.f), myDetectionMask(PHYSICS_ALL), myReactionMask(PHYSICS_ALL), mySaveCIs(0)
+	myFriction(1.f), myDetectionMask(PHYSICS_ALL), myReactionMask(PHYSICS_ALL), mySaveCIs(false), myBBValid(false)
 {
+	setOldBBox();
 }
 
 Polygon::Polygon(std::vector<Vertex*> VecVertex) :
-	myVertices(VecVertex), myFriction(1.f), myDetectionMask(PHYSICS_ALL), myReactionMask(PHYSICS_ALL), mySaveCIs(0)
+	myVertices(VecVertex), myFriction(1.f), myDetectionMask(PHYSICS_ALL), myReactionMask(PHYSICS_ALL), mySaveCIs(false), myBBValid(false)
 {
 	createConstraints();
+	setOldBBox();
 }
 
 void Polygon::createConstraints()
@@ -93,38 +95,40 @@ Vec2 Polygon::getMassCenter()
 	return Center;
 }
 
+void Polygon::setOldBBox()
+{
+	myOldBoundingBox = getBBox();
+	myBBValid = false;
+}
+
+void Polygon::setOldBBox(BBox OBB)
+{
+	myOldBoundingBox = OBB;
+	myBBValid = false;
+}
+
 BBox Polygon::getBBox()
 {
-	BBox BB;
-	Vec2 Pos = myVertices[0]->getPosition();
-	BB.TopLeft = Pos;
-	BB.BottomRight = Pos;
-	for(unsigned int i = 1; i < myVertices.size(); i++)
+	if(!myBBValid)
 	{
-		Pos = myVertices[i]->getPosition();
-		BB.TopLeft.x = std::min(BB.TopLeft.x, Pos.x);
-		BB.TopLeft.y = std::min(BB.TopLeft.y, Pos.y);
-		BB.BottomRight.x = std::max(BB.BottomRight.x, Pos.x);
-		BB.BottomRight.y = std::max(BB.BottomRight.y, Pos.y);
+		Vec2 Pos = myVertices[0]->getPosition();
+		myBoundingBox.TopLeft = Pos;
+		myBoundingBox.BottomRight = Pos;
+		for(unsigned int i = 1; i < myVertices.size(); i++)
+		{
+			Pos = myVertices[i]->getPosition();
+			myBoundingBox.TopLeft.x = std::min(myBoundingBox.TopLeft.x, Pos.x);
+			myBoundingBox.TopLeft.y = std::min(myBoundingBox.TopLeft.y, Pos.y);
+			myBoundingBox.BottomRight.x = std::max(myBoundingBox.BottomRight.x, Pos.x);
+			myBoundingBox.BottomRight.y = std::max(myBoundingBox.BottomRight.y, Pos.y);
+		}
 	}
-	return BB;
+	return myBoundingBox;
 }
 
 BBox Polygon::getOldBBox()
 {
-	BBox BB;
-	Vec2 Pos = myVertices[0]->getOldPosition();
-	BB.TopLeft = Pos;
-	BB.BottomRight = Pos;
-	for(unsigned int i = 1; i < myVertices.size(); i++)
-	{
-		Pos = myVertices[i]->getOldPosition();
-		BB.TopLeft.x = std::min(BB.TopLeft.x, Pos.x);
-		BB.TopLeft.y = std::min(BB.TopLeft.y, Pos.y);
-		BB.BottomRight.x = std::max(BB.BottomRight.x, Pos.x);
-		BB.BottomRight.y = std::max(BB.BottomRight.y, Pos.y);
-	}
-	return BB;
+	return myOldBoundingBox;
 }
 
 void Polygon::resolveRigids()

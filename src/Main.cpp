@@ -199,6 +199,9 @@ int main(int argc, char** argv)
 	Numbers.setCharacterSize(20);
 	Numbers.setColor(sf::Color(255, 255, 255, 170));
 	Numbers.setPosition(5.f, 30.f);
+	sf::Text Grid("Initializing...", Font);
+	Grid.setCharacterSize(10);
+	Grid.setColor(sf::Color(255, 255, 255, 170));
 	FPSCounter FPS;
 	while(window.isOpen())
 	{
@@ -343,6 +346,22 @@ int main(int argc, char** argv)
 			<< " #E : " << W.getElasticCount() << " #P : " << W.getPolygonCount();
 		Numbers.setString(oss.str());
 		window.draw(Numbers);
+#ifdef NDEBUG
+		for(unsigned int i = 0; i < W.getGrid().getWidth(); i++)
+		{
+			for(unsigned int j = 0; j < W.getGrid().getHeight(); j++)
+			{
+				std::ostringstream oss2;
+				oss2 << W.getGrid().getCellSize(j, i);
+				for(Cell::iterator it = W.getGrid()[j][i].begin();
+					it != W.getGrid()[j][i].end(); ++it)
+					oss2 << "\n" << *it;
+				Grid.setString(oss2.str());
+				Grid.setPosition(i*W.getGrid().getCellWidth(), j*W.getGrid().getCellHeight());
+				window.draw(Grid);
+			}
+		}
+#endif
 		window.popGLStates();
 
 		window.display();

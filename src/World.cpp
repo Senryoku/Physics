@@ -132,7 +132,7 @@ void World::updateGrid()
 		ite != myPolygons.end(); ite++)
 	{
 		Old = (*ite)->getOldBBox();
-		//Old.glDraw(); // DEBUG
+		Old.glDraw(); // DEBUG
 		Old_Top = myGrid.getCellCoord(Old.TopLeft);
 		Old_Bottom = myGrid.getCellCoord(Old.BottomRight);
 		Actual = (*ite)->getBBox();
@@ -147,6 +147,8 @@ void World::updateGrid()
 			//std::cout<<"grid size after rm :"<< myGrid.getCell(Old_Top).size()<<std::endl;
 			myGrid.add(*ite, Actual);
 		}
+
+		(*ite)->setOldBBox(Actual);
 	}
 }
 
@@ -289,7 +291,7 @@ void World::drawElastics()
 void World::drawRigids()
 {
 	glBegin(GL_LINES);
-	glColor3f(0.f, 0.f, 1.f);
+	glColor4f(0.f, 0.f, 1.f, 1.f);
 	for (std::list<Rigid*>::iterator ite = myRigids.begin();
 		ite != myRigids.end(); ite++)
 		(*ite)->glDraws();

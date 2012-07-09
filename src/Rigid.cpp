@@ -41,7 +41,7 @@ void Rigid::resolve()
 void Rigid::glDraw()
 {
 	glBegin(GL_LINES);
-	glColor3f(0.f, 0.f, 1.f);
+	glColor4f(0.f, 0.f, 1.f, 1.f);
 	glVertex2f(myV1->getPosition().x, myV1->getPosition().y);
 	glVertex2f(myV2->getPosition().x, myV2->getPosition().y);
 	glEnd();
