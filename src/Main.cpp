@@ -346,7 +346,7 @@ int main(int argc, char** argv)
 			<< " #E : " << W.getElasticCount() << " #P : " << W.getPolygonCount();
 		Numbers.setString(oss.str());
 		window.draw(Numbers);
-#ifdef NDEBUG
+#ifndef NDEBUG
 		for(unsigned int i = 0; i < W.getGrid().getWidth(); i++)
 		{
 			for(unsigned int j = 0; j < W.getGrid().getHeight(); j++)

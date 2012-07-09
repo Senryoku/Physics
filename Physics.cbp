@@ -14,7 +14,6 @@
 				<Compiler>
 					<Add option="-pg" />
 					<Add option="-g" />
-					<Add option="-DNDEBUG" />
 				</Compiler>
 				<Linker>
 					<Add option="-pg -lgmon" />
