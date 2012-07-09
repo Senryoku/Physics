@@ -132,11 +132,11 @@ void World::updateGrid()
 		ite != myPolygons.end(); ite++)
 	{
 		Old = (*ite)->getOldBBox();
-		Old.glDraw(); // DEBUG
+		// Old.glDraw(); // DEBUG
 		Old_Top = myGrid.getCellCoord(Old.TopLeft);
 		Old_Bottom = myGrid.getCellCoord(Old.BottomRight);
 		Actual = (*ite)->getBBox();
-		Actual.glDraw(); // DEBUG
+		// Actual.glDraw(); // DEBUG
 		Actual_Top = myGrid.getCellCoord(Actual.TopLeft);
 		Actual_Bottom = myGrid.getCellCoord(Actual.BottomRight);
 

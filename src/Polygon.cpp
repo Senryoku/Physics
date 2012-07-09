@@ -15,13 +15,13 @@ void BBox::glDraw()
 }
 
 Polygon::Polygon() :
-	myFriction(1.f), myDetectionMask(PHYSICS_ALL), myReactionMask(PHYSICS_ALL), mySaveCIs(false), myBBValid(false)
+	myFriction(1.f), myDetectionMask(PHYSICS_ALL), myReactionMask(PHYSICS_ALL), myFixed(false), mySaveCIs(false), myBBValid(false)
 {
 	setOldBBox();
 }
 
 Polygon::Polygon(std::vector<Vertex*> VecVertex) :
-	myVertices(VecVertex), myFriction(1.f), myDetectionMask(PHYSICS_ALL), myReactionMask(PHYSICS_ALL), mySaveCIs(false), myBBValid(false)
+	myVertices(VecVertex), myFriction(1.f), myDetectionMask(PHYSICS_ALL), myReactionMask(PHYSICS_ALL), myFixed(false), mySaveCIs(false), myBBValid(false)
 {
 	createConstraints();
 	setOldBBox();
@@ -67,9 +67,19 @@ void Polygon::addCI(CollisionInfo CI)
 
 void Polygon::setFixed(bool B)
 {
-	for(unsigned int i = 1; i < myVertices.size(); i++)
+	for(unsigned int i = 0; i < myVertices.size(); i++)
 		myVertices[i]->setFixed(B);
 	myFixed = B;
+	if(myFixed) updateNormals();
+}
+
+void Polygon::updateNormals()
+{
+	Normals.clear();
+	for(unsigned int i = 0; i < myEdges.size(); i++)
+	{
+		Normals.push_back(myEdges[i]->getVector().getOrthogonal().getNormalized());
+	}
 }
 
 Vec2 Polygon::getCenter()
@@ -153,18 +163,20 @@ CollisionInfo Polygon::collide(Polygon *P)
 	Info.Depth = INFINITY; // Pour le minimum
 	float Min, Max, MinP, MaxP, Gap; // Valeur des projections, distance
 
-	for(unsigned int i = 0; i < myEdges.size() + P->myEdges.size(); i++)
+	for(unsigned int i = 0; i < myEdges.size(); i++)
 	{
-		if(i < myEdges.size())
-			Edge = myEdges[i];
-		else Edge = P->myEdges[i - myEdges.size()], Info.P1 = P, Info.P2 = this;
-		// P1 est toujours le polygone dont on teste la face
+		Edge = myEdges[i];
 
 		// Si la face est "nulle", on n'essaye pas de la tester !
 		if(Edge->getVector() == Vec2(0.f, 0.f)) continue;
 
-		Axis = Edge->getVector().getOrthogonal();
-		Axis.normalize();
+		if(myFixed)
+		{
+			Axis = Normals[i];
+		} else {
+			Axis = Edge->getVector().getOrthogonal();
+			Axis.normalize();
+		}
 
 		ProjectToAxis(Min, Max, Axis);
 		P->ProjectToAxis(MinP, MaxP, Axis);
@@ -176,6 +188,38 @@ CollisionInfo Polygon::collide(Polygon *P)
 		if (Gap >= 0) return CollisionInfo(); // Pas de collision
 
 		if(std::abs(Gap) < Info.Depth)
+			Info.Depth = std::abs(Gap),
+			Info.Normal = Axis,
+			Info.Edge = Edge;
+	}
+
+	for(unsigned int i = 0; i < P->myEdges.size(); i++)
+	{
+		Edge = P->myEdges[i];
+
+		// Si la face est "nulle", on n'essaye pas de la tester !
+		if(Edge->getVector() == Vec2(0.f, 0.f)) continue;
+
+		if(P->isFixed())
+		{
+			Axis = Normals[i];
+		} else {
+			Axis = Edge->getVector().getOrthogonal();
+			Axis.normalize();
+		}
+
+		ProjectToAxis(Min, Max, Axis);
+		P->ProjectToAxis(MinP, MaxP, Axis);
+
+		if(Min < MinP)
+			Gap = MinP - Max;
+		else Gap = Min - MaxP;
+
+		if (Gap >= 0) return CollisionInfo(); // Pas de collision
+
+		if(std::abs(Gap) < Info.Depth)
+			Info.P1 = P,
+			Info.P2 = this,
 			Info.Depth = std::abs(Gap),
 			Info.Normal = Axis,
 			Info.Edge = Edge;

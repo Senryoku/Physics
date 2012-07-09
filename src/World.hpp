@@ -9,7 +9,7 @@
 #include "Elastic.hpp"
 #include "Polygon.hpp"
 
-#define WORLD_BASE_GRID_WIDTH 192.f
+#define WORLD_BASE_GRID_WIDTH 16.f
 
 namespace Physics
 {

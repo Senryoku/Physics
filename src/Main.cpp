@@ -226,6 +226,12 @@ int main(int argc, char** argv)
                         RE->getVertex(0)->setPosition(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
                         break;
 					}
+                    case sf::Keyboard::T:
+					{
+                        Polygon* RE = W.newRectangle(8.f, 8.f);
+                        RE->getVertex(0)->setPosition(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
+                        break;
+					}
                     default:
                         break;
                 }
@@ -323,7 +329,7 @@ int main(int argc, char** argv)
 
 		/*
 		//on affiche l'eau
-		glColor3f(0.f, 0.1f, 1.f);
+		glColor4f(0.f, 0.1f, 1.f, 1.f);
 		glBegin(GL_QUADS);
 		for (int i=0; i<waterN-1; i++)
 		{
@@ -347,6 +353,7 @@ int main(int argc, char** argv)
 		Numbers.setString(oss.str());
 		window.draw(Numbers);
 #ifndef NDEBUG
+/*
 		for(unsigned int i = 0; i < W.getGrid().getWidth(); i++)
 		{
 			for(unsigned int j = 0; j < W.getGrid().getHeight(); j++)
@@ -361,6 +368,7 @@ int main(int argc, char** argv)
 				window.draw(Grid);
 			}
 		}
+*/
 #endif
 		window.popGLStates();
 

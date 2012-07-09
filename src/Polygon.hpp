@@ -125,6 +125,7 @@ class Polygon
 		void setOldBBox(BBox OBB);
 
 		void resolveRigids();
+		void updateNormals();
 
 		inline bool getSaveCIs() { return mySaveCIs; }
 		void setSaveCIs(bool B = true) { mySaveCIs = B; }
