@@ -80,8 +80,8 @@ void Vertex::resolve(float prevdt, float dt)
 	if(myFixed) return;
 	Vec2 tmp = myPosition;
 	//            Dissipation d'énergie, dépend du milieu
-	myPosition += 0.99f*((myPosition - myOldPosition)*(dt/prevdt)) // Inertie
-	 + myAcceleration*dt*dt; // Accélération
+	myPosition += 0.999f*((myPosition - myOldPosition)*(dt/prevdt)) // Inertie
+	 + myAcceleration * dt * (dt/prevdt); // Accélération
 	myOldPosition = tmp;
 	myAcceleration = Vec2(0,0);
 }

@@ -1,0 +1,2 @@
+D:/Git/Physics/CMakeFiles/run.dir
+D:/Git/Physics/CMakeFiles/Exe.dir

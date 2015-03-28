@@ -55,7 +55,7 @@ class Grid
 		inline void rm(Polygon* P, BBox BB);
 		void rm(Polygon* P, Coord C1, Coord C2);
 
-		void glDraw();
+		void glDraw() const;
 
 	private:
 		std::vector<std::vector<Cell> > myGrid;
@@ -75,10 +75,13 @@ class World
 		void updateGrid();
 		void update(float prevdt, float dt);
 
-		unsigned int getVertexCount() { return static_cast<unsigned int>(myVertices.size()); }
-		unsigned int getElasticCount() { return static_cast<unsigned int>(myElastics.size()); }
-		unsigned int getRigidCount() { return static_cast<unsigned int>(myRigids.size()); }
-		unsigned int getPolygonCount() { return static_cast<unsigned int>(myPolygons.size()); }
+		float getWidth() const { return myWidth; }
+		float getHeight() const { return myHeight; }
+		
+		size_t getVertexCount() const { return myVertices.size(); }
+		size_t getElasticCount() const { return myElastics.size(); }
+		size_t getRigidCount() const { return myRigids.size(); }
+		size_t getPolygonCount() const { return myPolygons.size(); }
 
 		Vertex* getNearestVertex(Vec2 Pos);
 
@@ -95,11 +98,11 @@ class World
 		Rigid* newRigid(Vertex* P1, Vertex* P2, float Length = -1);
 		Polygon* newRectangle(float Width = 100.f, float Height = -1.f);
 
-		void draw();
-		void drawVertices();
-		void drawElastics();
-		void drawRigids();
-		void drawPolygons();
+		void draw() const;
+		void drawVertices() const;
+		void drawElastics() const;
+		void drawRigids() const;
+		void drawPolygons() const;
 
 		void applyForceVertices(Vec2 Force);
 		void addGlobalAcceleration(Vec2 Acc);
@@ -131,10 +134,10 @@ class World
 
 		Vec2 myGlobalAcceleration;
 
-		std::list<Vertex*> myVertices;
-		std::list<Elastic*> myElastics;
-		std::list<Rigid*> myRigids;
-		std::list<Polygon*> myPolygons;
+		std::vector<Vertex*> myVertices;
+		std::vector<Elastic*> myElastics;
+		std::vector<Rigid*> myRigids;
+		std::vector<Polygon*> myPolygons;
 
 		Grid myGrid;
 

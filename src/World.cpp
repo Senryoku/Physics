@@ -1,6 +1,9 @@
 #include "World.hpp"
 
 #include <iostream> // DEBUG
+#include <algorithm>
+
+#include <omp.h>
 
 namespace Physics
 {
@@ -96,7 +99,7 @@ void Grid::rm(Polygon* P, Coord C1, Coord C2)
 	}
 }
 
-void Grid::glDraw()
+void Grid::glDraw() const
 {
 	glColor4f(1.f, 1.f, 1.f, 0.2f);
 	glBegin(GL_LINES);
@@ -128,14 +131,13 @@ void World::updateGrid()
 {
 	BBox Old, Actual;
 	Coord Old_Top, Old_Bottom, Actual_Top, Actual_Bottom;
-	for(std::list<Polygon*>::iterator ite = myPolygons.begin();
-		ite != myPolygons.end(); ite++)
+	for(auto p : myPolygons)
 	{
-		Old = (*ite)->getOldBBox();
+		Old = p->getOldBBox();
 		// Old.glDraw(); // DEBUG
 		Old_Top = myGrid.getCellCoord(Old.TopLeft);
 		Old_Bottom = myGrid.getCellCoord(Old.BottomRight);
-		Actual = (*ite)->getBBox();
+		Actual = p->getBBox();
 		// Actual.glDraw(); // DEBUG
 		Actual_Top = myGrid.getCellCoord(Actual.TopLeft);
 		Actual_Bottom = myGrid.getCellCoord(Actual.BottomRight);
@@ -143,12 +145,12 @@ void World::updateGrid()
 		if(Old_Top != Actual_Top || Old_Bottom != Actual_Bottom)
 		{
 			//std::cout<<"grid size before rm :"<< myGrid.getCell(Old_Top).size()<<std::endl;
-			myGrid.rm(*ite, Old);
+			myGrid.rm(p, Old);
 			//std::cout<<"grid size after rm :"<< myGrid.getCell(Old_Top).size()<<std::endl;
-			myGrid.add(*ite, Actual);
+			myGrid.add(p, Actual);
 		}
 
-		(*ite)->setOldBBox(Actual);
+		p->setOldBBox(Actual);
 	}
 }
 
@@ -160,7 +162,8 @@ void World::update(float prevdt, float dt)
 	clearCIs();
 	for(unsigned int i = 0; i < myOverallIterations; i++)
 	{
-		for(unsigned int j = 0; j < myRigidIterations; j++) resolveRigids();
+		for(unsigned int j = 0; j < myRigidIterations; j++)
+			resolveRigids();
 		resolvePolygons();
 	}
 }
@@ -170,7 +173,7 @@ Vertex* World::getNearestVertex(Vec2 Pos)
 	if (myVertices.empty())
 		return NULL;
 
-	std::list<Vertex*>::iterator it = myVertices.begin();
+	auto it = myVertices.begin();
 	Vertex* P = *it;
 	it++;
 	float tmp, dis = (P->getPosition() - Pos)*(P->getPosition() - Pos);
@@ -259,7 +262,7 @@ Polygon* World::newRectangle(float Width, float Height)
 	return P;
 }
 
-void World::draw()
+void World::draw() const
 {
 	myGrid.glDraw();
 	drawVertices();
@@ -268,75 +271,71 @@ void World::draw()
 	drawPolygons();
 }
 
-void World::drawVertices()
+void World::drawVertices() const
 {
 	glPointSize(2);
 	glBegin(GL_POINTS);
-	for (std::list<Vertex*>::iterator ite = myVertices.begin();
-		ite != myVertices.end(); ite++)
-		(*ite)->glDraws();
+	for(auto v : myVertices)
+		v->glDraws();
 	glEnd();
 	glPointSize(1);
 }
 
-void World::drawElastics()
+void World::drawElastics() const
 {
 	glBegin(GL_LINES);
-	for(std::list<Elastic*>::iterator ite = myElastics.begin();
-		ite != myElastics.end(); ite++)
-		(*ite)->glDraws();
+	for(auto e : myElastics)
+		e->glDraws();
 	glEnd();
 }
 
-void World::drawRigids()
+void World::drawRigids() const
 {
 	glBegin(GL_LINES);
 	glColor4f(0.f, 0.f, 1.f, 1.f);
-	for (std::list<Rigid*>::iterator ite = myRigids.begin();
-		ite != myRigids.end(); ite++)
-		(*ite)->glDraws();
+	for(auto r : myRigids)
+		r->glDraws();
 	glEnd();
 }
 
-void World::drawPolygons()
+void World::drawPolygons() const
 {
-	for(std::list<Polygon*>::iterator ite = myPolygons.begin();
-		ite != myPolygons.end(); ite++)
-		(*ite)->glDraw();
+	for(auto p : myPolygons)
+		p->glDraw();
 }
 
 void World::resolveVertices(float prevdt, float dt)
 {
-	for(std::list<Vertex*>::iterator ite = myVertices.begin();
-		ite != myVertices.end(); ite++)
+	#pragma omp parallel for
+	for(size_t i = 0; i < myVertices.size(); ++i)
 	{
-		(*ite)->resolve(prevdt, dt);
+		auto v = myVertices[i];
+		v->resolve(prevdt, dt);
 
 		// Replace le point dans les limites du monde
-		if((*ite)->getPosition().x > myWidth)
-			(*ite)->setPosition(Vec2(myWidth, (*ite)->getPosition().y));
-		if((*ite)->getPosition().x < 0)
-			(*ite)->setPosition(Vec2(0.f, (*ite)->getPosition().y));
-		if((*ite)->getPosition().y > myHeight)
-			(*ite)->setPosition(Vec2((*ite)->getPosition().x, myHeight));
-		if((*ite)->getPosition().y < 0)
-			(*ite)->setPosition(Vec2((*ite)->getPosition().x, 0.f));
+		if(v->getPosition().x > myWidth)
+			v->setPosition(Vec2(myWidth, v->getPosition().y));
+		if(v->getPosition().x < 0)
+			v->setPosition(Vec2(0.f, v->getPosition().y));
+		if(v->getPosition().y > myHeight)
+			v->setPosition(Vec2(v->getPosition().x, myHeight));
+		if(v->getPosition().y < 0)
+			v->setPosition(Vec2(v->getPosition().x, 0.f));
 
         // Teste si une coordonnée vaut NaN
-        if((*ite)->getPosition().x != (*ite)->getPosition().x ||
-			(*ite)->getPosition().y != (*ite)->getPosition().y)
+        if(v->getPosition().x != v->getPosition().x ||
+			v->getPosition().y != v->getPosition().y)
         {
         	std::cout << "Nan Error !" << std::endl; // DEBUG
-            (*ite)->setPosition(Vec2(0, 0), true);
+            v->setPosition(Vec2(0, 0), true);
         }
 	}
 }
 
 void World::applyForceVertices(Vec2 Force)
 {
-	for(std::list<Vertex*>::iterator ite = myVertices.begin();
-		ite != myVertices.end(); ite++)
-		(*ite)->applyForce(Force);
+	for(auto v : myVertices)
+		v->applyForce(Force);
 }
 
 void World::addGlobalAcceleration(Vec2 Acc)
@@ -346,40 +345,39 @@ void World::addGlobalAcceleration(Vec2 Acc)
 
 void World::applyGlobalAcceleration()
 {
-	for(std::list<Vertex*>::iterator ite = myVertices.begin();
-		ite != myVertices.end(); ite++)
-		(*ite)->addAcceleration(myGlobalAcceleration);
+	for(auto v : myVertices)
+		v->addAcceleration(myGlobalAcceleration);
 	myGlobalAcceleration = Vec2(0.f, 0.f);
 }
 
 void World::resolveElastics()
 {
-	for(std::list<Elastic*>::iterator ite = myElastics.begin();
-		ite != myElastics.end(); ite++)
-		(*ite)->resolve();
+	#pragma omp parallel for
+	for(size_t i = 0; i < myElastics.size(); ++i)
+		myElastics[i]->resolve();
 }
 
 void World::resolveRigids()
 {
-	for(std::list<Rigid*>::iterator ite = myRigids.begin();
-		ite != myRigids.end(); ite++)
-		(*ite)->resolve();
+	#pragma omp parallel for
+	for(size_t i = 0; i < myRigids.size(); ++i)
+		myRigids[i]->resolve();
 }
 
 void World::resolvePolygons()
 {
 	CollisionInfo Info;
 	updateGrid();
-	for(std::list<Polygon*>::iterator ite = myPolygons.begin();
-		ite != myPolygons.end(); ite++)
+	for(size_t i = 0; i < myPolygons.size(); ++i)
 	{
-		(*ite)->resolveRigids();
-		BBox BB = (*ite)->getBBox();
+		myPolygons[i]->resolveRigids();
+		BBox BB = myPolygons[i]->getBBox();
 		std::list<Polygon*> List = myGrid.getList(BB);
-		for(std::list<Polygon*>::iterator ite2 = List.begin(); ite2 != List.end(); ite2++)
+		for(auto p : List)
 		{
-			if( *ite != *ite2) {
-				Info = (*ite)->collide((*ite2));
+			if(p != myPolygons[i])
+			{
+				Info = myPolygons[i]->collide(p);
 				// Il y a collision
 				if(Info.P1 != NULL)
 				{
@@ -426,9 +424,8 @@ void World::resolvePolygons()
 
 void World::clearCIs()
 {
-	for(std::list<Polygon*>::iterator ite = myPolygons.begin();
-		ite != myPolygons.end(); ite++)
-		(*ite)->clearCIs();
+	for(auto p : myPolygons)
+		p->clearCIs();
 }
 
 void World::deleteAll()
@@ -441,57 +438,53 @@ void World::deleteAll()
 
 void World::deleteVertices()
 {
-	for(std::list<Vertex*>::iterator ite = myVertices.begin();
-		ite != myVertices.end(); ite++)
-        delete *ite;
+	for(auto v : myVertices)
+        delete v;
 	myVertices.clear();
 }
 
 void World::deleteVertex(Vertex* V)
 {
-	myVertices.remove(V);
+	myVertices.erase(std::remove(myVertices.begin(), myVertices.end(), V), myVertices.end());
 	delete V;
 }
 
 void World::deleteRigids()
 {
-	for(std::list<Rigid*>::iterator ite = myRigids.begin();
-		ite != myRigids.end(); ite++)
-        delete *ite;
+	for(auto r : myRigids)
+		delete r;
 	myRigids.clear();
 }
 
 void World::deleteRigid(Rigid* R)
 {
-	myRigids.remove(R);
+	myRigids.erase(std::remove(myRigids.begin(), myRigids.end(), R), myRigids.end());
 	delete R;
 }
 
 void World::deleteElastics()
 {
-	for(std::list<Elastic*>::iterator ite = myElastics.begin();
-		ite != myElastics.end(); ite++)
-        delete *ite;
+	for(auto e : myElastics)
+        delete e;
 	myElastics.clear();
 }
 
 void World::deleteElastic(Elastic* E)
 {
-	myElastics.remove(E);
+	myElastics.erase(std::remove(myElastics.begin(), myElastics.end(), E), myElastics.end());
 	delete E;
 }
 
 void World::deletePolygons()
 {
-	for(std::list<Polygon*>::iterator ite = myPolygons.begin();
-		ite != myPolygons.end(); ite++)
-        delete *ite;
+	for(auto p : myPolygons)
+        delete p;
 	myPolygons.clear();
 }
 
 void World::deletePolygon(Polygon* P)
 {
-	myPolygons.remove(P);
+	myPolygons.erase(std::remove(myPolygons.begin(), myPolygons.end(), P), myPolygons.end());
 	delete P;
 }
 

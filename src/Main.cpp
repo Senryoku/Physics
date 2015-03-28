@@ -14,50 +14,13 @@
 
 using namespace Physics;
 
-void glDrawCube(const sf::Vector2f &Position, float size);
-
 GLuint glTexLoad(const char* Path);
-GLuint glTexLoad(const char* Path)
-{
-	sf::Image image;
-	bool LoadSuccess = 0;
-	GLuint texture = 0;
-
-	if(Path[0] != '\0')
-	{
-		#ifdef SFML_SYSTEM_MACOS
-		LoadSuccess = image.loadFromFile(Path); //À rajouter ResourcePath selon compilation
-		#else
-		LoadSuccess = image.loadFromFile(Path);
-		#endif
-	}
-
-	glEnable(GL_TEXTURE_2D);
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
-
-	if(LoadSuccess)
-	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image.getSize().x, image.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.getPixelsPtr());
-		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
-	} else {
-		/* Texture transparente si le fichier n'a pas pu être chargé */
-		GLubyte TexNull[4] =
-		{
-			0,0,0,0
-		};
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, TexNull);
-	}
-	glDisable(GL_TEXTURE_2D);
-
-	return texture;
-}
 
 int main(int argc, char** argv)
 {
+	bool vsyncEnabled = false;
 	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
-	window.setVerticalSyncEnabled(0);
+	window.setVerticalSyncEnabled(vsyncEnabled);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -73,6 +36,7 @@ int main(int argc, char** argv)
 	float forceVent(1.f);
 
 	World W;
+	bool drawWorld = true;
 
 	//Une texture OpenGL
 	GLuint texture = glTexLoad("data/cute.png");
@@ -135,16 +99,17 @@ int main(int argc, char** argv)
 	*/
 
 	//Un petit rideau :D
-	const int rows=20, colums=20, cTimes(2);
+	
+	const int rows=100, colums=100, cTimes(2);
 	bool cType(0);
-	const float tailleCarre(20.f);
+	const float tailleCarre(400.f/rows);
 	Vertex* pRideau[rows*colums]={NULL};
 	for (int i=0; i<colums; i++)
 		for (int j=0; j<rows; j++)
 		{
 			pRideau[i+j*colums]=W.newVertex();
 			pRideau[i+j*colums]->setPosition(Vec2(300.f+i*tailleCarre, 30.f+j*tailleCarre));
-			pRideau[i+j*colums]->setMass(.5f);
+			pRideau[i+j*colums]->setMass(5.f/rows);
 			//On fixe deux des points
 			if ((i==0 && j==0) || (i==0  && j==rows-1))// || (i==colums-1 && j==0) || (i==colums-1  && j==rows-1))
 				pRideau[i+j*colums]->setFixed();
@@ -188,7 +153,7 @@ int main(int argc, char** argv)
 	Elastic* MouseElastic = NULL;
 	Vertex* Mouse = W.newVertex();
 
-	Polygon* rP;
+	Physics::Polygon* rP;
 	rP = W.newRectangle(40.f, 60.f);
 	rP->getVertex(0)->setPosition(Vec2(10.f,400.f));
 	//rP->setFixed();
@@ -203,6 +168,10 @@ int main(int argc, char** argv)
 	Grid.setCharacterSize(10);
 	Grid.setColor(sf::Color(255, 255, 255, 170));
 	FPSCounter FPS;
+	
+	sf::Clock clock;
+	clock.restart();
+	
 	while(window.isOpen())
 	{
 		// Process events
@@ -222,14 +191,24 @@ int main(int argc, char** argv)
                         break;
                     case sf::Keyboard::R:
 					{
-                        Polygon* RE = W.newRectangle(50.f, 50.f);
+                        Physics::Polygon* RE = W.newRectangle(50.f, 50.f);
                         RE->getVertex(0)->setPosition(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
                         break;
 					}
                     case sf::Keyboard::T:
 					{
-                        Polygon* RE = W.newRectangle(8.f, 8.f);
+                        Physics::Polygon* RE = W.newRectangle(8.f, 8.f);
                         RE->getVertex(0)->setPosition(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
+                        break;
+					}
+                    case sf::Keyboard::W:
+					{
+						drawWorld = !drawWorld;
+                        break;
+					}
+                    case sf::Keyboard::V:
+					{
+						window.setVerticalSyncEnabled(vsyncEnabled = !vsyncEnabled);
                         break;
 					}
                     default:
@@ -243,30 +222,32 @@ int main(int argc, char** argv)
 
 			if (event.type == sf::Event::MouseButtonPressed)
 			{
-
-				grab = W.getNearestVertex(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
+				Vec2 MouseWorldPosition {W.getWidth() * sf::Mouse::getPosition(window).x / window.getSize().x, 
+											W.getHeight() * sf::Mouse::getPosition(window).y / window.getSize().y};
+				grab = W.getNearestVertex(MouseWorldPosition);
 				if(event.mouseButton.button == sf::Mouse::Left)
-					W.deleteElastic(MouseElastic),
-					MouseElastic = W.newElastic(grab, Mouse, 1.f, 5.f);
+				{
+					W.deleteElastic(MouseElastic);
+					MouseElastic = W.newElastic(grab, Mouse, 10.f, 5.f);
+				}
 				if(event.mouseButton.button == sf::Mouse::Middle || event.mouseButton.button == sf::Mouse::XButton1)
 				{
-					Polygon* R = W.newRectangle(25.f, 25.f);
-					R->getVertex(0)->setPosition(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
+					Physics::Polygon* R = W.newRectangle(25.f, 25.f);
+					R->getVertex(0)->setPosition(MouseWorldPosition);
 				}
 			}
 		}
 
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && grab!=NULL)
 		{
+			Vec2 MouseWorldPosition {W.getWidth() * sf::Mouse::getPosition(window).x / window.getSize().x, 
+										W.getHeight() * sf::Mouse::getPosition(window).y / window.getSize().y};
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::H))
-				grab->setPosition(Vec2(sf::Mouse::getPosition(window).x, grab->getPosition().y));
+				grab->setPosition(Vec2{MouseWorldPosition.x, grab->getPosition().y});
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::V))
+				grab->setPosition(Vec2(grab->getPosition().x, MouseWorldPosition.y));
 			else
-			{
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::V))
-					grab->setPosition(Vec2(grab->getPosition().x, sf::Mouse::getPosition(window).y));
-				else
-					grab->setPosition(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
-			}
+				grab->setPosition(MouseWorldPosition);
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
@@ -277,7 +258,10 @@ int main(int argc, char** argv)
 				rP->applyForce(Vec2(0.f,-50.f));
 
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-				Mouse->setPosition(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
+		{
+				Mouse->setPosition(Vec2{W.getWidth() * sf::Mouse::getPosition(window).x / window.getSize().x, 
+										W.getHeight() * sf::Mouse::getPosition(window).y / window.getSize().y});
+		}
 		//else if(MouseElastic != NULL) delete MouseElastic, MouseElastic = NULL;
 		else Mouse->setFixed();
 
@@ -292,10 +276,12 @@ int main(int argc, char** argv)
 			forceVent=(forceVent>0 ? -1 : 1)*((rand()%400)/100.f+3.f), vent.restart();
 
 		// W.addGlobalAcceleration(Vec2(forceVent, 0.f)); // Vent
-		W.addGlobalAcceleration(Vec2(0.f, 12.f)); // Gravité
+		W.addGlobalAcceleration(Vec2(0.f, 9.81f)); // Gravité
 		W.update(prevdt, dt);
 		prevdt = dt; // Permet de gérer des framerate inconstants
-
+		dt = clock.getElapsedTime().asSeconds();
+		clock.restart();
+		
 		//On affiche le rideau
 		glColor4f(1.f, 1.f, 1.f, 1.f);
 		glEnable(GL_TEXTURE_2D);
@@ -342,7 +328,8 @@ int main(int argc, char** argv)
 		glEnd();
 		*/
 
-		W.draw();
+		if(drawWorld)
+			W.draw();
 
 		FPS.update();
 		window.pushGLStates();
@@ -378,4 +365,41 @@ int main(int argc, char** argv)
 	W.deleteAll();
 	//On libere la texture
 	glDeleteTextures(1, &texture);
+}
+
+GLuint glTexLoad(const char* Path)
+{
+	sf::Image image;
+	bool LoadSuccess = 0;
+	GLuint texture = 0;
+
+	if(Path[0] != '\0')
+	{
+		#ifdef SFML_SYSTEM_MACOS
+		LoadSuccess = image.loadFromFile(Path); //À rajouter ResourcePath selon compilation
+		#else
+		LoadSuccess = image.loadFromFile(Path);
+		#endif
+	}
+
+	glEnable(GL_TEXTURE_2D);
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+
+	if(LoadSuccess)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image.getSize().x, image.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.getPixelsPtr());
+		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
+	} else {
+		/* Texture transparente si le fichier n'a pas pu être chargé */
+		GLubyte TexNull[4] =
+		{
+			0,0,0,0
+		};
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, TexNull);
+	}
+	glDisable(GL_TEXTURE_2D);
+
+	return texture;
 }

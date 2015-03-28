@@ -3,17 +3,15 @@
 namespace Physics
 {
 
-Elastic::Elastic(Vertex* P1, Vertex* P2,
-								float Length, float Spring) :
-								Constraint(P1, P2, Length),
-								mySpring(Spring)
+Elastic::Elastic(Vertex* P1, Vertex* P2, float Length, float Spring) :
+					Constraint(P1, P2, Length),
+					mySpring(Spring)
 {
 }
 
-Elastic::Elastic(Vertex &P1, Vertex &P2,
-								float Length, float Spring) :
-								Constraint(P1, P2, Length),
-								mySpring(Spring)
+Elastic::Elastic(Vertex &P1, Vertex &P2, float Length, float Spring) :
+					Constraint(P1, P2, Length),
+					mySpring(Spring)
 {
 }
 
