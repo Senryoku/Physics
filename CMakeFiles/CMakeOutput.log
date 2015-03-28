@@ -28,34 +28,37 @@ The CXX compiler identification is GNU, found in "D:/Git/Physics/CMakeFiles/3.1.
 Determining if the C compiler works passed with the following output:
 Change Dir: D:/Git/Physics/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/MinGW/bin/mingw32-make.exe" "cmTryCompileExec1917524675/fast"
-C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTryCompileExec1917524675.dir\build.make CMakeFiles/cmTryCompileExec1917524675.dir/build
+Run Build Command:"C:/MinGW/bin/mingw32-make.exe" "cmTryCompileExec1710700366/fast"
 mingw32-make.exe[1]: Entering directory 'D:/Git/Physics/CMakeFiles/CMakeTmp'
+C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTryCompileExec1710700366.dir\build.make CMakeFiles/cmTryCompileExec1710700366.dir/build
+mingw32-make.exe[2]: Entering directory 'D:/Git/Physics/CMakeFiles/CMakeTmp'
 "C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_progress_report D:\Git\Physics\CMakeFiles\CMakeTmp\CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec1917524675.dir/testCCompiler.c.obj
-C:\MinGW\bin\gcc.exe    -o CMakeFiles\cmTryCompileExec1917524675.dir\testCCompiler.c.obj   -c D:\Git\Physics\CMakeFiles\CMakeTmp\testCCompiler.c
-Linking C executable cmTryCompileExec1917524675.exe
-"C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTryCompileExec1917524675.dir\link.txt --verbose=1
-"C:\Program Files (x86)\CMake\bin\cmake.exe" -E remove -f CMakeFiles\cmTryCompileExec1917524675.dir/objects.a
-C:\MinGW\bin\ar.exe cr CMakeFiles\cmTryCompileExec1917524675.dir/objects.a @CMakeFiles\cmTryCompileExec1917524675.dir\objects1.rsp
-C:\MinGW\bin\gcc.exe      -Wl,--whole-archive CMakeFiles\cmTryCompileExec1917524675.dir/objects.a -Wl,--no-whole-archive  -o cmTryCompileExec1917524675.exe -Wl,--out-implib,libcmTryCompileExec1917524675.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\cmTryCompileExec1917524675.dir\linklibs.rsp
+Building C object CMakeFiles/cmTryCompileExec1710700366.dir/testCCompiler.c.obj
+C:\MinGW\bin\gcc.exe    -o CMakeFiles\cmTryCompileExec1710700366.dir\testCCompiler.c.obj   -c D:\Git\Physics\CMakeFiles\CMakeTmp\testCCompiler.c
+Linking C executable cmTryCompileExec1710700366.exe
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTryCompileExec1710700366.dir\link.txt --verbose=1
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -E remove -f CMakeFiles\cmTryCompileExec1710700366.dir/objects.a
+C:\MinGW\bin\ar.exe cr CMakeFiles\cmTryCompileExec1710700366.dir/objects.a @CMakeFiles\cmTryCompileExec1710700366.dir\objects1.rsp
+C:\MinGW\bin\gcc.exe      -Wl,--whole-archive CMakeFiles\cmTryCompileExec1710700366.dir/objects.a -Wl,--no-whole-archive  -o cmTryCompileExec1710700366.exe -Wl,--out-implib,libcmTryCompileExec1710700366.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\cmTryCompileExec1710700366.dir\linklibs.rsp
+mingw32-make.exe[2]: Leaving directory 'D:/Git/Physics/CMakeFiles/CMakeTmp'
 mingw32-make.exe[1]: Leaving directory 'D:/Git/Physics/CMakeFiles/CMakeTmp'
 
 
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: D:/Git/Physics/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/MinGW/bin/mingw32-make.exe" "cmTryCompileExec362618997/fast"
-C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTryCompileExec362618997.dir\build.make CMakeFiles/cmTryCompileExec362618997.dir/build
+Run Build Command:"C:/MinGW/bin/mingw32-make.exe" "cmTryCompileExec3721920738/fast"
 mingw32-make.exe[1]: Entering directory 'D:/Git/Physics/CMakeFiles/CMakeTmp'
+C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTryCompileExec3721920738.dir\build.make CMakeFiles/cmTryCompileExec3721920738.dir/build
+mingw32-make.exe[2]: Entering directory 'D:/Git/Physics/CMakeFiles/CMakeTmp'
 "C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_progress_report D:\Git\Physics\CMakeFiles\CMakeTmp\CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec362618997.dir/CMakeCCompilerABI.c.obj
-C:\MinGW\bin\gcc.exe    -o CMakeFiles\cmTryCompileExec362618997.dir\CMakeCCompilerABI.c.obj   -c "C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCCompilerABI.c"
-Linking C executable cmTryCompileExec362618997.exe
-"C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTryCompileExec362618997.dir\link.txt --verbose=1
-"C:\Program Files (x86)\CMake\bin\cmake.exe" -E remove -f CMakeFiles\cmTryCompileExec362618997.dir/objects.a
-C:\MinGW\bin\ar.exe cr CMakeFiles\cmTryCompileExec362618997.dir/objects.a @CMakeFiles\cmTryCompileExec362618997.dir\objects1.rsp
-C:\MinGW\bin\gcc.exe     -v -Wl,--whole-archive CMakeFiles\cmTryCompileExec362618997.dir/objects.a -Wl,--no-whole-archive  -o cmTryCompileExec362618997.exe -Wl,--out-implib,libcmTryCompileExec362618997.dll.a -Wl,--major-image-version,0,--minor-image-version,0   
+Building C object CMakeFiles/cmTryCompileExec3721920738.dir/CMakeCCompilerABI.c.obj
+C:\MinGW\bin\gcc.exe    -o CMakeFiles\cmTryCompileExec3721920738.dir\CMakeCCompilerABI.c.obj   -c "C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCCompilerABI.c"
+Linking C executable cmTryCompileExec3721920738.exe
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTryCompileExec3721920738.dir\link.txt --verbose=1
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -E remove -f CMakeFiles\cmTryCompileExec3721920738.dir/objects.a
+C:\MinGW\bin\ar.exe cr CMakeFiles\cmTryCompileExec3721920738.dir/objects.a @CMakeFiles\cmTryCompileExec3721920738.dir\objects1.rsp
+C:\MinGW\bin\gcc.exe     -v -Wl,--whole-archive CMakeFiles\cmTryCompileExec3721920738.dir/objects.a -Wl,--no-whole-archive  -o cmTryCompileExec3721920738.exe -Wl,--out-implib,libcmTryCompileExec3721920738.dll.a -Wl,--major-image-version,0,--minor-image-version,0   
 Reading specs from c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/specs
 COLLECT_GCC=C:\MinGW\bin\gcc.exe
 COLLECT_LTO_WRAPPER=c:/mingw/bin/../libexec/gcc/i686-w64-mingw32/4.8.3/lto-wrapper.exe
@@ -65,8 +68,9 @@ Thread model: posix
 gcc version 4.8.3 (GCC) 
 COMPILER_PATH=c:/mingw/bin/../libexec/gcc/i686-w64-mingw32/4.8.3/;c:/mingw/bin/../libexec/gcc/;c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/bin/
 LIBRARY_PATH=c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/;c:/mingw/bin/../lib/gcc/;c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib/;c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec362618997.exe' '-mtune=generic' '-march=pentium3'
- c:/mingw/bin/../libexec/gcc/i686-w64-mingw32/4.8.3/collect2.exe --sysroot=/opt/windows_32 -m i386pe -Bdynamic -o cmTryCompileExec362618997.exe c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib/crt2.o c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/crtbegin.o -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3 -Lc:/mingw/bin/../lib/gcc -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib --whole-archive CMakeFiles\cmTryCompileExec362618997.dir/objects.a --no-whole-archive --out-implib libcmTryCompileExec362618997.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -LC:/MinGW/lib -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/crtend.o
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec3721920738.exe' '-mtune=generic' '-march=pentium3'
+ c:/mingw/bin/../libexec/gcc/i686-w64-mingw32/4.8.3/collect2.exe --sysroot=/opt/windows_32 -m i386pe -Bdynamic -o cmTryCompileExec3721920738.exe c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib/crt2.o c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/crtbegin.o -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3 -Lc:/mingw/bin/../lib/gcc -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib --whole-archive CMakeFiles\cmTryCompileExec3721920738.dir/objects.a --no-whole-archive --out-implib libcmTryCompileExec3721920738.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -LC:/MinGW/lib -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/crtend.o
+mingw32-make.exe[2]: Leaving directory 'D:/Git/Physics/CMakeFiles/CMakeTmp'
 mingw32-make.exe[1]: Leaving directory 'D:/Git/Physics/CMakeFiles/CMakeTmp'
 
 
@@ -74,17 +78,18 @@ Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld\.exe|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: D:/Git/Physics/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"C:/MinGW/bin/mingw32-make.exe" "cmTryCompileExec362618997/fast"]
-  ignore line: [C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTryCompileExec362618997.dir\build.make CMakeFiles/cmTryCompileExec362618997.dir/build]
+  ignore line: [Run Build Command:"C:/MinGW/bin/mingw32-make.exe" "cmTryCompileExec3721920738/fast"]
   ignore line: [mingw32-make.exe[1]: Entering directory 'D:/Git/Physics/CMakeFiles/CMakeTmp']
+  ignore line: [C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTryCompileExec3721920738.dir\build.make CMakeFiles/cmTryCompileExec3721920738.dir/build]
+  ignore line: [mingw32-make.exe[2]: Entering directory 'D:/Git/Physics/CMakeFiles/CMakeTmp']
   ignore line: ["C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_progress_report D:\Git\Physics\CMakeFiles\CMakeTmp\CMakeFiles 1]
-  ignore line: [Building C object CMakeFiles/cmTryCompileExec362618997.dir/CMakeCCompilerABI.c.obj]
-  ignore line: [C:\MinGW\bin\gcc.exe    -o CMakeFiles\cmTryCompileExec362618997.dir\CMakeCCompilerABI.c.obj   -c "C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCCompilerABI.c"]
-  ignore line: [Linking C executable cmTryCompileExec362618997.exe]
-  ignore line: ["C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTryCompileExec362618997.dir\link.txt --verbose=1]
-  ignore line: ["C:\Program Files (x86)\CMake\bin\cmake.exe" -E remove -f CMakeFiles\cmTryCompileExec362618997.dir/objects.a]
-  ignore line: [C:\MinGW\bin\ar.exe cr CMakeFiles\cmTryCompileExec362618997.dir/objects.a @CMakeFiles\cmTryCompileExec362618997.dir\objects1.rsp]
-  ignore line: [C:\MinGW\bin\gcc.exe     -v -Wl,--whole-archive CMakeFiles\cmTryCompileExec362618997.dir/objects.a -Wl,--no-whole-archive  -o cmTryCompileExec362618997.exe -Wl,--out-implib,libcmTryCompileExec362618997.dll.a -Wl,--major-image-version,0,--minor-image-version,0   ]
+  ignore line: [Building C object CMakeFiles/cmTryCompileExec3721920738.dir/CMakeCCompilerABI.c.obj]
+  ignore line: [C:\MinGW\bin\gcc.exe    -o CMakeFiles\cmTryCompileExec3721920738.dir\CMakeCCompilerABI.c.obj   -c "C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCCompilerABI.c"]
+  ignore line: [Linking C executable cmTryCompileExec3721920738.exe]
+  ignore line: ["C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTryCompileExec3721920738.dir\link.txt --verbose=1]
+  ignore line: ["C:\Program Files (x86)\CMake\bin\cmake.exe" -E remove -f CMakeFiles\cmTryCompileExec3721920738.dir/objects.a]
+  ignore line: [C:\MinGW\bin\ar.exe cr CMakeFiles\cmTryCompileExec3721920738.dir/objects.a @CMakeFiles\cmTryCompileExec3721920738.dir\objects1.rsp]
+  ignore line: [C:\MinGW\bin\gcc.exe     -v -Wl,--whole-archive CMakeFiles\cmTryCompileExec3721920738.dir/objects.a -Wl,--no-whole-archive  -o cmTryCompileExec3721920738.exe -Wl,--out-implib,libcmTryCompileExec3721920738.dll.a -Wl,--major-image-version,0,--minor-image-version,0   ]
   ignore line: [Reading specs from c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/specs]
   ignore line: [COLLECT_GCC=C:\MinGW\bin\gcc.exe]
   ignore line: [COLLECT_LTO_WRAPPER=c:/mingw/bin/../libexec/gcc/i686-w64-mingw32/4.8.3/lto-wrapper.exe]
@@ -99,15 +104,15 @@ Parsed C implicit link information from above output:
   ignore line: [c:/mingw/bin/../lib/gcc/]
   ignore line: [c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib/]
   ignore line: [c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec362618997.exe' '-mtune=generic' '-march=pentium3']
-  link line: [ c:/mingw/bin/../libexec/gcc/i686-w64-mingw32/4.8.3/collect2.exe --sysroot=/opt/windows_32 -m i386pe -Bdynamic -o cmTryCompileExec362618997.exe c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib/crt2.o c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/crtbegin.o -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3 -Lc:/mingw/bin/../lib/gcc -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib --whole-archive CMakeFiles\cmTryCompileExec362618997.dir/objects.a --no-whole-archive --out-implib libcmTryCompileExec362618997.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -LC:/MinGW/lib -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/crtend.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec3721920738.exe' '-mtune=generic' '-march=pentium3']
+  link line: [ c:/mingw/bin/../libexec/gcc/i686-w64-mingw32/4.8.3/collect2.exe --sysroot=/opt/windows_32 -m i386pe -Bdynamic -o cmTryCompileExec3721920738.exe c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib/crt2.o c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/crtbegin.o -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3 -Lc:/mingw/bin/../lib/gcc -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib --whole-archive CMakeFiles\cmTryCompileExec3721920738.dir/objects.a --no-whole-archive --out-implib libcmTryCompileExec3721920738.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -LC:/MinGW/lib -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/crtend.o]
     arg [c:/mingw/bin/../libexec/gcc/i686-w64-mingw32/4.8.3/collect2.exe] ==> ignore
     arg [--sysroot=/opt/windows_32] ==> ignore
     arg [-m] ==> ignore
     arg [i386pe] ==> ignore
     arg [-Bdynamic] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTryCompileExec362618997.exe] ==> ignore
+    arg [cmTryCompileExec3721920738.exe] ==> ignore
     arg [c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib/crt2.o] ==> ignore
     arg [c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/crtbegin.o] ==> ignore
     arg [-Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3] ==> dir [c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3]
@@ -115,10 +120,10 @@ Parsed C implicit link information from above output:
     arg [-Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib] ==> dir [c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib]
     arg [-Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib] ==> dir [c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib]
     arg [--whole-archive] ==> ignore
-    arg [CMakeFiles\cmTryCompileExec362618997.dir/objects.a] ==> ignore
+    arg [CMakeFiles\cmTryCompileExec3721920738.dir/objects.a] ==> ignore
     arg [--no-whole-archive] ==> ignore
     arg [--out-implib] ==> ignore
-    arg [libcmTryCompileExec362618997.dll.a] ==> ignore
+    arg [libcmTryCompileExec3721920738.dll.a] ==> ignore
     arg [--major-image-version] ==> ignore
     arg [0] ==> ignore
     arg [--minor-image-version] ==> ignore
@@ -159,34 +164,37 @@ Parsed C implicit link information from above output:
 Determining if the CXX compiler works passed with the following output:
 Change Dir: D:/Git/Physics/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/MinGW/bin/mingw32-make.exe" "cmTryCompileExec3817486564/fast"
-C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTryCompileExec3817486564.dir\build.make CMakeFiles/cmTryCompileExec3817486564.dir/build
+Run Build Command:"C:/MinGW/bin/mingw32-make.exe" "cmTryCompileExec1800172754/fast"
 mingw32-make.exe[1]: Entering directory 'D:/Git/Physics/CMakeFiles/CMakeTmp'
+C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTryCompileExec1800172754.dir\build.make CMakeFiles/cmTryCompileExec1800172754.dir/build
+mingw32-make.exe[2]: Entering directory 'D:/Git/Physics/CMakeFiles/CMakeTmp'
 "C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_progress_report D:\Git\Physics\CMakeFiles\CMakeTmp\CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec3817486564.dir/testCXXCompiler.cxx.obj
-C:\MinGW\bin\g++.exe     -o CMakeFiles\cmTryCompileExec3817486564.dir\testCXXCompiler.cxx.obj -c D:\Git\Physics\CMakeFiles\CMakeTmp\testCXXCompiler.cxx
-Linking CXX executable cmTryCompileExec3817486564.exe
-"C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTryCompileExec3817486564.dir\link.txt --verbose=1
-"C:\Program Files (x86)\CMake\bin\cmake.exe" -E remove -f CMakeFiles\cmTryCompileExec3817486564.dir/objects.a
-C:\MinGW\bin\ar.exe cr CMakeFiles\cmTryCompileExec3817486564.dir/objects.a @CMakeFiles\cmTryCompileExec3817486564.dir\objects1.rsp
-C:\MinGW\bin\g++.exe      -Wl,--whole-archive CMakeFiles\cmTryCompileExec3817486564.dir/objects.a -Wl,--no-whole-archive  -o cmTryCompileExec3817486564.exe -Wl,--out-implib,libcmTryCompileExec3817486564.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\cmTryCompileExec3817486564.dir\linklibs.rsp
+Building CXX object CMakeFiles/cmTryCompileExec1800172754.dir/testCXXCompiler.cxx.obj
+C:\MinGW\bin\g++.exe     -o CMakeFiles\cmTryCompileExec1800172754.dir\testCXXCompiler.cxx.obj -c D:\Git\Physics\CMakeFiles\CMakeTmp\testCXXCompiler.cxx
+Linking CXX executable cmTryCompileExec1800172754.exe
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTryCompileExec1800172754.dir\link.txt --verbose=1
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -E remove -f CMakeFiles\cmTryCompileExec1800172754.dir/objects.a
+C:\MinGW\bin\ar.exe cr CMakeFiles\cmTryCompileExec1800172754.dir/objects.a @CMakeFiles\cmTryCompileExec1800172754.dir\objects1.rsp
+C:\MinGW\bin\g++.exe      -Wl,--whole-archive CMakeFiles\cmTryCompileExec1800172754.dir/objects.a -Wl,--no-whole-archive  -o cmTryCompileExec1800172754.exe -Wl,--out-implib,libcmTryCompileExec1800172754.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\cmTryCompileExec1800172754.dir\linklibs.rsp
+mingw32-make.exe[2]: Leaving directory 'D:/Git/Physics/CMakeFiles/CMakeTmp'
 mingw32-make.exe[1]: Leaving directory 'D:/Git/Physics/CMakeFiles/CMakeTmp'
 
 
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: D:/Git/Physics/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/MinGW/bin/mingw32-make.exe" "cmTryCompileExec3560314941/fast"
-C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTryCompileExec3560314941.dir\build.make CMakeFiles/cmTryCompileExec3560314941.dir/build
+Run Build Command:"C:/MinGW/bin/mingw32-make.exe" "cmTryCompileExec209766801/fast"
 mingw32-make.exe[1]: Entering directory 'D:/Git/Physics/CMakeFiles/CMakeTmp'
+C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTryCompileExec209766801.dir\build.make CMakeFiles/cmTryCompileExec209766801.dir/build
+mingw32-make.exe[2]: Entering directory 'D:/Git/Physics/CMakeFiles/CMakeTmp'
 "C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_progress_report D:\Git\Physics\CMakeFiles\CMakeTmp\CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec3560314941.dir/CMakeCXXCompilerABI.cpp.obj
-C:\MinGW\bin\g++.exe     -o CMakeFiles\cmTryCompileExec3560314941.dir\CMakeCXXCompilerABI.cpp.obj -c "C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCXXCompilerABI.cpp"
-Linking CXX executable cmTryCompileExec3560314941.exe
-"C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTryCompileExec3560314941.dir\link.txt --verbose=1
-"C:\Program Files (x86)\CMake\bin\cmake.exe" -E remove -f CMakeFiles\cmTryCompileExec3560314941.dir/objects.a
-C:\MinGW\bin\ar.exe cr CMakeFiles\cmTryCompileExec3560314941.dir/objects.a @CMakeFiles\cmTryCompileExec3560314941.dir\objects1.rsp
-C:\MinGW\bin\g++.exe     -v -Wl,--whole-archive CMakeFiles\cmTryCompileExec3560314941.dir/objects.a -Wl,--no-whole-archive  -o cmTryCompileExec3560314941.exe -Wl,--out-implib,libcmTryCompileExec3560314941.dll.a -Wl,--major-image-version,0,--minor-image-version,0   
+Building CXX object CMakeFiles/cmTryCompileExec209766801.dir/CMakeCXXCompilerABI.cpp.obj
+C:\MinGW\bin\g++.exe     -o CMakeFiles\cmTryCompileExec209766801.dir\CMakeCXXCompilerABI.cpp.obj -c "C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCXXCompilerABI.cpp"
+Linking CXX executable cmTryCompileExec209766801.exe
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTryCompileExec209766801.dir\link.txt --verbose=1
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -E remove -f CMakeFiles\cmTryCompileExec209766801.dir/objects.a
+C:\MinGW\bin\ar.exe cr CMakeFiles\cmTryCompileExec209766801.dir/objects.a @CMakeFiles\cmTryCompileExec209766801.dir\objects1.rsp
+C:\MinGW\bin\g++.exe     -v -Wl,--whole-archive CMakeFiles\cmTryCompileExec209766801.dir/objects.a -Wl,--no-whole-archive  -o cmTryCompileExec209766801.exe -Wl,--out-implib,libcmTryCompileExec209766801.dll.a -Wl,--major-image-version,0,--minor-image-version,0   
 Reading specs from c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/specs
 COLLECT_GCC=C:\MinGW\bin\g++.exe
 COLLECT_LTO_WRAPPER=c:/mingw/bin/../libexec/gcc/i686-w64-mingw32/4.8.3/lto-wrapper.exe
@@ -196,8 +204,9 @@ Thread model: posix
 gcc version 4.8.3 (GCC) 
 COMPILER_PATH=c:/mingw/bin/../libexec/gcc/i686-w64-mingw32/4.8.3/;c:/mingw/bin/../libexec/gcc/;c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/bin/
 LIBRARY_PATH=c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/;c:/mingw/bin/../lib/gcc/;c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib/;c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec3560314941.exe' '-shared-libgcc' '-mtune=generic' '-march=pentium3'
- c:/mingw/bin/../libexec/gcc/i686-w64-mingw32/4.8.3/collect2.exe --sysroot=/opt/windows_32 -m i386pe -Bdynamic -o cmTryCompileExec3560314941.exe c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib/crt2.o c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/crtbegin.o -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3 -Lc:/mingw/bin/../lib/gcc -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib --whole-archive CMakeFiles\cmTryCompileExec3560314941.dir/objects.a --no-whole-archive --out-implib libcmTryCompileExec3560314941.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -LC:/MinGW/lib -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/crtend.o
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec209766801.exe' '-shared-libgcc' '-mtune=generic' '-march=pentium3'
+ c:/mingw/bin/../libexec/gcc/i686-w64-mingw32/4.8.3/collect2.exe --sysroot=/opt/windows_32 -m i386pe -Bdynamic -o cmTryCompileExec209766801.exe c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib/crt2.o c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/crtbegin.o -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3 -Lc:/mingw/bin/../lib/gcc -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib --whole-archive CMakeFiles\cmTryCompileExec209766801.dir/objects.a --no-whole-archive --out-implib libcmTryCompileExec209766801.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -LC:/MinGW/lib -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/crtend.o
+mingw32-make.exe[2]: Leaving directory 'D:/Git/Physics/CMakeFiles/CMakeTmp'
 mingw32-make.exe[1]: Leaving directory 'D:/Git/Physics/CMakeFiles/CMakeTmp'
 
 
@@ -205,17 +214,18 @@ Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld\.exe|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: D:/Git/Physics/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"C:/MinGW/bin/mingw32-make.exe" "cmTryCompileExec3560314941/fast"]
-  ignore line: [C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTryCompileExec3560314941.dir\build.make CMakeFiles/cmTryCompileExec3560314941.dir/build]
+  ignore line: [Run Build Command:"C:/MinGW/bin/mingw32-make.exe" "cmTryCompileExec209766801/fast"]
   ignore line: [mingw32-make.exe[1]: Entering directory 'D:/Git/Physics/CMakeFiles/CMakeTmp']
+  ignore line: [C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTryCompileExec209766801.dir\build.make CMakeFiles/cmTryCompileExec209766801.dir/build]
+  ignore line: [mingw32-make.exe[2]: Entering directory 'D:/Git/Physics/CMakeFiles/CMakeTmp']
   ignore line: ["C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_progress_report D:\Git\Physics\CMakeFiles\CMakeTmp\CMakeFiles 1]
-  ignore line: [Building CXX object CMakeFiles/cmTryCompileExec3560314941.dir/CMakeCXXCompilerABI.cpp.obj]
-  ignore line: [C:\MinGW\bin\g++.exe     -o CMakeFiles\cmTryCompileExec3560314941.dir\CMakeCXXCompilerABI.cpp.obj -c "C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCXXCompilerABI.cpp"]
-  ignore line: [Linking CXX executable cmTryCompileExec3560314941.exe]
-  ignore line: ["C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTryCompileExec3560314941.dir\link.txt --verbose=1]
-  ignore line: ["C:\Program Files (x86)\CMake\bin\cmake.exe" -E remove -f CMakeFiles\cmTryCompileExec3560314941.dir/objects.a]
-  ignore line: [C:\MinGW\bin\ar.exe cr CMakeFiles\cmTryCompileExec3560314941.dir/objects.a @CMakeFiles\cmTryCompileExec3560314941.dir\objects1.rsp]
-  ignore line: [C:\MinGW\bin\g++.exe     -v -Wl,--whole-archive CMakeFiles\cmTryCompileExec3560314941.dir/objects.a -Wl,--no-whole-archive  -o cmTryCompileExec3560314941.exe -Wl,--out-implib,libcmTryCompileExec3560314941.dll.a -Wl,--major-image-version,0,--minor-image-version,0   ]
+  ignore line: [Building CXX object CMakeFiles/cmTryCompileExec209766801.dir/CMakeCXXCompilerABI.cpp.obj]
+  ignore line: [C:\MinGW\bin\g++.exe     -o CMakeFiles\cmTryCompileExec209766801.dir\CMakeCXXCompilerABI.cpp.obj -c "C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCXXCompilerABI.cpp"]
+  ignore line: [Linking CXX executable cmTryCompileExec209766801.exe]
+  ignore line: ["C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTryCompileExec209766801.dir\link.txt --verbose=1]
+  ignore line: ["C:\Program Files (x86)\CMake\bin\cmake.exe" -E remove -f CMakeFiles\cmTryCompileExec209766801.dir/objects.a]
+  ignore line: [C:\MinGW\bin\ar.exe cr CMakeFiles\cmTryCompileExec209766801.dir/objects.a @CMakeFiles\cmTryCompileExec209766801.dir\objects1.rsp]
+  ignore line: [C:\MinGW\bin\g++.exe     -v -Wl,--whole-archive CMakeFiles\cmTryCompileExec209766801.dir/objects.a -Wl,--no-whole-archive  -o cmTryCompileExec209766801.exe -Wl,--out-implib,libcmTryCompileExec209766801.dll.a -Wl,--major-image-version,0,--minor-image-version,0   ]
   ignore line: [Reading specs from c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/specs]
   ignore line: [COLLECT_GCC=C:\MinGW\bin\g++.exe]
   ignore line: [COLLECT_LTO_WRAPPER=c:/mingw/bin/../libexec/gcc/i686-w64-mingw32/4.8.3/lto-wrapper.exe]
@@ -230,15 +240,15 @@ Parsed CXX implicit link information from above output:
   ignore line: [c:/mingw/bin/../lib/gcc/]
   ignore line: [c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib/]
   ignore line: [c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec3560314941.exe' '-shared-libgcc' '-mtune=generic' '-march=pentium3']
-  link line: [ c:/mingw/bin/../libexec/gcc/i686-w64-mingw32/4.8.3/collect2.exe --sysroot=/opt/windows_32 -m i386pe -Bdynamic -o cmTryCompileExec3560314941.exe c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib/crt2.o c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/crtbegin.o -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3 -Lc:/mingw/bin/../lib/gcc -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib --whole-archive CMakeFiles\cmTryCompileExec3560314941.dir/objects.a --no-whole-archive --out-implib libcmTryCompileExec3560314941.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -LC:/MinGW/lib -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/crtend.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec209766801.exe' '-shared-libgcc' '-mtune=generic' '-march=pentium3']
+  link line: [ c:/mingw/bin/../libexec/gcc/i686-w64-mingw32/4.8.3/collect2.exe --sysroot=/opt/windows_32 -m i386pe -Bdynamic -o cmTryCompileExec209766801.exe c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib/crt2.o c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/crtbegin.o -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3 -Lc:/mingw/bin/../lib/gcc -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib -Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib --whole-archive CMakeFiles\cmTryCompileExec209766801.dir/objects.a --no-whole-archive --out-implib libcmTryCompileExec209766801.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -LC:/MinGW/lib -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/crtend.o]
     arg [c:/mingw/bin/../libexec/gcc/i686-w64-mingw32/4.8.3/collect2.exe] ==> ignore
     arg [--sysroot=/opt/windows_32] ==> ignore
     arg [-m] ==> ignore
     arg [i386pe] ==> ignore
     arg [-Bdynamic] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTryCompileExec3560314941.exe] ==> ignore
+    arg [cmTryCompileExec209766801.exe] ==> ignore
     arg [c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib/crt2.o] ==> ignore
     arg [c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/crtbegin.o] ==> ignore
     arg [-Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3] ==> dir [c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3]
@@ -246,10 +256,10 @@ Parsed CXX implicit link information from above output:
     arg [-Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib] ==> dir [c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib/../lib]
     arg [-Lc:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib] ==> dir [c:/mingw/bin/../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/lib]
     arg [--whole-archive] ==> ignore
-    arg [CMakeFiles\cmTryCompileExec3560314941.dir/objects.a] ==> ignore
+    arg [CMakeFiles\cmTryCompileExec209766801.dir/objects.a] ==> ignore
     arg [--no-whole-archive] ==> ignore
     arg [--out-implib] ==> ignore
-    arg [libcmTryCompileExec3560314941.dll.a] ==> ignore
+    arg [libcmTryCompileExec209766801.dll.a] ==> ignore
     arg [--major-image-version] ==> ignore
     arg [0] ==> ignore
     arg [--minor-image-version] ==> ignore
