@@ -1,48 +1,36 @@
-cmake_minimum_required (VERSION 2.6)
+cmake_minimum_required(VERSION 3.1)
+project(Physics)
 
-cmake_policy(SET CMP0015 NEW)
-cmake_policy(SET CMP0048 OLD)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -fopenmp")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -gdwarf-2")
 
-project (Physics)
-set (OpenGL_Toolbox_VERSION_MAJOR 0)
-set (OpenGL_Toolbox_VERSION_MINOR 1)
+INCLUDE_DIRECTORIES("src/")
+set(SOURCE_FILES
+    src/Constant.hpp
+    src/Constraint.cpp
+    src/Constraint.hpp
+    src/Elastic.cpp
+    src/Elastic.hpp
+    src/Physics.hpp
+    src/Polygon.cpp
+    src/Polygon.hpp
+    src/Rigid.cpp
+    src/Rigid.hpp
+    src/Vec2.hpp
+    src/Vertex.cpp
+    src/Vertex.hpp
+    src/World.cpp
+    src/World.hpp
+)
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(TEST_SOURCE_FILES
+    tests/FPSCounter.cpp
+    tests/FPSCounter.hpp
+    tests/Main.cpp
+)
 
-set(EXECUTABLE_NAME Exe)
-
-MACRO(SUBDIRLIST result curdir)
-  FILE(GLOB children RELATIVE ${curdir} ${curdir}/*)
-  SET(dirlist "")
-  FOREACH(child ${children})
-    IF(IS_DIRECTORY ${curdir}/${child})
-        LIST(APPEND dirlist ${child})
-    ENDIF()
-  ENDFOREACH()
-  SET(${result} ${dirlist})
-ENDMACRO()
-
-MACRO(REC_SOURCE ParentDir)
-	INCLUDE_DIRECTORIES(${ParentDir})
-	AUX_SOURCE_DIRECTORY(${ParentDir} SOURCE_FILES)
-	
-	SUBDIRLIST(SUBDIRECTORIES ${ParentDir})
-
-	foreach(DIR ${SUBDIRECTORIES})
-		REC_SOURCE(${ParentDir}/${DIR})
-		
-	endforeach(DIR)
-ENDMACRO()
-
-REC_SOURCE(${CMAKE_SOURCE_DIR}/src)
-
-list(APPEND CMAKE_CXX_FLAGS "-std=c++0x -O3 -Wall -fopenmp ${CMAKE_CXX_FLAGS}")
-
-add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES})
-
-# Libraries ------------------------------------------------------------------------
+add_executable(Physics ${TEST_SOURCE_FILES} ${SOURCE_FILES})
 
 #OpenGL
 FIND_PACKAGE(OpenGL REQUIRED)
@@ -53,17 +41,9 @@ ADD_DEFINITIONS(${OpenGL_DEFINITIONS})
 
 #SFML
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
+set(SFML_ROOT "D:/Git/SFML/")
 find_package(SFML 2 REQUIRED system window graphics)
 if(SFML_FOUND)
   include_directories(${SFML_INCLUDE_DIR})
-  target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES} ${OPENGL_LIBRARIES})
+  target_link_libraries(Physics ${SFML_LIBRARIES} ${OPENGL_LIBRARIES})
 endif()
-
-# -----------------------------------------------------------------------------------
-
-add_custom_target(run
-    COMMAND bin/${EXECUTABLE_NAME}.exe
-    DEPENDS ${EXECUTABLE_NAME}
-    WORKING_DIRECTORY ${CMAKE_PROJECT_DIR}
-)
-

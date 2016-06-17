@@ -2,7 +2,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "Physics.hpp"
+#include <Physics.hpp>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/OpenGL.hpp>
@@ -162,11 +162,11 @@ int main(int argc, char** argv)
 	Font.loadFromFile("data/V5PRC___.TTF");
 	sf::Text Numbers("Initializing...", Font);
 	Numbers.setCharacterSize(20);
-	Numbers.setColor(sf::Color(255, 255, 255, 170));
+	Numbers.setFillColor(sf::Color(255, 255, 255, 170));
 	Numbers.setPosition(5.f, 30.f);
 	sf::Text Grid("Initializing...", Font);
 	Grid.setCharacterSize(10);
-	Grid.setColor(sf::Color(255, 255, 255, 170));
+	Grid.setFillColor(sf::Color(255, 255, 255, 170));
 	FPSCounter FPS;
 	
 	sf::Clock clock;
@@ -193,22 +193,26 @@ int main(int argc, char** argv)
 					{
                         Physics::Polygon* RE = W.newRectangle(50.f, 50.f);
                         RE->getVertex(0)->setPosition(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
+						std::cout << "newRectangle" << std::endl;
                         break;
 					}
                     case sf::Keyboard::T:
 					{
                         Physics::Polygon* RE = W.newRectangle(8.f, 8.f);
                         RE->getVertex(0)->setPosition(Vec2(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
+						std::cout << "newRectangle" << std::endl;
                         break;
 					}
                     case sf::Keyboard::W:
 					{
 						drawWorld = !drawWorld;
+						std::cout << "Toggle Debug Draw" << std::endl;
                         break;
 					}
                     case sf::Keyboard::V:
 					{
 						window.setVerticalSyncEnabled(vsyncEnabled = !vsyncEnabled);
+						std::cout << "Toggle VSync" << std::endl;
                         break;
 					}
                     default:

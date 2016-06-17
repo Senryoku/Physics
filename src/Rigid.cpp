@@ -25,7 +25,10 @@ void Rigid::resolve()
 
 	// Normalisation du vecteur (pas besoin de Normalize(), on a déjà acLength)
 	if(acLength == 0.f) Vect = Vec2(1.f, 0.f);
-	else Vect = Vect*(factor/acLength);
+	else {
+		acLength = 1.0f / acLength;
+		Vect = Vect*(factor * acLength);
+	}
 
 	if(myV2->isFixed())
 		myV1->correctPosition(Vect);

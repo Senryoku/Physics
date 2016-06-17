@@ -202,7 +202,7 @@ CollisionInfo Polygon::collide(Polygon *P)
 
 		if(P->isFixed())
 		{
-			Axis = Normals[i];
+			Axis = P->Normals[i];
 		} else {
 			Axis = Edge->getVector().getOrthogonal();
 			Axis.normalize();

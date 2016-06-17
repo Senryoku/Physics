@@ -4,7 +4,7 @@ FPSCounter::FPSCounter() : myFrames(0), myText("FPS : 0", myFont) // Evite un bu
 {
 	myFont.loadFromFile("data/V5PRC___.TTF");
 	myText.setCharacterSize(20);
-	myText.setColor(sf::Color(255, 255, 255, 170));
+	myText.setFillColor(sf::Color(255, 255, 255, 170));
 	myText.setPosition(5.f, 5.f);
 	myClock.restart();
 }
