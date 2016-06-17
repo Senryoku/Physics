@@ -14,17 +14,15 @@
 
 using namespace Physics;
 
-GLuint glTexLoad(const char* Path);
-
 int main(int argc, char** argv)
 {
 	bool vsyncEnabled = false;
-	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
+	sf::RenderWindow window(sf::VideoMode(1280, 720), "Physics test");
 	window.setVerticalSyncEnabled(vsyncEnabled);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0.0, 800.0, 600.0, 0.0, 0.0, 100.0);
+	glOrtho(0.0, window.getSize().x, window.getSize().y, 0.0, 0.0, 100.0);
 	glDisable(GL_DEPTH_TEST);
 	glClearColor(0.0f, 0.f, 0.f, 1.f);
 	glEnable(GL_BLEND);
@@ -35,11 +33,11 @@ int main(int argc, char** argv)
 	sf::Clock vent;
 	float forceVent(1.f);
 
-	World W;
+	World W(window.getSize().x, window.getSize().y);
 	bool drawWorld = true;
 
-	//Une texture OpenGL
-	GLuint texture = glTexLoad("data/cute.png");
+	sf::Texture texture;
+	texture.loadFromFile("data/cute.png");
 
 	Vertex* P4 = W.newVertex();
 	P4->setPosition(Vec2(100, 25));
@@ -75,39 +73,16 @@ int main(int argc, char** argv)
 	P43->setPosition(Vec2(100, 300));
 	P43->setFixed();
 
-	// W.add(new Polygon(3, FLAG_NULL, P41, P42, P43));
-
-	//Vertex* P8 = new Vertex();
-
-	/*
-	//De l'eau?
-	const int waterN(30); //MULTIPLE DE 2
-	Vertex *pWater[waterN], *pWaterFixed[waterN];
-	for (int i=0; i<waterN; i++)
-	{
-		pWater[i]= new Vertex(50.f+i*10.f, 300.f);
-		pWater[i]->setMass(0.1f);
-		if (i==0 || i==waterN-1)
-			pWater[i]->setFixe();
-		pWaterFixed[i]=new Vertex(50.f+i*10.f, 300.f);
-		pWaterFixed[i]->setFixe();
-		pWaterFixed[i]->setMass(3.f);
-		new Elastic(pWaterFixed[i], pWater[i], 0.f, 0.75f);
-		if (i>0)
-			new Elastic(pWater[i], pWater[i-1]);
-	}
-	*/
-
 	//Un petit rideau :D
 	
 	const int rows=100, colums=100, cTimes(2);
 	bool cType(0);
 	const float tailleCarre(400.f/rows);
 	Vertex* pRideau[rows*colums]={NULL};
-	for (int i=0; i<colums; i++)
-		for (int j=0; j<rows; j++)
+	for(int i = 0; i < colums; i++)
+		for(int j = 0; j < rows; j++)
 		{
-			pRideau[i+j*colums]=W.newVertex();
+			pRideau[i+j*colums] = W.newVertex();
 			pRideau[i+j*colums]->setPosition(Vec2(300.f+i*tailleCarre, 30.f+j*tailleCarre));
 			pRideau[i+j*colums]->setMass(5.f/rows);
 			//On fixe deux des points
@@ -156,7 +131,6 @@ int main(int argc, char** argv)
 	Physics::Polygon* rP;
 	rP = W.newRectangle(40.f, 60.f);
 	rP->getVertex(0)->setPosition(Vec2(10.f,400.f));
-	//rP->setFixed();
 
 	sf::Font Font;
 	Font.loadFromFile("data/V5PRC___.TTF");
@@ -171,6 +145,8 @@ int main(int argc, char** argv)
 	
 	sf::Clock clock;
 	clock.restart();
+	
+	glEnable(GL_TEXTURE_2D);
 	
 	while(window.isOpen())
 	{
@@ -276,8 +252,8 @@ int main(int argc, char** argv)
 		glLoadIdentity(); //On charge l'identite pour dessiner normalement
 		glTranslatef(0.375, 0.375, 0.0); //petit trick qui assure le dessin à la  bonne place
 
-		if (vent.getElapsedTime().asSeconds()>=4.f)
-			forceVent=(forceVent>0 ? -1 : 1)*((rand()%400)/100.f+3.f), vent.restart();
+		if(vent.getElapsedTime().asSeconds() >= 4.f)
+			forceVent=(forceVent>0 ? -1 : 1) * ((rand()%400)/100.f+3.f), vent.restart();
 
 		// W.addGlobalAcceleration(Vec2(forceVent, 0.f)); // Vent
 		W.addGlobalAcceleration(Vec2(0.f, 9.81f)); // Gravité
@@ -288,8 +264,7 @@ int main(int argc, char** argv)
 		
 		//On affiche le rideau
 		glColor4f(1.f, 1.f, 1.f, 1.f);
-		glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, texture);
+		sf::Texture::bind(&texture);
 		glBegin(GL_QUADS);
 
 		for (int i=0; i<colums; i++) //On fait de 4 en quatre ??
@@ -315,22 +290,6 @@ int main(int argc, char** argv)
 		}
 
 		glEnd();
-		glDisable(GL_TEXTURE_2D);
-
-		/*
-		//on affiche l'eau
-		glColor4f(0.f, 0.1f, 1.f, 1.f);
-		glBegin(GL_QUADS);
-		for (int i=0; i<waterN-1; i++)
-		{
-			glVertex2f(pWaterFixed[i]->getPosition().x, pWaterFixed[i]->getPosition().y+200.f);
-			glVertex2f(pWater[i]->getPosition().x, pWater[i]->getPosition().y);
-			glVertex2f(pWater[i+1]->getPosition().x, pWater[i+1]->getPosition().y);
-			glVertex2f(pWaterFixed[i+1]->getPosition().x, pWaterFixed[i+1]->getPosition().y+200.f);
-
-		}
-		glEnd();
-		*/
 
 		if(drawWorld)
 			W.draw();
@@ -367,43 +326,4 @@ int main(int argc, char** argv)
 	}
 
 	W.deleteAll();
-	//On libere la texture
-	glDeleteTextures(1, &texture);
-}
-
-GLuint glTexLoad(const char* Path)
-{
-	sf::Image image;
-	bool LoadSuccess = 0;
-	GLuint texture = 0;
-
-	if(Path[0] != '\0')
-	{
-		#ifdef SFML_SYSTEM_MACOS
-		LoadSuccess = image.loadFromFile(Path); //À rajouter ResourcePath selon compilation
-		#else
-		LoadSuccess = image.loadFromFile(Path);
-		#endif
-	}
-
-	glEnable(GL_TEXTURE_2D);
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
-
-	if(LoadSuccess)
-	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image.getSize().x, image.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.getPixelsPtr());
-		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
-	} else {
-		/* Texture transparente si le fichier n'a pas pu être chargé */
-		GLubyte TexNull[4] =
-		{
-			0,0,0,0
-		};
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, TexNull);
-	}
-	glDisable(GL_TEXTURE_2D);
-
-	return texture;
 }
