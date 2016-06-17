@@ -1,3 +1,0 @@
-D:/Source/Physics/CMakeFiles/Physics.dir
-D:/Source/Physics/CMakeFiles/edit_cache.dir
-D:/Source/Physics/CMakeFiles/rebuild_cache.dir
